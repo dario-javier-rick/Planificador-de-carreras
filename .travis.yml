@@ -1,8 +1,8 @@
 language: csharp
 solution: Planificador.sln
-install:
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
   - nuget restore Planificador.sln
-  - nuget install NUnit -Version 3.6.1 -OutputDirectory testrunner
-script:
-  - xbuild /p:Configuration=Release Planificador.sln
-  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./PlanificadorTests/bin/Release/Planificador.Tests.dll
+after_script:
+  - nunit-console PlanificadorTest/bin/Release/PlanificadorTest.dll
