@@ -2,7 +2,7 @@ language: csharp
 solution: Planificador.sln
 install:
   - nuget restore Planificador.sln
-  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+  - nuget install NUnit -Version 3.6.1 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Planificador.sln
-  - mono ./NUnit.Runners.3.0.1/tools/nunit-console.exe ./Planificador.Tests/bin/Release/Planificador.Tests.dll
+  - mono ./NUnit.3.6.1/tools/nunit-console.exe ./Planificador.Tests/bin/Release/Planificador.Tests.dll
