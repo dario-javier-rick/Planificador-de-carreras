@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="252a76b40faf47eeab1695d71e0c37d7" Name="Diagram1" ZoomLevel="106" >
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="3.75" PointY="10.25" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.Materia" Width="1.5" PointX="0.75" PointY="3.625" FillColor="Lime" />
+        <EntityTypeShape EntityType="Model.Carrera" Width="1.5" PointX="0.75" PointY="0.75" FillColor="Red" />
+        <EntityTypeShape EntityType="Model.MateriasPorCarrera" Width="1.5" PointX="3" PointY="3.5" FillColor="Black" />
+        <EntityTypeShape EntityType="Model.CarrerasPorUsuario" Width="1.5" PointX="8" PointY="6.75" FillColor="Orange" />
+        <EntityTypeShape EntityType="Model.MateriasPorUsuario" Width="1.5" PointX="6" PointY="3.5" FillColor="GreenYellow" />
+        <EntityTypeShape EntityType="Model.CorrelativaPorMateria" Width="1.5" PointX="5.25" PointY="6.625" />
+        <AssociationConnector Association="Model.UsuarioMateriasPorUsuario" />
+        <AssociationConnector Association="Model.UsuarioCarrerasPorUsuario" />
+        <AssociationConnector Association="Model.MateriaMateriasPorCarrera" />
+        <AssociationConnector Association="Model.MateriaMateriasPorUsuario" />
+        <AssociationConnector Association="Model.CarreraMateriasPorCarrera" />
+        <AssociationConnector Association="Model.CarreraCarrerasPorUsuario" />
+        <AssociationConnector Association="Model.MateriasPorCarreraCorrelativaPorMateria" />
+        <AssociationConnector Association="Model.IdMateriaDestino" />
+        <EntityTypeShape EntityType="Model.dsadasd" Width="1.5" PointX="9.125" PointY="5.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
