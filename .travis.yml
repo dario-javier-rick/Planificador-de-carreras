@@ -3,5 +3,5 @@ solution: "Planificador.sln"
 install:
 - travis_retry nuget restore -source "https://www.nuget.org/api/v2" Planificador.sln
 script:
-- xbuild Planificadorsln
+- xbuild Planificador.sln
 - mono ./packages/xunit.runner.console*/tools/xunit.console.exe ./PlanificadorTests/bin/Debug/FibonacciTests.dll.dll
