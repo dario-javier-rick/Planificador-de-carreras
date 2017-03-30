@@ -1,8 +1,7 @@
 language: csharp
-solution: Planificador.sln
-before_install:
-  - sudo apt-get install nunit-console
-before_script:
-  - nuget restore Planificador.sln
-after_script:
-  - nunit-console PlanificadorTest/bin/Release/PlanificadorTest.dll
+solution: "Planificador.sln"
+install:
+- travis_retry nuget restore -source "https://www.nuget.org/api/v2" Planificador.sln
+script:
+- xbuild Planificadorsln
+- mono ./packages/xunit.runner.console*/tools/xunit.console.exe ./PlanificadorTests/bin/Debug/FibonacciTests.dll.dll
