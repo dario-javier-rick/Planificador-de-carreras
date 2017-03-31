@@ -20,7 +20,6 @@
         <AssociationConnector Association="Model.CarreraCarrerasPorUsuario" />
         <AssociationConnector Association="Model.MateriasPorCarreraCorrelativaPorMateria" />
         <AssociationConnector Association="Model.IdMateriaDestino" />
-        <EntityTypeShape EntityType="Model.dsadasd" Width="1.5" PointX="9.125" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

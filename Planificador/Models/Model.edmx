@@ -4,11 +4,208 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="ModelTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="UsuarioSet" EntityType="Model.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MateriaSet" EntityType="Model.Store.MateriaSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CarreraSet" EntityType="Model.Store.CarreraSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MateriasPorCarreraSet" EntityType="Model.Store.MateriasPorCarreraSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CarrerasPorUsuarioSet" EntityType="Model.Store.CarrerasPorUsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MateriasPorUsuarioSet" EntityType="Model.Store.MateriasPorUsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CorrelativaPorMateriaSet" EntityType="Model.Store.CorrelativaPorMateriaSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="UsuarioMateriasPorUsuario" Association="Model.Store.UsuarioMateriasPorUsuario">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="UsuarioCarrerasPorUsuario" Association="Model.Store.UsuarioCarrerasPorUsuario">
+      <End Role="Usuario" EntitySet="UsuarioSet" />
+      <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="MateriaMateriasPorCarrera" Association="Model.Store.MateriaMateriasPorCarrera">
+      <End Role="Materia" EntitySet="MateriaSet" />
+      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
+    </AssociationSet>
+    <AssociationSet Name="MateriaMateriasPorUsuario" Association="Model.Store.MateriaMateriasPorUsuario">
+      <End Role="Materia" EntitySet="MateriaSet" />
+      <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="CarreraMateriasPorCarrera" Association="Model.Store.CarreraMateriasPorCarrera">
+      <End Role="Carrera" EntitySet="CarreraSet" />
+      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
+    </AssociationSet>
+    <AssociationSet Name="CarreraCarrerasPorUsuario" Association="Model.Store.CarreraCarrerasPorUsuario">
+      <End Role="Carrera" EntitySet="CarreraSet" />
+      <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
+    </AssociationSet>
+    <AssociationSet Name="MateriasPorCarreraCorrelativaPorMateria" Association="Model.Store.MateriasPorCarreraCorrelativaPorMateria">
+      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
+      <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
+    </AssociationSet>
+    <AssociationSet Name="IdMateriaDestino" Association="Model.Store.IdMateriaDestino">
+      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
+      <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="IdUsuario" />
+    </Key>
+    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DNI" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Apellido" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="FechaUltimaActualizacion" Type="datetime" Nullable="false" />
+    <Property Name="Pass" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MateriaSet">
+    <Key>
+      <PropertyRef Name="IdMateria" />
+    </Key>
+    <Property Name="IdMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EsConNota" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarreraSet">
+    <Key>
+      <PropertyRef Name="IdCarrera" />
+    </Key>
+    <Property Name="IdCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MateriasPorCarreraSet">
+    <Key>
+      <PropertyRef Name="IdMateriaPorCarrera" />
+    </Key>
+    <Property Name="IdMateriaPorCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdMateria" Type="int" Nullable="false" />
+    <Property Name="IdCarrera" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarrerasPorUsuarioSet">
+    <Key>
+      <PropertyRef Name="IdCarreraPorUsuario" />
+    </Key>
+    <Property Name="IdCarreraPorUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdCarrera" Type="int" Nullable="false" />
+    <Property Name="Promedio" Type="decimal" Nullable="false" />
+    <Property Name="PorcentajeCompletitud" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MateriasPorUsuarioSet">
+    <Key>
+      <PropertyRef Name="IdMateriaPorUsuario" />
+    </Key>
+    <Property Name="IdMateriaPorUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="IdMateria" Type="int" Nullable="false" />
+    <Property Name="EstaAprobada" Type="bit" Nullable="false" />
+    <Property Name="Nota" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CorrelativaPorMateriaSet">
+    <Key>
+      <PropertyRef Name="IdCorrelativaPorMateria" />
+    </Key>
+    <Property Name="IdCorrelativaPorMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdMateriaOrigen" Type="int" Nullable="false" />
+    <Property Name="IdMateriaDestino" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="UsuarioMateriasPorUsuario">
+    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="MateriasPorUsuario" Type="Model.Store.MateriasPorUsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="MateriasPorUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UsuarioCarrerasPorUsuario">
+    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="CarrerasPorUsuario" Type="Model.Store.CarrerasPorUsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="CarrerasPorUsuario">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MateriaMateriasPorCarrera">
+    <End Role="Materia" Type="Model.Store.MateriaSet" Multiplicity="1" />
+    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="IdMateria" />
+      </Principal>
+      <Dependent Role="MateriasPorCarrera">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MateriaMateriasPorUsuario">
+    <End Role="Materia" Type="Model.Store.MateriaSet" Multiplicity="1" />
+    <End Role="MateriasPorUsuario" Type="Model.Store.MateriasPorUsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Materia">
+        <PropertyRef Name="IdMateria" />
+      </Principal>
+      <Dependent Role="MateriasPorUsuario">
+        <PropertyRef Name="IdMateria" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarreraMateriasPorCarrera">
+    <End Role="Carrera" Type="Model.Store.CarreraSet" Multiplicity="1" />
+    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrera">
+        <PropertyRef Name="IdCarrera" />
+      </Principal>
+      <Dependent Role="MateriasPorCarrera">
+        <PropertyRef Name="IdCarrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CarreraCarrerasPorUsuario">
+    <End Role="Carrera" Type="Model.Store.CarreraSet" Multiplicity="1" />
+    <End Role="CarrerasPorUsuario" Type="Model.Store.CarrerasPorUsuarioSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrera">
+        <PropertyRef Name="IdCarrera" />
+      </Principal>
+      <Dependent Role="CarrerasPorUsuario">
+        <PropertyRef Name="IdCarrera" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MateriasPorCarreraCorrelativaPorMateria">
+    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="1" />
+    <End Role="CorrelativaPorMateria" Type="Model.Store.CorrelativaPorMateriaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasPorCarrera">
+        <PropertyRef Name="IdMateriaPorCarrera" />
+      </Principal>
+      <Dependent Role="CorrelativaPorMateria">
+        <PropertyRef Name="IdMateriaOrigen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="IdMateriaDestino">
+    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="1" />
+    <End Role="CorrelativaPorMateria" Type="Model.Store.CorrelativaPorMateriaSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MateriasPorCarrera">
+        <PropertyRef Name="IdMateriaPorCarrera" />
+      </Principal>
+      <Dependent Role="CorrelativaPorMateria">
+        <PropertyRef Name="IdMateriaDestino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -52,7 +249,6 @@
             <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
             <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
           </AssociationSet>
-          <EntitySet Name="dsadasdSet" EntityType="Model.dsadasd" />
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -229,23 +425,84 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="dsadasd">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="Model" />
-        <Alias Key="Target" Value="Model.Store" />
-        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
+    <EntitySetMapping Name="UsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Usuario)">
+        <MappingFragment StoreEntitySet="UsuarioSet">
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="DNI" ColumnName="DNI" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+          <ScalarProperty Name="FechaUltimaActualizacion" ColumnName="FechaUltimaActualizacion" />
+          <ScalarProperty Name="Pass" ColumnName="Pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Materia)">
+        <MappingFragment StoreEntitySet="MateriaSet">
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="EsConNota" ColumnName="EsConNota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarreraSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Carrera)">
+        <MappingFragment StoreEntitySet="CarreraSet">
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriasPorCarreraSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MateriasPorCarrera)">
+        <MappingFragment StoreEntitySet="MateriasPorCarreraSet">
+          <ScalarProperty Name="IdMateriaPorCarrera" ColumnName="IdMateriaPorCarrera" />
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrerasPorUsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CarrerasPorUsuario)">
+        <MappingFragment StoreEntitySet="CarrerasPorUsuarioSet">
+          <ScalarProperty Name="IdCarreraPorUsuario" ColumnName="IdCarreraPorUsuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
+          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
+          <ScalarProperty Name="PorcentajeCompletitud" ColumnName="PorcentajeCompletitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MateriasPorUsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MateriasPorUsuario)">
+        <MappingFragment StoreEntitySet="MateriasPorUsuarioSet">
+          <ScalarProperty Name="IdMateriaPorUsuario" ColumnName="IdMateriaPorUsuario" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
+          <ScalarProperty Name="EstaAprobada" ColumnName="EstaAprobada" />
+          <ScalarProperty Name="Nota" ColumnName="Nota" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CorrelativaPorMateriaSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.CorrelativaPorMateria)">
+        <MappingFragment StoreEntitySet="CorrelativaPorMateriaSet">
+          <ScalarProperty Name="IdCorrelativaPorMateria" ColumnName="IdCorrelativaPorMateria" />
+          <ScalarProperty Name="IdMateriaOrigen" ColumnName="IdMateriaOrigen" />
+          <ScalarProperty Name="IdMateriaDestino" ColumnName="IdMateriaDestino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -258,7 +515,8 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
