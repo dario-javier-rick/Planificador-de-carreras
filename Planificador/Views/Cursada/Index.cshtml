@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Models.Materia>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div>
+    <h1> Programador de cursadas </h1>
+			
+			<table>
+				<thead>
+					<tr>
+						<td>Id</td>
+						<td>Materia</td>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (Models.Materia m in Model){
+					<tr>
+						<td>@m.IdMateria</td>
+						<td>@m.Nombre</td>
+					</tr>
+					}
+				</tbody>
+			</table>
+			
+    </div>
+</body>
+</html>
