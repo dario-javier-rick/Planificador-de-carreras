@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Planificador.Models;
+using Planificador.Models.ViewModels;
+using Planificador.Logic;
 
 namespace Planificador.Controllers
 {
@@ -10,15 +13,12 @@ namespace Planificador.Controllers
     {
         public ActionResult Index()
         {
-			List<Models.Materia> lista = new List<Models.Materia>();
-			Models.Materia m = new Models.Materia();
+            var model = new CursadaViewModel
+            {
+                Materias = DbContext.GetListaDeMaterias()
+            };
 
-			m.IdMateria = 1;
-			m.Nombre = "Proyecto profesional 2";
-
-			lista.Add(m);
-
-            return View (lista);
+            return View(model);
         }
     }
 }
