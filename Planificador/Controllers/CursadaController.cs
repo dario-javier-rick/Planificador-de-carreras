@@ -14,19 +14,8 @@ namespace Planificador.Controllers
         public ActionResult Index(string nombre)
         {
             var model = new CursadaViewModel();
-            model.Materias = (nombre == null) ? new List<Materia>() : MateriasRestantesHelper.GetMateriasPendientes(nombre);
+            model.Materias = (nombre == null) ? new List<Materia>() : MateriasRestantesHelper.GetMateriasPendientes(new Alumno());
             return View(model);
         }
-
-        //[HttpPost]
-        //public ActionResult GetMateriasPendientes(string nombre)
-        //{
-        //    var model = new CursadaViewModel
-        //    {
-        //        Materias = MateriasRestantesHelper.GetMateriasPendientes(nombre)
-        //    };
-
-        //    return View("Index", model);
-        //}
     }
 }

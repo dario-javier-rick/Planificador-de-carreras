@@ -13,7 +13,7 @@ namespace Planificador.Logic
             var materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas);
             var materiasSinAprobarSinCorrelativasDeMateriasAprobadas = QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
             var materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any());
-            return materiasQuePudenSerCursadas;
+            return materiasQuePudenSerCursadas;  
         }
 
         private static IEnumerable<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
