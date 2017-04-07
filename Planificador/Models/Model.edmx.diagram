@@ -20,6 +20,7 @@
         <AssociationConnector Association="Model.CarreraCarrerasPorUsuario" />
         <AssociationConnector Association="Model.MateriasPorCarreraCorrelativaPorMateria" />
         <AssociationConnector Association="Model.IdMateriaDestino" />
+        <AssociationConnector Association="Model.TieneCorrelativas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

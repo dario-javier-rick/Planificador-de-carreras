@@ -249,6 +249,10 @@
             <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
             <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
           </AssociationSet>
+          <AssociationSet Name="TieneCorrelativas" Association="Model.TieneCorrelativas">
+            <End Role="Materia" EntitySet="MateriaSet" />
+            <End Role="Materia1" EntitySet="MateriaSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Usuario">
           <Key>
@@ -270,10 +274,10 @@
           </Key>
           <Property Name="IdMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" />
-          <Property Name="EsConNota" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MateriasPorCarrera" Relationship="Model.MateriaMateriasPorCarrera" FromRole="Materia" ToRole="MateriasPorCarrera" />
           <NavigationProperty Name="MateriasPorUsuario" Relationship="Model.MateriaMateriasPorUsuario" FromRole="Materia" ToRole="MateriasPorUsuario" />
-          <Property Name="TieneCorrelativas" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Correlativas" Relationship="Model.TieneCorrelativas" FromRole="Materia" ToRole="Materia1" />
+          <NavigationProperty Name="EsCorrealativaCon" Relationship="Model.TieneCorrelativas" FromRole="Materia1" ToRole="Materia" />
         </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -426,6 +430,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="TieneCorrelativas">
+          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia1" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -450,7 +458,6 @@
         <MappingFragment StoreEntitySet="MateriaSet">
           <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-          <ScalarProperty Name="EsConNota" ColumnName="EsConNota" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

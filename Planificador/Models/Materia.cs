@@ -19,16 +19,20 @@ namespace Planificador.Models
         {
             this.MateriasPorCarrera = new HashSet<MateriasPorCarrera>();
             this.MateriasPorUsuario = new HashSet<MateriasPorUsuario>();
+            this.Correlativas = new HashSet<Materia>();
+            this.EsCorrealativaCon = new HashSet<Materia>();
         }
     
         public int IdMateria { get; set; }
         public string Nombre { get; set; }
-        public bool EsConNota { get; set; }
-        public bool TieneCorrelativas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MateriasPorCarrera> MateriasPorCarrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MateriasPorUsuario> MateriasPorUsuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Materia> Correlativas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Materia> EsCorrealativaCon { get; set; }
     }
 }

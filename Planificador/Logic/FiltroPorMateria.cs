@@ -12,7 +12,7 @@ namespace Planificador.Logic
         {
             var listaDeMaterias = materiasAprobadas.Except(materiasCarrera);
             listaDeMaterias = ActualizarCorrelativasPendientes(listaDeMaterias);
-            return listaDeMaterias.Where(x => !x.TieneCorrelativas);
+            return listaDeMaterias.Where(x => !x.Correlativas.Any());
         }
 
         private static IEnumerable<Materia> ActualizarCorrelativasPendientes(IEnumerable<Materia> materiasRestantes)

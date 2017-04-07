@@ -69,50 +69,42 @@ namespace Planificador.Logic
                 new Materia
                 {
                     IdMateria = 7,
-                    Nombre = "Programacion I",
-                    TieneCorrelativas = true
+                    Nombre = "Programacion I"
                 },
                 new Materia
                 {
                     IdMateria = 8,
-                    Nombre = "Programacion II",
-                    TieneCorrelativas = true
+                    Nombre = "Programacion II"
                 },
                 new Materia
                 {
                     IdMateria = 9,
-                    Nombre = "Programacion III",
-                    TieneCorrelativas = true
+                    Nombre = "Programacion III"
                 },
                 new Materia
                 {
                     IdMateria = 10,
-                    Nombre = "Especificacion de Software",
-                    TieneCorrelativas = true
+                    Nombre = "Especificacion de Software"
                 }
                 ,new Materia
                 {
                     IdMateria = 11,
-                    Nombre = "Base de Datos I",
-                    TieneCorrelativas = true
+                    Nombre = "Base de Datos I"
                 },
                 new Materia
                 {
                     IdMateria = 12,
-                    Nombre = "Base de Datos II",
-                    TieneCorrelativas = true
+                    Nombre = "Base de Datos II"
                 },
                 new Materia
                 {
                     IdMateria = 13,
-                    Nombre = "Ingenieria de Software I",
-                    TieneCorrelativas = true
+                    Nombre = "Ingenieria de Software I"
                 },
                 new Materia
                 {
                     IdMateria = 14,
-                    Nombre = "Ingenieria de Software II",
-                    TieneCorrelativas = true
+                    Nombre = "Ingenieria de Software II"
                 }
             };
         }
