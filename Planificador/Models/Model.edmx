@@ -210,7 +210,7 @@
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="UsuarioSet" EntityType="Model.Usuario" />
+          <EntitySet Name="AlumnoSet" EntityType="Model.Alumno" />
           <EntitySet Name="MateriaSet" EntityType="Model.Materia" />
           <EntitySet Name="CarreraSet" EntityType="Model.Carrera" />
           <EntitySet Name="MateriasPorCarreraSet" EntityType="Model.MateriasPorCarrera" />
@@ -218,11 +218,11 @@
           <EntitySet Name="MateriasPorUsuarioSet" EntityType="Model.MateriasPorUsuario" />
           <EntitySet Name="CorrelativaPorMateriaSet" EntityType="Model.CorrelativaPorMateria" />
           <AssociationSet Name="UsuarioMateriasPorUsuario" Association="Model.UsuarioMateriasPorUsuario">
-            <End Role="Usuario" EntitySet="UsuarioSet" />
+            <End Role="Usuario" EntitySet="AlumnoSet" />
             <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
           </AssociationSet>
           <AssociationSet Name="UsuarioCarrerasPorUsuario" Association="Model.UsuarioCarrerasPorUsuario">
-            <End Role="Usuario" EntitySet="UsuarioSet" />
+            <End Role="Usuario" EntitySet="AlumnoSet" />
             <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
           </AssociationSet>
           <AssociationSet Name="MateriaMateriasPorCarrera" Association="Model.MateriaMateriasPorCarrera">
@@ -254,7 +254,7 @@
             <End Role="Materia1" EntitySet="MateriaSet" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Usuario">
+        <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="IdUsuario" />
           </Key>
@@ -335,7 +335,7 @@
           <NavigationProperty Name="MateriaDestino" Relationship="Model.IdMateriaDestino" FromRole="CorrelativaPorMateria" ToRole="MateriasPorCarrera" />
         </EntityType>
         <Association Name="UsuarioMateriasPorUsuario">
-          <End Type="Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="Model.Alumno" Role="Usuario" Multiplicity="1" />
           <End Type="Model.MateriasPorUsuario" Role="MateriasPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -347,7 +347,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="UsuarioCarrerasPorUsuario">
-          <End Type="Model.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="Model.Alumno" Role="Usuario" Multiplicity="1" />
           <End Type="Model.CarrerasPorUsuario" Role="CarrerasPorUsuario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuario">
@@ -440,8 +440,8 @@
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ModelContainer">
-    <EntitySetMapping Name="UsuarioSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Usuario)">
+    <EntitySetMapping Name="AlumnoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Alumno)">
         <MappingFragment StoreEntitySet="UsuarioSet">
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="DNI" ColumnName="DNI" />

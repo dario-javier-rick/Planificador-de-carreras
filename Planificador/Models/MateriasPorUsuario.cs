@@ -20,7 +20,7 @@ namespace Planificador.Models
         public bool EstaAprobada { get; set; }
         public short Nota { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual Alumno Usuario { get; set; }
         public virtual Materia Materia { get; set; }
     }
 }

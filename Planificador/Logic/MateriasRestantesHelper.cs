@@ -9,11 +9,12 @@ namespace Planificador.Logic
 {
     public static class MateriasRestantesHelper
     {
-        public static IEnumerable<Materia> GetMateriasPendientes(string nombre)
+        public static IEnumerable<Materia> GetMateriasPendientes(Alumno Alumno)
         {
-            var MateriasDeCarrera = DbContext.GetListaDeMaterias();
-            var MateriasDeEstudiante = DbContext.GetListaDeMaterias(nombre);
-            return FiltroPorMateria.Filtrar(MateriasDeEstudiante, MateriasDeCarrera);
+            var MateriasDeLaCarrera = DbContext.GetListaDeMaterias();
+            string lalalal = "lalalalal";
+            var MateriasDelEstudiante = DbContext.GetListaDeMaterias(lalalal);
+            return FiltroPorMateria.ObtenerMateriasQuePudenSerCursadas(MateriasDelEstudiante, MateriasDeLaCarrera);
         }
     }
 }

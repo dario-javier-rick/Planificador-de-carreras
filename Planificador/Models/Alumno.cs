@@ -12,10 +12,10 @@ namespace Planificador.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Alumno
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public Alumno()
         {
             this.MateriasPorUsuario = new HashSet<MateriasPorUsuario>();
             this.CarrerasPorUsuario = new HashSet<CarrerasPorUsuario>();

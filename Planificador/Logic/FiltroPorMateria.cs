@@ -8,14 +8,32 @@ namespace Planificador.Logic
 {
     public static class FiltroPorMateria
     {
-        public static IEnumerable<Materia> Filtrar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasCarrera)
+        public static IEnumerable<Materia> ObtenerMateriasQuePudenSerCursadas(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
         {
-            var listaDeMaterias = materiasAprobadas.Except(materiasCarrera);
-            listaDeMaterias = ActualizarCorrelativasPendientes(listaDeMaterias);
-            return listaDeMaterias.Where(x => !x.Correlativas.Any());
+            var materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas);
+            var materiasSinAprobarSinCorrelativasDeMateriasAprobadas = QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
+            var materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any());
+            return materiasQuePudenSerCursadas;
         }
 
-        private static IEnumerable<Materia> ActualizarCorrelativasPendientes(IEnumerable<Materia> materiasRestantes)
+        private static IEnumerable<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
+        {
+            var lista = new List<Materia>();
+            foreach (var materiaAprobada in materiasAprobadas)
+            {
+
+                foreach (var materiaDeCarrera in materiasDeCarrera)
+                {
+                    if (materiasDeCarrera.Equals(materiaAprobada))
+                    {
+                        materiasDeCarrera.Remove(materiaDeCarrera);
+                    }
+                }
+            }
+            return lista;
+        }
+
+        private static IEnumerable<Materia> QuitarCorrelativasDeMateriasAprobadas(IEnumerable<Materia> materiasRestantes)
         {
             var lista = new List<Materia>();
             foreach (var materia in materiasRestantes)

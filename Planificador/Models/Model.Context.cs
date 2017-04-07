@@ -25,7 +25,7 @@ namespace Planificador.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Usuario> UsuarioSet { get; set; }
+        public virtual DbSet<Alumno> AlumnoSet { get; set; }
         public virtual DbSet<Materia> MateriaSet { get; set; }
         public virtual DbSet<Carrera> CarreraSet { get; set; }
         public virtual DbSet<MateriasPorCarrera> MateriasPorCarreraSet { get; set; }

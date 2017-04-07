@@ -20,7 +20,7 @@ namespace Planificador.Models
         public decimal Promedio { get; set; }
         public decimal PorcentajeCompletitud { get; set; }
     
-        public virtual Usuario Usuario { get; set; }
+        public virtual Alumno Usuario { get; set; }
         public virtual Carrera Carrera { get; set; }
     }
 }

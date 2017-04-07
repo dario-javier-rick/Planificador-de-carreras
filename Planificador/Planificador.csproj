@@ -203,6 +203,9 @@
     <Compile Include="Logic\FiltroPorMateria.cs" />
     <Compile Include="Logic\MateriasRestantesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Alumno.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Carrera.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -237,9 +240,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Usuario.cs">
-      <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModels\CursadaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="252a76b40faf47eeab1695d71e0c37d7" Name="Diagram1" ZoomLevel="80" >
-        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="3.75" PointY="10.25" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.Alumno" Width="1.5" PointX="3.75" PointY="10.25" FillColor="Yellow" />
         <EntityTypeShape EntityType="Model.Materia" Width="1.5" PointX="0.75" PointY="3.625" FillColor="Lime" />
         <EntityTypeShape EntityType="Model.Carrera" Width="1.5" PointX="0.75" PointY="0.75" FillColor="Red" />
         <EntityTypeShape EntityType="Model.MateriasPorCarrera" Width="1.5" PointX="3" PointY="3.5" FillColor="Black" />
