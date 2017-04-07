@@ -13,38 +13,29 @@ namespace Planificador.Logic
             var materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas);
             var materiasSinAprobarSinCorrelativasDeMateriasAprobadas = QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
             var materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any());
-            return materiasQuePudenSerCursadas;  
+            return materiasQuePudenSerCursadas;
         }
 
         private static IEnumerable<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
         {
-            var lista = new List<Materia>();
-            foreach (var materiaAprobada in materiasAprobadas)
+            var listaDeMateriasSinAprobar = new List<Materia>();
+            foreach (var materiaDelAlumnoAprobada in materiasAprobadas)
             {
-
-                foreach (var materiaDeCarrera in materiasDeCarrera)
+                var materiaAprobada = materiasDeCarrera.FirstOrDefault(x => x.Equals(materiaDelAlumnoAprobada));
+                if (materiaAprobada != null)
                 {
-                    if (materiasDeCarrera.Equals(materiaAprobada))
+                    foreach (var materiaDeCarrera in materiasDeCarrera)
                     {
-                        materiasDeCarrera.Remove(materiaDeCarrera);
+                        if (materiaDeCarrera.Correlativas.Contains(materiaAprobada))
+                        {
+                            materiaDeCarrera.Correlativas.Remove(materiaDeCarrera);
+                            listaDeMateriasSinAprobar.Add(materiaDeCarrera);
+                        }
                     }
                 }
             }
-            return lista;
-        }
 
-        private static IEnumerable<Materia> QuitarCorrelativasDeMateriasAprobadas(IEnumerable<Materia> materiasRestantes)
-        {
-            var lista = new List<Materia>();
-            foreach (var materia in materiasRestantes)
-            {
-                //Logica temporal, debe filtrar por lista de correlatividades restantes por materias del conjunto
-                if (materia.IdMateria % 2 == 0)
-                {
-                    lista.Add(materia);
-                }
-            }
-            return lista;
+            return listaDeMateriasSinAprobar;
         }
     }
 }
