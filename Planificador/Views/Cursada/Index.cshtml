@@ -6,32 +6,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>ools</title>
+    <style>
+        .text-center * {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
     <div>
         <h1> Programador de cursadas </h1>
 
-        <table>
+        <div></div>
+        <table class="table table-bordered table-inverse text-center">
             <thead>
                 <tr>
-                    <td>Id</td>
-                    <td>Materia</td>
+                    <th>Materia</th>
                 </tr>
             </thead>
             <tbody>
                 @{
-                    foreach (var m in Model.Materias)
+                    foreach (var Materia in Model.Materias)
                     {
                         <tr>
-                            <td>@m.IdMateria</td>
-                            <td>@m.Nombre</td>
+                            <td scope="row">@Materia.Nombre</td>
+                            @*<table class="table table-bordered table-inverse text-center">
+                                    <thead>
+                                        <tr>
+                                            <th>Horarios</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var Horario in Materia.Horarios)
+                                            {
+                                                <tr>
+                                                    <td scope="row">@Horario.Turno</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>*@
                         </tr>
                     }
                 }
             </tbody>
         </table>
-
+        @using (Html.BeginForm("Index", "Cursada", FormMethod.Post))
+        {
+            <input id="nombre" type="text" name="nombre" value="" />
+            <input type="submit" />
+        }
     </div>
 </body>
 </html>

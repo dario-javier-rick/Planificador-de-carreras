@@ -24,6 +24,7 @@ namespace Planificador.Models
         public int IdMateria { get; set; }
         public string Nombre { get; set; }
         public bool EsConNota { get; set; }
+        public bool TieneCorrelativas { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MateriasPorCarrera> MateriasPorCarrera { get; set; }

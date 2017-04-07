@@ -28,7 +28,7 @@ namespace PlanificadorTest
         public void Index_ListaVacia()
         {
             //Here the mock for the service provider call
-            var result = this.Controller.Index() as ViewResult;
+            var result = this.Controller.Index(null) as ViewResult;
             var model = (CursadaViewModel)result.ViewData.Model;
 
             Assert.IsTrue(model.Materias.Equals(DbContext.GetListaDeMaterias()));

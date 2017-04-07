@@ -11,14 +11,22 @@ namespace Planificador.Controllers
 {
     public class CursadaController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index(string nombre)
         {
-            var model = new CursadaViewModel
-            {
-                Materias = DbContext.GetListaDeMaterias()
-            };
-
+            var model = new CursadaViewModel();
+            model.Materias = (nombre == null) ? new List<Materia>() : MateriasRestantesHelper.GetMateriasPendientes(nombre);
             return View(model);
         }
+
+        //[HttpPost]
+        //public ActionResult GetMateriasPendientes(string nombre)
+        //{
+        //    var model = new CursadaViewModel
+        //    {
+        //        Materias = MateriasRestantesHelper.GetMateriasPendientes(nombre)
+        //    };
+
+        //    return View("Index", model);
+        //}
     }
 }

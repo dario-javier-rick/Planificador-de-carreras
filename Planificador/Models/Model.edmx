@@ -273,6 +273,7 @@
           <Property Name="EsConNota" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="MateriasPorCarrera" Relationship="Model.MateriaMateriasPorCarrera" FromRole="Materia" ToRole="MateriasPorCarrera" />
           <NavigationProperty Name="MateriasPorUsuario" Relationship="Model.MateriaMateriasPorUsuario" FromRole="Materia" ToRole="MateriasPorUsuario" />
+          <Property Name="TieneCorrelativas" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Carrera">
           <Key>
