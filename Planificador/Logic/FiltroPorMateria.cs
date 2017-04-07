@@ -10,9 +10,10 @@ namespace Planificador.Logic
     {
         public static IEnumerable<Materia> ObtenerMateriasQuePudenSerCursadas(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
         {
-            var materiasSinAprobar = ObtenerMateriasSinAprobar(materiasAprobadas, materiasDeCarrera);
-            var materiasQuePudenSerCursadas = materiasSinAprobar.Where(x => !x.Correlativas.Any());
-            return materiasQuePudenSerCursadas;
+			IEnumerable<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas);
+			IEnumerable<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
+			IEnumerable<Materia> materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any());
+            return materiasQuePudenSerCursadas;  
         }
 
         private static List<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)

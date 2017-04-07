@@ -13,7 +13,7 @@ namespace Planificador.Controllers
     {
         public ActionResult Index(string nombre)
         {
-            var model = new CursadaViewModel();
+            CursadaViewModel model = new CursadaViewModel();
             model.Materias = (nombre == null) ? new List<Materia>() : MateriasRestantesHelper.GetMateriasPendientes(new Alumno());
             return View(model);
         }

@@ -199,7 +199,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logic\DbContext.cs" />
+    <Compile Include="Logic\MateriasPorCarrera.cs" />
     <Compile Include="Logic\FiltroPorMateria.cs" />
     <Compile Include="Logic\MateriasRestantesHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />

@@ -11,9 +11,8 @@ namespace Planificador.Logic
     {
         public static IEnumerable<Materia> GetMateriasPendientes(Alumno Alumno)
         {
-            var MateriasDeLaCarrera = DbContext.GetListaDeMaterias();
-            string lalalal = "lalalalal";
-            var MateriasDelEstudiante = DbContext.GetListaDeMaterias(lalalal);
+			IEnumerable<Materia> MateriasDeLaCarrera = MateriasPorCarrera.ListaMateriasLicenciaturaInformatica();
+			IEnumerable<Materia> MateriasDelEstudiante = MateriasPorCarrera.ListaMateriasLicenciaturaInformatica();
             return FiltroPorMateria.ObtenerMateriasQuePudenSerCursadas(MateriasDelEstudiante, MateriasDeLaCarrera);
         }
     }
