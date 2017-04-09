@@ -21,15 +21,20 @@ namespace Planificador.Logic
 
         public IEnumerable<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
         {
+			if (alumno == null)
+			{
+				return new List<Materia>();
+			}
+			
 			//Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
-	    	IEnumerable <Materia> MateriasDeLaCarrera = MateriasPorCarrera.ListaMateriasLicenciaturaInformatica();
 			//TODO: Filtrar por plan de estudios. Patron observer?
+	    	IEnumerable <Materia> materiasDeCarrera = MateriasPorCarrera.ListarMateriasLicenciaturaInformatica();
 
-			//Me fijo que materias tiene el alumno
-            IEnumerable<Materia> MateriasDelEstudiante = alumno.ListarMateriasAprobadas();
+			//Me fijo que materias aprobadas tiene el alumno
+            IEnumerable<Materia> materiasAprobadas = alumno.ListarMateriasAprobadas();
 
-			//Devuelvo las que realmente peuden ser cursadas. TODO: Este metodo deberia ser parte de Alumno?
-            return FiltroPorMateria.ObtenerMateriasQuePudenSerCursadas(MateriasDelEstudiante, MateriasDeLaCarrera);
-        }
+			//Devuelvo las que realmente pueden ser cursadas.
+			return alumno.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarrera);
+		}
     }
 }

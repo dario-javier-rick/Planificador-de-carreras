@@ -203,7 +203,6 @@
     <Compile Include="Logic\Entidades\Alumno.cs" />
     <Compile Include="Logic\Entidades\Materia.cs" />
     <Compile Include="Logic\MateriasPorCarrera.cs" />
-    <Compile Include="Logic\FiltroPorMateria.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>Model.tt</DependentUpon>

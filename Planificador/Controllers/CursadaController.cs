@@ -18,25 +18,28 @@ namespace Planificador.Controllers
         /// <returns></returns>
         public ActionResult Index(string nombreAlumno)
         {
-		    Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);		
-            Cursada cursada = new Cursada();
-			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
-
-            CursadaViewModel model = new CursadaViewModel();
-			model.Materias = materias;
-
-            return View(model);
+		    Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+			CursadaViewModel viewModel = Index(alumno);
+			return View(viewModel);
         }
 
 
         /// <summary>
-        /// Controlador abstracto
+        /// Controlador generico.
+		/// Controlador HTTP debe consultar a este método para abstraer el comportamiento web 
+		/// de la propia lógica del controlador
         /// </summary>
-        /// <param name="nombreAlumno"></param>
-        private void IndexAbs(string nombreAlumno)
-        {
-            //Controlador HTTP debe consultar a este método para abstraer el comportamiento web de la lógica de controlador
-        }
+        /// <param name="alumno"></param>
+		private CursadaViewModel Index(Alumno alumno)
+		{
+			Cursada cursada = new Cursada();
+			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
+
+			CursadaViewModel model = new CursadaViewModel();
+			model.Materias = materias;
+
+			return model;
+		}
 
     }
 }

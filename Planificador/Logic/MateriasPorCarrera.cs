@@ -6,7 +6,7 @@ namespace Planificador.Logic
     public static class MateriasPorCarrera
     {
 	
-		public static IEnumerable<Materia> ListaMateriasLicenciaturaInformatica()
+		public static IEnumerable<Materia> ListarMateriasLicenciaturaInformatica()
 		{
 			List<Materia> listaMaterias = new List<Materia>();
 
