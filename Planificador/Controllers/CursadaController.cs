@@ -18,11 +18,13 @@ namespace Planificador.Controllers
         /// <returns></returns>
         public ActionResult Index(string nombreAlumno)
         {
-            CursadaViewModel model = new CursadaViewModel();
-
+		    Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);		
             Cursada cursada = new Cursada();
-            
-            model.Materias = (nombreAlumno == null) ? new List<Materia>() : cursada.obtenerPosiblesMateriasACursar(new Alumno()).ToList(); //TODO
+			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
+
+            CursadaViewModel model = new CursadaViewModel();
+			model.Materias = materias;
+
             return View(model);
         }
 

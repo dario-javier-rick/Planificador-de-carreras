@@ -27,8 +27,8 @@ namespace PlanificadorTest
         [Test]
         public void Index_ListaVacia()
         {
-			//Consulto al controlador
-			ViewResult result = this.Controller.Index(null) as ViewResult;
+		//Consulto al controlador
+		ViewResult result = this.Controller.Index(null) as ViewResult;
 
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
