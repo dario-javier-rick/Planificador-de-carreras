@@ -11,11 +11,30 @@ namespace Planificador.Controllers
 {
     public class CursadaController : Controller
     {
-        public ActionResult Index(string nombre)
+        /// <summary>
+        /// Controlador HTTP
+        /// </summary>
+        /// <param name="nombreAlumno"></param>
+        /// <returns></returns>
+        public ActionResult Index(string nombreAlumno)
         {
             CursadaViewModel model = new CursadaViewModel();
-            model.Materias = (nombre == null) ? new List<Materia>() : MateriasRestantesHelper.GetMateriasPendientes(new Alumno());
+
+            Cursada cursada = new Cursada();
+            
+            model.Materias = (nombreAlumno == null) ? new List<Materia>() : cursada.obtenerPosiblesMateriasACursar(new Alumno()).ToList(); //TODO
             return View(model);
         }
+
+
+        /// <summary>
+        /// Controlador abstracto
+        /// </summary>
+        /// <param name="nombreAlumno"></param>
+        private void IndexAbs(string nombreAlumno)
+        {
+            //Controlador HTTP debe consultar a este método para abstraer el comportamiento web de la lógica de controlador
+        }
+
     }
 }

@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="Model.Carrera" Width="1.5" PointX="0.75" PointY="0.75" FillColor="Red" />
         <EntityTypeShape EntityType="Model.MateriasPorCarrera" Width="1.5" PointX="3" PointY="3.5" FillColor="Black" />
         <EntityTypeShape EntityType="Model.CarrerasPorUsuario" Width="1.5" PointX="8" PointY="6.75" FillColor="Orange" />
-        <EntityTypeShape EntityType="Model.MateriasPorUsuario" Width="1.5" PointX="6" PointY="3.5" FillColor="GreenYellow" />
+        <EntityTypeShape EntityType="Model.MateriasPorUsuario" Width="1.5" PointX="6" PointY="3.625" FillColor="GreenYellow" />
         <EntityTypeShape EntityType="Model.CorrelativaPorMateria" Width="1.5" PointX="5.25" PointY="6.625" />
         <AssociationConnector Association="Model.UsuarioMateriasPorUsuario" />
         <AssociationConnector Association="Model.UsuarioCarrerasPorUsuario" />

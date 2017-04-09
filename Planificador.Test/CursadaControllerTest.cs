@@ -30,11 +30,11 @@ namespace PlanificadorTest
 			//Consulto al controlador
 			ViewResult result = this.Controller.Index(null) as ViewResult;
 
-			//Controlador retorna ViewModel
-            var model = (CursadaViewModel)result.ViewData.Model;
+            //Controlador retorna ViewModel
+            CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
 			//Valido resultado de ViewModel
-            Assert.IsTrue(model.Materias.Equals(DbContext.GetListaDeMaterias()));
+            Assert.IsTrue(!model.Materias.Any());
 
         }
     }

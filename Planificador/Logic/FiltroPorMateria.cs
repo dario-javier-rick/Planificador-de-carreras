@@ -8,10 +8,10 @@ namespace Planificador.Logic
 {
     public static class FiltroPorMateria
     {
-        public static IEnumerable<Materia> ObtenerMateriasQuePudenSerCursadas(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
+        public static IEnumerable<Materia> ObtenerMateriasQuePudenSerCursadas(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
         {
 			IEnumerable<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas);
-			IEnumerable<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
+            IEnumerable<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = null; //TODO QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
 			IEnumerable<Materia> materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any());
             return materiasQuePudenSerCursadas;  
         }
