@@ -27,18 +27,16 @@ namespace Planificador.Controllers
         /// <summary>
         /// Controlador generico.
 		/// Controlador HTTP debe consultar a este método para abstraer el comportamiento web 
-		/// de la propia lógica del controlador
         /// </summary>
         /// <param name="alumno"></param>
 		private CursadaViewModel Index(Alumno alumno)
 		{
-			Cursada cursada = new Cursada();
-			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
+			Cursada cursada = new Cursada(); //Facade object
+			IEnumerable<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno);
 
-			CursadaViewModel model = new CursadaViewModel();
-			model.Materias = materias;
+		    CursadaViewModel model = new CursadaViewModel {Materias = materias};
 
-			return model;
+		    return model;
 		}
 
     }

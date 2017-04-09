@@ -17,22 +17,22 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Materia()
         {
-            this.MateriasPorCarrera = new HashSet<MateriasPorCarrera>();
-            this.MateriasPorUsuario = new HashSet<MateriasPorUsuario>();
-            this.Correlativas = new HashSet<Materia>();
-            this.EsCorrealativaCon = new HashSet<Materia>();
+            this.Alumno = new HashSet<Alumno>();
+            this.PlanDeEstudios = new HashSet<PlanDeEstudios>();
+            this.EsCorrelativaCon = new HashSet<Materia>();
+            this.RequeridaPara = new HashSet<Materia>();
         }
     
         public int IdMateria { get; set; }
         public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MateriasPorCarrera> MateriasPorCarrera { get; set; }
+        public virtual ICollection<Alumno> Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MateriasPorUsuario> MateriasPorUsuario { get; set; }
+        public virtual ICollection<PlanDeEstudios> PlanDeEstudios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Materia> Correlativas { get; set; }
+        public virtual ICollection<Materia> EsCorrelativaCon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Materia> EsCorrealativaCon { get; set; }
+        public virtual ICollection<Materia> RequeridaPara { get; set; }
     }
 }

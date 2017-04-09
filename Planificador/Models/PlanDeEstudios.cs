@@ -12,24 +12,22 @@ namespace Planificador.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MateriasPorCarrera
+    public partial class PlanDeEstudios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MateriasPorCarrera()
+        public PlanDeEstudios()
         {
-            this.CorrelativaPorMateria = new HashSet<CorrelativaPorMateria>();
-            this.CorrelativaPorMateria1 = new HashSet<CorrelativaPorMateria>();
+            this.Materia = new HashSet<Materia>();
+            this.Alumno = new HashSet<Alumno>();
         }
     
-        public int IdMateriaPorCarrera { get; set; }
-        public int IdMateria { get; set; }
-        public int IdCarrera { get; set; }
+        public int Id { get; set; }
+        public int CarreraIdCarrera { get; set; }
     
-        public virtual Materia Materia { get; set; }
         public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CorrelativaPorMateria> CorrelativaPorMateria { get; set; }
+        public virtual ICollection<Materia> Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CorrelativaPorMateria> CorrelativaPorMateria1 { get; set; }
+        public virtual ICollection<Alumno> Alumno { get; set; }
     }
 }

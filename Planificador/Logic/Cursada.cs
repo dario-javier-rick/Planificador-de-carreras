@@ -11,30 +11,42 @@ namespace Planificador.Logic
     /// </summary>
     public class Cursada
     {
-        private Carrera carrera = new Carrera();
-        private Materia materia = new Materia();
-        private Alumno alumno = new Alumno();
+        private Carrera _carrera = new Carrera();
+        private Materia _materia = new Materia();
+        private Alumno _alumno = new Alumno();
 
         public Cursada()
         {
         }
 
+        /// <summary>
+        /// Dado un alumno, devuelve las materias que puede cursar teniendo en cuenta las de los planes de estudios, las ya cursadas, las que le faltan y las correlativas.
+        /// </summary>
+        /// <param name="alumno"></param>
+        /// <returns></returns>
         public IEnumerable<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
         {
-			if (alumno == null)
-			{
-				return new List<Materia>();
-			}
-			
-			//Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
-			//TODO: Filtrar por plan de estudios. Patron observer?
-	    	IEnumerable <Materia> materiasDeCarrera = MateriasPorCarrera.ListarMateriasLicenciaturaInformatica();
+            if (alumno == null)
+            {
+                return Enumerable.Empty<Materia>();
+            }
 
-			//Me fijo que materias aprobadas tiene el alumno
+            //Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
+            List<PlanDeEstudios> planesDeEstudios = alumno.PlanDeEstudios.ToList();
+
+            //TODO: Patron observer?
+            List<Materia> materiasDeCarreras = new List<Materia>();
+            foreach (PlanDeEstudios plan in planesDeEstudios)
+            {
+                materiasDeCarreras.AddRange(plan.Materia);
+            }
+
+
+            //Me fijo que materias aprobadas tiene el alumno
             IEnumerable<Materia> materiasAprobadas = alumno.ListarMateriasAprobadas();
 
 			//Devuelvo las que realmente pueden ser cursadas.
-			return alumno.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarrera);
+			return alumno.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarreras);
 		}
     }
 }

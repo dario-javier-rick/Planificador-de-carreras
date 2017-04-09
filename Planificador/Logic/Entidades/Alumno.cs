@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Planificador.Logic;
 
 namespace Planificador.Models
 {
     public partial class Alumno
     {
-		public static Alumno ObtenerAlumno(string nombreAlumno){
-			return new Alumno { IdUsuario = 1, Nombre = nombreAlumno }; //TODO: Validar si el alumno existe en alguna DB?
+		public static Alumno ObtenerAlumno(string nombreAlumno)
+		{
+		    return Alumnos.ListaAlumnos.FirstOrDefault(alumno => alumno.Nombre == nombreAlumno);
 		}
 
-		public List<Materia> ListarMateriasAprobadas() {
-			return new List<Materia>(); //TODO: Obtener realmente las materias que tiene aprobadas, y no devolver una lista vacia
+		public List<Materia> ListarMateriasAprobadas()
+		{
+		    return this.MateriasCursadas.ToList();
 		}
 
 		public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera) { 
@@ -22,6 +25,7 @@ namespace Planificador.Models
 			return materiasSinAprobar;//materiasQuePudenSerCursadas;
 		}
 
+        /*
 		private static List<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
 		{
 			List<Materia> listaDeMateriasSinAprobar = new List<Materia>();
@@ -43,5 +47,6 @@ namespace Planificador.Models
 
 			return listaDeMateriasSinAprobar;
 		}
+        */
     }
 }

@@ -28,9 +28,6 @@ namespace Planificador.Models
         public virtual DbSet<Alumno> AlumnoSet { get; set; }
         public virtual DbSet<Materia> MateriaSet { get; set; }
         public virtual DbSet<Carrera> CarreraSet { get; set; }
-        public virtual DbSet<MateriasPorCarrera> MateriasPorCarreraSet { get; set; }
-        public virtual DbSet<CarrerasPorUsuario> CarrerasPorUsuarioSet { get; set; }
-        public virtual DbSet<MateriasPorUsuario> MateriasPorUsuarioSet { get; set; }
-        public virtual DbSet<CorrelativaPorMateria> CorrelativaPorMateriaSet { get; set; }
+        public virtual DbSet<PlanDeEstudios> PlanDeEstudiosSet { get; set; }
     }
 }

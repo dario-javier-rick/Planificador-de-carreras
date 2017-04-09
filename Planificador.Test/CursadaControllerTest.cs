@@ -31,10 +31,40 @@ namespace PlanificadorTest
 			ViewResult result = this.Controller.Index(null) as ViewResult;
 
             //Controlador retorna ViewModel
-            CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
+            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
 
 			//Valido resultado de ViewModel
             Assert.IsTrue(!model.Materias.Any());
         }
+
+        [Test]
+        public void Index_Alumno_LicenciaturaInformatica()
+        {
+            //Consulto al controlador
+            ViewResult result = this.Controller.Index("Dario") as ViewResult;
+
+            //Controlador retorna ViewModel
+            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
+
+            //Valido resultado de ViewModel
+            IEnumerable<Materia> listaMateriasLicenciaturaInformatica = MateriasPorCarrera.ListarMateriasLicenciaturaSistemas();
+            CollectionAssert.AreEqual(listaMateriasLicenciaturaInformatica.ToList(), model.Materias.ToList());
+        }
+
+        [Test]
+        public void Index_Alumno_LicenciaturaEconomia()
+        {
+            //Consulto al controlador
+            ViewResult result = this.Controller.Index("Adam") as ViewResult;
+
+            //Controlador retorna ViewModel
+            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
+
+            //Valido resultado de ViewModel
+            IEnumerable<Materia> listaMateriasLicenciaturaEconomia = MateriasPorCarrera.ListarMateriasLicenciaturaEconomia();
+            CollectionAssert.AreEqual(listaMateriasLicenciaturaEconomia.ToList(), model.Materias.ToList());
+        }
+
+
     }
 }

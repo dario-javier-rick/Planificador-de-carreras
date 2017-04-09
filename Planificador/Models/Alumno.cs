@@ -17,12 +17,12 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Alumno()
         {
-            this.MateriasPorUsuario = new HashSet<MateriasPorUsuario>();
-            this.CarrerasPorUsuario = new HashSet<CarrerasPorUsuario>();
+            this.MateriasCursadas = new HashSet<Materia>();
+            this.PlanDeEstudios = new HashSet<PlanDeEstudios>();
         }
     
         public int IdUsuario { get; set; }
-        public string DNI { get; set; }
+        public int DNI { get; set; }
         public string Email { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
@@ -30,8 +30,8 @@ namespace Planificador.Models
         public string Pass { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MateriasPorUsuario> MateriasPorUsuario { get; set; }
+        public virtual ICollection<Materia> MateriasCursadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CarrerasPorUsuario> CarrerasPorUsuario { get; set; }
+        public virtual ICollection<PlanDeEstudios> PlanDeEstudios { get; set; }
     }
 }

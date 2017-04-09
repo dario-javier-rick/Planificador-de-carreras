@@ -9,43 +9,7 @@
     <EntitySet Name="UsuarioSet" EntityType="Model.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MateriaSet" EntityType="Model.Store.MateriaSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CarreraSet" EntityType="Model.Store.CarreraSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MateriasPorCarreraSet" EntityType="Model.Store.MateriasPorCarreraSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CarrerasPorUsuarioSet" EntityType="Model.Store.CarrerasPorUsuarioSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="MateriasPorUsuarioSet" EntityType="Model.Store.MateriasPorUsuarioSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CorrelativaPorMateriaSet" EntityType="Model.Store.CorrelativaPorMateriaSet" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="UsuarioMateriasPorUsuario" Association="Model.Store.UsuarioMateriasPorUsuario">
-      <End Role="Usuario" EntitySet="UsuarioSet" />
-      <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="UsuarioCarrerasPorUsuario" Association="Model.Store.UsuarioCarrerasPorUsuario">
-      <End Role="Usuario" EntitySet="UsuarioSet" />
-      <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="MateriaMateriasPorCarrera" Association="Model.Store.MateriaMateriasPorCarrera">
-      <End Role="Materia" EntitySet="MateriaSet" />
-      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-    </AssociationSet>
-    <AssociationSet Name="MateriaMateriasPorUsuario" Association="Model.Store.MateriaMateriasPorUsuario">
-      <End Role="Materia" EntitySet="MateriaSet" />
-      <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="CarreraMateriasPorCarrera" Association="Model.Store.CarreraMateriasPorCarrera">
-      <End Role="Carrera" EntitySet="CarreraSet" />
-      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-    </AssociationSet>
-    <AssociationSet Name="CarreraCarrerasPorUsuario" Association="Model.Store.CarreraCarrerasPorUsuario">
-      <End Role="Carrera" EntitySet="CarreraSet" />
-      <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
-    </AssociationSet>
-    <AssociationSet Name="MateriasPorCarreraCorrelativaPorMateria" Association="Model.Store.MateriasPorCarreraCorrelativaPorMateria">
-      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-      <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
-    </AssociationSet>
-    <AssociationSet Name="IdMateriaDestino" Association="Model.Store.IdMateriaDestino">
-      <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-      <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
-    </AssociationSet>
-  </EntityContainer>
+    </EntityContainer>
   <EntityType Name="UsuarioSet">
     <Key>
       <PropertyRef Name="IdUsuario" />
@@ -73,139 +37,7 @@
     <Property Name="IdCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="MateriasPorCarreraSet">
-    <Key>
-      <PropertyRef Name="IdMateriaPorCarrera" />
-    </Key>
-    <Property Name="IdMateriaPorCarrera" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdMateria" Type="int" Nullable="false" />
-    <Property Name="IdCarrera" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CarrerasPorUsuarioSet">
-    <Key>
-      <PropertyRef Name="IdCarreraPorUsuario" />
-    </Key>
-    <Property Name="IdCarreraPorUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUsuario" Type="int" Nullable="false" />
-    <Property Name="IdCarrera" Type="int" Nullable="false" />
-    <Property Name="Promedio" Type="decimal" Nullable="false" />
-    <Property Name="PorcentajeCompletitud" Type="decimal" Nullable="false" />
-  </EntityType>
-  <EntityType Name="MateriasPorUsuarioSet">
-    <Key>
-      <PropertyRef Name="IdMateriaPorUsuario" />
-    </Key>
-    <Property Name="IdMateriaPorUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdUsuario" Type="int" Nullable="false" />
-    <Property Name="IdMateria" Type="int" Nullable="false" />
-    <Property Name="EstaAprobada" Type="bit" Nullable="false" />
-    <Property Name="Nota" Type="smallint" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CorrelativaPorMateriaSet">
-    <Key>
-      <PropertyRef Name="IdCorrelativaPorMateria" />
-    </Key>
-    <Property Name="IdCorrelativaPorMateria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="IdMateriaOrigen" Type="int" Nullable="false" />
-    <Property Name="IdMateriaDestino" Type="int" Nullable="false" />
-  </EntityType>
-  <Association Name="UsuarioMateriasPorUsuario">
-    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="1" />
-    <End Role="MateriasPorUsuario" Type="Model.Store.MateriasPorUsuarioSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="IdUsuario" />
-      </Principal>
-      <Dependent Role="MateriasPorUsuario">
-        <PropertyRef Name="IdUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="UsuarioCarrerasPorUsuario">
-    <End Role="Usuario" Type="Model.Store.UsuarioSet" Multiplicity="1" />
-    <End Role="CarrerasPorUsuario" Type="Model.Store.CarrerasPorUsuarioSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuario">
-        <PropertyRef Name="IdUsuario" />
-      </Principal>
-      <Dependent Role="CarrerasPorUsuario">
-        <PropertyRef Name="IdUsuario" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MateriaMateriasPorCarrera">
-    <End Role="Materia" Type="Model.Store.MateriaSet" Multiplicity="1" />
-    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Materia">
-        <PropertyRef Name="IdMateria" />
-      </Principal>
-      <Dependent Role="MateriasPorCarrera">
-        <PropertyRef Name="IdMateria" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MateriaMateriasPorUsuario">
-    <End Role="Materia" Type="Model.Store.MateriaSet" Multiplicity="1" />
-    <End Role="MateriasPorUsuario" Type="Model.Store.MateriasPorUsuarioSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Materia">
-        <PropertyRef Name="IdMateria" />
-      </Principal>
-      <Dependent Role="MateriasPorUsuario">
-        <PropertyRef Name="IdMateria" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CarreraMateriasPorCarrera">
-    <End Role="Carrera" Type="Model.Store.CarreraSet" Multiplicity="1" />
-    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Carrera">
-        <PropertyRef Name="IdCarrera" />
-      </Principal>
-      <Dependent Role="MateriasPorCarrera">
-        <PropertyRef Name="IdCarrera" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CarreraCarrerasPorUsuario">
-    <End Role="Carrera" Type="Model.Store.CarreraSet" Multiplicity="1" />
-    <End Role="CarrerasPorUsuario" Type="Model.Store.CarrerasPorUsuarioSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Carrera">
-        <PropertyRef Name="IdCarrera" />
-      </Principal>
-      <Dependent Role="CarrerasPorUsuario">
-        <PropertyRef Name="IdCarrera" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="MateriasPorCarreraCorrelativaPorMateria">
-    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="1" />
-    <End Role="CorrelativaPorMateria" Type="Model.Store.CorrelativaPorMateriaSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MateriasPorCarrera">
-        <PropertyRef Name="IdMateriaPorCarrera" />
-      </Principal>
-      <Dependent Role="CorrelativaPorMateria">
-        <PropertyRef Name="IdMateriaOrigen" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="IdMateriaDestino">
-    <End Role="MateriasPorCarrera" Type="Model.Store.MateriasPorCarreraSet" Multiplicity="1" />
-    <End Role="CorrelativaPorMateria" Type="Model.Store.CorrelativaPorMateriaSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="MateriasPorCarrera">
-        <PropertyRef Name="IdMateriaPorCarrera" />
-      </Principal>
-      <Dependent Role="CorrelativaPorMateria">
-        <PropertyRef Name="IdMateriaDestino" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
+  </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
@@ -213,43 +45,24 @@
           <EntitySet Name="AlumnoSet" EntityType="Model.Alumno" />
           <EntitySet Name="MateriaSet" EntityType="Model.Materia" />
           <EntitySet Name="CarreraSet" EntityType="Model.Carrera" />
-          <EntitySet Name="MateriasPorCarreraSet" EntityType="Model.MateriasPorCarrera" />
-          <EntitySet Name="CarrerasPorUsuarioSet" EntityType="Model.CarrerasPorUsuario" />
-          <EntitySet Name="MateriasPorUsuarioSet" EntityType="Model.MateriasPorUsuario" />
-          <EntitySet Name="CorrelativaPorMateriaSet" EntityType="Model.CorrelativaPorMateria" />
-          <AssociationSet Name="UsuarioMateriasPorUsuario" Association="Model.UsuarioMateriasPorUsuario">
-            <End Role="Usuario" EntitySet="AlumnoSet" />
-            <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
+          <AssociationSet Name="AlumnoMateria" Association="Model.AlumnoMateria">
+            <End EntitySet="AlumnoSet" Role="Alumno" />
+            <End EntitySet="MateriaSet" Role="Materia" />
           </AssociationSet>
-          <AssociationSet Name="UsuarioCarrerasPorUsuario" Association="Model.UsuarioCarrerasPorUsuario">
-            <End Role="Usuario" EntitySet="AlumnoSet" />
-            <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
-          </AssociationSet>
-          <AssociationSet Name="MateriaMateriasPorCarrera" Association="Model.MateriaMateriasPorCarrera">
-            <End Role="Materia" EntitySet="MateriaSet" />
-            <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-          </AssociationSet>
-          <AssociationSet Name="MateriaMateriasPorUsuario" Association="Model.MateriaMateriasPorUsuario">
-            <End Role="Materia" EntitySet="MateriaSet" />
-            <End Role="MateriasPorUsuario" EntitySet="MateriasPorUsuarioSet" />
-          </AssociationSet>
-          <AssociationSet Name="CarreraMateriasPorCarrera" Association="Model.CarreraMateriasPorCarrera">
+          <EntitySet Name="PlanDeEstudiosSet" EntityType="Model.PlanDeEstudios" />
+          <AssociationSet Name="CarreraPlanDeEstudios" Association="Model.CarreraPlanDeEstudios">
             <End Role="Carrera" EntitySet="CarreraSet" />
-            <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
+            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
           </AssociationSet>
-          <AssociationSet Name="CarreraCarrerasPorUsuario" Association="Model.CarreraCarrerasPorUsuario">
-            <End Role="Carrera" EntitySet="CarreraSet" />
-            <End Role="CarrerasPorUsuario" EntitySet="CarrerasPorUsuarioSet" />
+          <AssociationSet Name="PlanDeEstudiosMateria" Association="Model.PlanDeEstudiosMateria">
+            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
+            <End Role="Materia" EntitySet="MateriaSet" />
           </AssociationSet>
-          <AssociationSet Name="MateriasPorCarreraCorrelativaPorMateria" Association="Model.MateriasPorCarreraCorrelativaPorMateria">
-            <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-            <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
+          <AssociationSet Name="AlumnoPlanDeEstudios" Association="Model.AlumnoPlanDeEstudios">
+            <End Role="Alumno" EntitySet="AlumnoSet" />
+            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
           </AssociationSet>
-          <AssociationSet Name="IdMateriaDestino" Association="Model.IdMateriaDestino">
-            <End Role="MateriasPorCarrera" EntitySet="MateriasPorCarreraSet" />
-            <End Role="CorrelativaPorMateria" EntitySet="CorrelativaPorMateriaSet" />
-          </AssociationSet>
-          <AssociationSet Name="TieneCorrelativas" Association="Model.TieneCorrelativas">
+          <AssociationSet Name="EsCorrelativa" Association="Model.EsCorrelativa">
             <End Role="Materia" EntitySet="MateriaSet" />
             <End Role="Materia1" EntitySet="MateriaSet" />
           </AssociationSet>
@@ -259,14 +72,14 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DNI" Type="String" Nullable="false" />
+          <Property Name="DNI" Type="Int32" Nullable="false" />
           <Property Name="Email" Type="String" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" />
           <Property Name="Apellido" Type="String" Nullable="false" />
           <Property Name="FechaUltimaActualizacion" Type="DateTime" Nullable="false" />
           <Property Name="Pass" Type="String" Nullable="false" />
-          <NavigationProperty Name="MateriasPorUsuario" Relationship="Model.UsuarioMateriasPorUsuario" FromRole="Usuario" ToRole="MateriasPorUsuario" />
-          <NavigationProperty Name="CarrerasPorUsuario" Relationship="Model.UsuarioCarrerasPorUsuario" FromRole="Usuario" ToRole="CarrerasPorUsuario" />
+          <NavigationProperty Name="MateriasCursadas" Relationship="Model.AlumnoMateria" FromRole="Alumno" ToRole="Materia" />
+          <NavigationProperty Name="PlanDeEstudios" Relationship="Model.AlumnoPlanDeEstudios" FromRole="Alumno" ToRole="PlanDeEstudios" />
         </EntityType>
         <EntityType Name="Materia">
           <Key>
@@ -274,10 +87,10 @@
           </Key>
           <Property Name="IdMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" />
-          <NavigationProperty Name="MateriasPorCarrera" Relationship="Model.MateriaMateriasPorCarrera" FromRole="Materia" ToRole="MateriasPorCarrera" />
-          <NavigationProperty Name="MateriasPorUsuario" Relationship="Model.MateriaMateriasPorUsuario" FromRole="Materia" ToRole="MateriasPorUsuario" />
-          <NavigationProperty Name="Correlativas" Relationship="Model.TieneCorrelativas" FromRole="Materia" ToRole="Materia1" />
-          <NavigationProperty Name="EsCorrealativaCon" Relationship="Model.TieneCorrelativas" FromRole="Materia1" ToRole="Materia" />
+          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoMateria" FromRole="Materia" ToRole="Alumno" />
+          <NavigationProperty Name="PlanDeEstudios" Relationship="Model.PlanDeEstudiosMateria" FromRole="Materia" ToRole="PlanDeEstudios" />
+          <NavigationProperty Name="EsCorrelativaCon" Relationship="Model.EsCorrelativa" FromRole="Materia" ToRole="Materia1" />
+          <NavigationProperty Name="RequeridaPara" Relationship="Model.EsCorrelativa" FromRole="Materia1" ToRole="Materia" />
         </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -285,152 +98,43 @@
           </Key>
           <Property Name="IdCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" />
-          <NavigationProperty Name="MateriasPorCarrera" Relationship="Model.CarreraMateriasPorCarrera" FromRole="Carrera" ToRole="MateriasPorCarrera" />
-          <NavigationProperty Name="CarrerasPorUsuario" Relationship="Model.CarreraCarrerasPorUsuario" FromRole="Carrera" ToRole="CarrerasPorUsuario" />
+          <NavigationProperty Name="PlanDeEstudios" Relationship="Model.CarreraPlanDeEstudios" FromRole="Carrera" ToRole="PlanDeEstudios" />
         </EntityType>
-        <EntityType Name="MateriasPorCarrera">
-          <Key>
-            <PropertyRef Name="IdMateriaPorCarrera" />
-          </Key>
-          <Property Name="IdMateriaPorCarrera" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Materia" Relationship="Model.MateriaMateriasPorCarrera" FromRole="MateriasPorCarrera" ToRole="Materia" />
-          <NavigationProperty Name="Carrera" Relationship="Model.CarreraMateriasPorCarrera" FromRole="MateriasPorCarrera" ToRole="Carrera" />
-          <NavigationProperty Name="CorrelativaPorMateria" Relationship="Model.MateriasPorCarreraCorrelativaPorMateria" FromRole="MateriasPorCarrera" ToRole="CorrelativaPorMateria" />
-          <NavigationProperty Name="CorrelativaPorMateria1" Relationship="Model.IdMateriaDestino" FromRole="MateriasPorCarrera" ToRole="CorrelativaPorMateria" />
-        </EntityType>
-        <EntityType Name="CarrerasPorUsuario">
-          <Key>
-            <PropertyRef Name="IdCarreraPorUsuario" />
-          </Key>
-          <Property Name="IdCarreraPorUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="IdCarrera" Type="Int32" Nullable="false" />
-          <Property Name="Promedio" Type="Decimal" Nullable="false" />
-          <Property Name="PorcentajeCompletitud" Type="Decimal" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Model.UsuarioCarrerasPorUsuario" FromRole="CarrerasPorUsuario" ToRole="Usuario" />
-          <NavigationProperty Name="Carrera" Relationship="Model.CarreraCarrerasPorUsuario" FromRole="CarrerasPorUsuario" ToRole="Carrera" />
-        </EntityType>
-        <EntityType Name="MateriasPorUsuario">
-          <Key>
-            <PropertyRef Name="IdMateriaPorUsuario" />
-          </Key>
-          <Property Name="IdMateriaPorUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="IdMateria" Type="Int32" Nullable="false" />
-          <Property Name="EstaAprobada" Type="Boolean" Nullable="false" />
-          <Property Name="Nota" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Usuario" Relationship="Model.UsuarioMateriasPorUsuario" FromRole="MateriasPorUsuario" ToRole="Usuario" />
-          <NavigationProperty Name="Materia" Relationship="Model.MateriaMateriasPorUsuario" FromRole="MateriasPorUsuario" ToRole="Materia" />
-        </EntityType>
-        <EntityType Name="CorrelativaPorMateria">
-          <Key>
-            <PropertyRef Name="IdCorrelativaPorMateria" />
-          </Key>
-          <Property Name="IdCorrelativaPorMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdMateriaOrigen" Type="Int32" Nullable="false" />
-          <Property Name="IdMateriaDestino" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="MateriaOrigen" Relationship="Model.MateriasPorCarreraCorrelativaPorMateria" FromRole="CorrelativaPorMateria" ToRole="MateriasPorCarrera" />
-          <NavigationProperty Name="MateriaDestino" Relationship="Model.IdMateriaDestino" FromRole="CorrelativaPorMateria" ToRole="MateriasPorCarrera" />
-        </EntityType>
-        <Association Name="UsuarioMateriasPorUsuario">
-          <End Type="Model.Alumno" Role="Usuario" Multiplicity="1" />
-          <End Type="Model.MateriasPorUsuario" Role="MateriasPorUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="MateriasPorUsuario">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AlumnoMateria">
+          <End Type="Model.Alumno" Multiplicity="*" Role="Alumno" />
+          <End Type="Model.Materia" Multiplicity="*" Role="Materia" />
         </Association>
-        <Association Name="UsuarioCarrerasPorUsuario">
-          <End Type="Model.Alumno" Role="Usuario" Multiplicity="1" />
-          <End Type="Model.CarrerasPorUsuario" Role="CarrerasPorUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuario">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="CarrerasPorUsuario">
-              <PropertyRef Name="IdUsuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="MateriaMateriasPorCarrera">
-          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
-          <End Type="Model.MateriasPorCarrera" Role="MateriasPorCarrera" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materia">
-              <PropertyRef Name="IdMateria" />
-            </Principal>
-            <Dependent Role="MateriasPorCarrera">
-              <PropertyRef Name="IdMateria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="MateriaMateriasPorUsuario">
-          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
-          <End Type="Model.MateriasPorUsuario" Role="MateriasPorUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Materia">
-              <PropertyRef Name="IdMateria" />
-            </Principal>
-            <Dependent Role="MateriasPorUsuario">
-              <PropertyRef Name="IdMateria" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CarreraMateriasPorCarrera">
+        <EntityType Name="PlanDeEstudios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Carrera" Relationship="Model.CarreraPlanDeEstudios" FromRole="PlanDeEstudios" ToRole="Carrera" />
+          <Property Name="CarreraIdCarrera" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.PlanDeEstudiosMateria" FromRole="PlanDeEstudios" ToRole="Materia" />
+          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoPlanDeEstudios" FromRole="PlanDeEstudios" ToRole="Alumno" />
+        </EntityType>
+        <Association Name="CarreraPlanDeEstudios">
           <End Type="Model.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="Model.MateriasPorCarrera" Role="MateriasPorCarrera" Multiplicity="*" />
+          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Carrera">
               <PropertyRef Name="IdCarrera" />
             </Principal>
-            <Dependent Role="MateriasPorCarrera">
-              <PropertyRef Name="IdCarrera" />
+            <Dependent Role="PlanDeEstudios">
+              <PropertyRef Name="CarreraIdCarrera" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="CarreraCarrerasPorUsuario">
-          <End Type="Model.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="Model.CarrerasPorUsuario" Role="CarrerasPorUsuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrera">
-              <PropertyRef Name="IdCarrera" />
-            </Principal>
-            <Dependent Role="CarrerasPorUsuario">
-              <PropertyRef Name="IdCarrera" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="PlanDeEstudiosMateria">
+          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
         </Association>
-        <Association Name="MateriasPorCarreraCorrelativaPorMateria">
-          <End Type="Model.MateriasPorCarrera" Role="MateriasPorCarrera" Multiplicity="1" />
-          <End Type="Model.CorrelativaPorMateria" Role="CorrelativaPorMateria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MateriasPorCarrera">
-              <PropertyRef Name="IdMateriaPorCarrera" />
-            </Principal>
-            <Dependent Role="CorrelativaPorMateria">
-              <PropertyRef Name="IdMateriaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="AlumnoPlanDeEstudios">
+          <End Type="Model.Alumno" Role="Alumno" Multiplicity="*" />
+          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
         </Association>
-        <Association Name="IdMateriaDestino">
-          <End Type="Model.MateriasPorCarrera" Role="MateriasPorCarrera" Multiplicity="1" />
-          <End Type="Model.CorrelativaPorMateria" Role="CorrelativaPorMateria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MateriasPorCarrera">
-              <PropertyRef Name="IdMateriaPorCarrera" />
-            </Principal>
-            <Dependent Role="CorrelativaPorMateria">
-              <PropertyRef Name="IdMateriaDestino" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="TieneCorrelativas">
+        <Association Name="EsCorrelativa">
           <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
           <End Type="Model.Materia" Role="Materia1" Multiplicity="*" />
         </Association>
@@ -466,46 +170,6 @@
         <MappingFragment StoreEntitySet="CarreraSet">
           <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MateriasPorCarreraSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MateriasPorCarrera)">
-        <MappingFragment StoreEntitySet="MateriasPorCarreraSet">
-          <ScalarProperty Name="IdMateriaPorCarrera" ColumnName="IdMateriaPorCarrera" />
-          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
-          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CarrerasPorUsuarioSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CarrerasPorUsuario)">
-        <MappingFragment StoreEntitySet="CarrerasPorUsuarioSet">
-          <ScalarProperty Name="IdCarreraPorUsuario" ColumnName="IdCarreraPorUsuario" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="IdCarrera" ColumnName="IdCarrera" />
-          <ScalarProperty Name="Promedio" ColumnName="Promedio" />
-          <ScalarProperty Name="PorcentajeCompletitud" ColumnName="PorcentajeCompletitud" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="MateriasPorUsuarioSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.MateriasPorUsuario)">
-        <MappingFragment StoreEntitySet="MateriasPorUsuarioSet">
-          <ScalarProperty Name="IdMateriaPorUsuario" ColumnName="IdMateriaPorUsuario" />
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="IdMateria" ColumnName="IdMateria" />
-          <ScalarProperty Name="EstaAprobada" ColumnName="EstaAprobada" />
-          <ScalarProperty Name="Nota" ColumnName="Nota" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CorrelativaPorMateriaSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CorrelativaPorMateria)">
-        <MappingFragment StoreEntitySet="CorrelativaPorMateriaSet">
-          <ScalarProperty Name="IdCorrelativaPorMateria" ColumnName="IdCorrelativaPorMateria" />
-          <ScalarProperty Name="IdMateriaOrigen" ColumnName="IdMateriaOrigen" />
-          <ScalarProperty Name="IdMateriaDestino" ColumnName="IdMateriaDestino" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
