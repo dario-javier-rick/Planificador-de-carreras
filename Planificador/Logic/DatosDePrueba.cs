@@ -28,7 +28,7 @@ namespace Planificador.Logic
                 IdUsuario = 1,
                 Nombre = "Dario",
                 Apellido = "Rick",
-                DNI = 37170404,
+                Dni = "37170404",
                 PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
             },
 

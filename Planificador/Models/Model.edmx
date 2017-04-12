@@ -72,12 +72,9 @@
             <PropertyRef Name="IdUsuario" />
           </Key>
           <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DNI" Type="Int32" Nullable="false" />
-          <Property Name="Email" Type="String" Nullable="false" />
+          <Property Name="Dni" Type="String" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" />
           <Property Name="Apellido" Type="String" Nullable="false" />
-          <Property Name="FechaUltimaActualizacion" Type="DateTime" Nullable="false" />
-          <Property Name="Pass" Type="String" Nullable="false" />
           <NavigationProperty Name="MateriasCursadas" Relationship="Model.AlumnoMateria" FromRole="Alumno" ToRole="Materia" />
           <NavigationProperty Name="PlanDeEstudios" Relationship="Model.AlumnoPlanDeEstudios" FromRole="Alumno" ToRole="PlanDeEstudios" />
         </EntityType>
@@ -148,12 +145,9 @@
       <EntityTypeMapping TypeName="IsTypeOf(Model.Alumno)">
         <MappingFragment StoreEntitySet="UsuarioSet">
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-          <ScalarProperty Name="DNI" ColumnName="DNI" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Dni" ColumnName="DNI" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-          <ScalarProperty Name="FechaUltimaActualizacion" ColumnName="FechaUltimaActualizacion" />
-          <ScalarProperty Name="Pass" ColumnName="Pass" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

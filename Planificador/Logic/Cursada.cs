@@ -34,7 +34,7 @@ namespace Planificador.Logic
             //Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
             List<PlanDeEstudios> planesDeEstudios = alumno.PlanDeEstudios.ToList();
 
-            //TODO: Patron observer?
+            //TODO: Patron observer? Nico V: noup, observer es para el front
             List<Materia> materiasDeCarreras = new List<Materia>();
             foreach (PlanDeEstudios plan in planesDeEstudios)
             {

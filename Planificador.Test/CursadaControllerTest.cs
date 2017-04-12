@@ -55,7 +55,8 @@ namespace PlanificadorTest
         public void Index_Alumno_LicenciaturaEconomia()
         {
             //Consulto al controlador
-            ViewResult result = this.Controller.Index("Adam") as ViewResult;
+            const string Alumno = "Adam";
+            ViewResult result = this.Controller.Index(Alumno) as ViewResult;
 
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
