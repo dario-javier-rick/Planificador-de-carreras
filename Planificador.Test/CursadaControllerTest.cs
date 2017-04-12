@@ -9,6 +9,7 @@ using Planificador.Models;
 using System.Web.Mvc;
 using Planificador.Models.ViewModels;
 using Planificador.Logic;
+using Planificador.Data.PlanesDeEstudio;
 
 
 namespace PlanificadorTest
@@ -27,13 +28,13 @@ namespace PlanificadorTest
         [Test]
         public void Index_ListaVacia()
         {
-			//Consulto al controlador
-			ViewResult result = this.Controller.Index(null) as ViewResult;
+            //Consulto al controlador
+            ViewResult result = this.Controller.Index(null) as ViewResult;
 
             //Controlador retorna ViewModel
-            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
+            CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
-			//Valido resultado de ViewModel
+            //Valido resultado de ViewModel
             Assert.IsTrue(!model.Materias.Any());
         }
 
@@ -44,7 +45,7 @@ namespace PlanificadorTest
             ViewResult result = this.Controller.Index("Dario") as ViewResult;
 
             //Controlador retorna ViewModel
-            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
+            CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
             //Valido resultado de ViewModel
             IEnumerable<Materia> listaMateriasLicenciaturaInformatica = MateriasPorCarrera.ListarMateriasLicenciaturaSistemas();
@@ -59,13 +60,21 @@ namespace PlanificadorTest
             ViewResult result = this.Controller.Index(Alumno) as ViewResult;
 
             //Controlador retorna ViewModel
-            CursadaViewModel model = (CursadaViewModel) result.ViewData.Model;
+            CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
             //Valido resultado de ViewModel
             IEnumerable<Materia> listaMateriasLicenciaturaEconomia = MateriasPorCarrera.ListarMateriasLicenciaturaEconomia();
             CollectionAssert.AreEqual(listaMateriasLicenciaturaEconomia.ToList(), model.Materias.ToList());
         }
 
+        [Test]
+        public void Lalalala()
+        {
+            //Consulto al controlador
+            IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
+            var b = new CaminoCritico();
+            var g = b.GetCaminoCritico(a.GetPlanEstudio());
+        }
 
     }
 }

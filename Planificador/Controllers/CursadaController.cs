@@ -20,7 +20,7 @@ namespace Planificador.Controllers
         {
 		    Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
 			CursadaViewModel viewModel = Index(alumno);
-			return View(viewModel);
+			return View(viewModel); 
         }
 
 

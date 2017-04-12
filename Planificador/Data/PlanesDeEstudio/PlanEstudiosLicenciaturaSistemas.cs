@@ -14,7 +14,7 @@ namespace Planificador.Data.PlanesDeEstudio
             var planDeEstudios = new PlanDeEstudios
             {
                 Id = 1,
-                Materias = this.GetListaMaterias()                
+                Materias = this.GetListaMaterias(),                
             };
             return planDeEstudios;
         }
