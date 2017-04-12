@@ -14,11 +14,11 @@ namespace Planificador.Logic
 
         public static PlanDeEstudios PlanDeEstudiosSistemas = new PlanDeEstudios
         {
-            Materia = MateriasPorCarrera.ListarMateriasLicenciaturaSistemas()
+            Materias = MateriasPorCarrera.ListarMateriasLicenciaturaSistemas()
         };
         public static PlanDeEstudios PlanDeEstudiosEconomia = new PlanDeEstudios
         {
-            Materia = MateriasPorCarrera.ListarMateriasLicenciaturaEconomia()
+            Materias = MateriasPorCarrera.ListarMateriasLicenciaturaEconomia()
         };
 
         public static List<Alumno> ListaAlumnos = new List<Alumno> {
@@ -29,7 +29,7 @@ namespace Planificador.Logic
                 Nombre = "Dario",
                 Apellido = "Rick",
                 Dni = "37170404",
-                PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
             },
 
             new Alumno
@@ -37,7 +37,7 @@ namespace Planificador.Logic
                 IdUsuario = 2,
                 Nombre = "Nicolas",
                 Apellido = "Fernandez",
-                PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
             },
 
             new Alumno
@@ -45,7 +45,7 @@ namespace Planificador.Logic
                 IdUsuario = 3,
                 Nombre = "Nicolas",
                 Apellido = "Videla Rivero",
-                PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas, PlanDeEstudiosEconomia }
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas, PlanDeEstudiosEconomia }
             },
 
             new Alumno
@@ -53,7 +53,7 @@ namespace Planificador.Logic
                 IdUsuario = 4,
                 Nombre = "Adam",
                 Apellido = "Smith",
-                PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosEconomia }
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosEconomia }
             }
 
         };
@@ -109,7 +109,7 @@ namespace Planificador.Logic
             {
                 IdMateria = 2,
                 Nombre = "Programacion 1",
-                EsCorrelativaCon = new List<Materia> { ip }
+                Correlativas = new List<Materia> { ip }
             };
             listaMaterias.Add(p1);
 
@@ -117,7 +117,7 @@ namespace Planificador.Logic
             {
                 IdMateria = 3,
                 Nombre = "Programacion 2",
-                EsCorrelativaCon = new List<Materia> { p1 }
+                Correlativas = new List<Materia> { p1 }
             };
             listaMaterias.Add(p2);
 
@@ -125,7 +125,7 @@ namespace Planificador.Logic
             {
                 IdMateria = 4,
                 Nombre = "Programacion 3",
-                EsCorrelativaCon = new List<Materia> { p2 }
+                Correlativas = new List<Materia> { p2 }
             };
             listaMaterias.Add(p3);
 
@@ -141,7 +141,7 @@ namespace Planificador.Logic
             {
                 IdMateria = 6,
                 Nombre = "Logica y teoria de numeros",
-                EsCorrelativaCon = new List<Materia> { im }
+                Correlativas = new List<Materia> { im }
             };
             listaMaterias.Add(lg);
 
@@ -150,7 +150,7 @@ namespace Planificador.Logic
             {
                 IdMateria = 7,
                 Nombre = "Matematica Discreta",
-                EsCorrelativaCon = new List<Materia> { lg }
+                Correlativas = new List<Materia> { lg }
             };
             listaMaterias.Add(md);
 

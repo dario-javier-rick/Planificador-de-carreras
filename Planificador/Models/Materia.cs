@@ -17,22 +17,14 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Materia()
         {
-            this.Alumno = new HashSet<Alumno>();
-            this.PlanDeEstudios = new HashSet<PlanDeEstudios>();
-            this.EsCorrelativaCon = new HashSet<Materia>();
-            this.RequeridaPara = new HashSet<Materia>();
+            this.Correlativas = new HashSet<Materia>();
         }
     
         public int IdMateria { get; set; }
         public string Nombre { get; set; }
+        public int PlanDeEstudiosId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alumno> Alumno { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanDeEstudios> PlanDeEstudios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Materia> EsCorrelativaCon { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Materia> RequeridaPara { get; set; }
+        public virtual ICollection<Materia> Correlativas { get; set; }
     }
 }

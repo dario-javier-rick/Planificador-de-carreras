@@ -8,22 +8,28 @@ namespace Planificador.Models
 {
     public partial class Alumno
     {
-		public static Alumno ObtenerAlumno(string nombreAlumno)
-		{
-		    return Alumnos.ListaAlumnos.FirstOrDefault(alumno => alumno.Nombre == nombreAlumno);
-		}
+        public static Alumno ObtenerAlumno(string nombreAlumno)
+        {
+            return Alumnos.ListaAlumnos.FirstOrDefault(alumno => alumno.Nombre == nombreAlumno);
+        }
 
-		public List<Materia> ListarMateriasAprobadas()
-		{
-		    return this.MateriasCursadas.ToList();
-		}
+        public List<Materia> ListarMateriasAprobadas()
+        {
+            List<Materia> materiasAprobadas = new List<Materia>();
+            foreach (var plan in this.PlanesDeEstudios)
+            {
+                materiasAprobadas.AddRange(plan.Materias);
+            } 
+            return materiasAprobadas;
+        }
 
-		public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera) { 
-			List<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas).ToList();
-			List<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = null; //TODO QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
-			//List<Materia> materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any()).ToList();
-			return materiasSinAprobar;//materiasQuePudenSerCursadas;
-		}
+        public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
+        {
+            List<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas).ToList();
+            List<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = null; //TODO QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
+                                                                                       //List<Materia> materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any()).ToList();
+            return materiasSinAprobar;//materiasQuePudenSerCursadas;
+        }
 
         /*
 		private static List<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)

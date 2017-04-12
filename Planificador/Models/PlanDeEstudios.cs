@@ -17,17 +17,13 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PlanDeEstudios()
         {
-            this.Materia = new HashSet<Materia>();
-            this.Alumno = new HashSet<Alumno>();
+            this.Materias = new HashSet<Materia>();
         }
     
         public int Id { get; set; }
         public int CarreraIdCarrera { get; set; }
     
-        public virtual Carrera Carrera { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Materia> Materia { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Alumno> Alumno { get; set; }
+        public virtual ICollection<Materia> Materias { get; set; }
     }
 }

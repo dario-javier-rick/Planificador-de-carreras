@@ -14,7 +14,7 @@ namespace Planificador.Data.PlanesDeEstudio
             var planDeEstudios = new PlanDeEstudios
             {
                 Id = 1,
-                Materia = this.GetListaMaterias()                
+                Materias = this.GetListaMaterias()                
             };
             return planDeEstudios;
         }
@@ -38,7 +38,7 @@ namespace Planificador.Data.PlanesDeEstudio
             {
                 IdMateria = 2,
                 Nombre = "Programacion 1",
-                EsCorrelativaCon = new List<Materia> { ip }
+                Correlativas = new List<Materia> { ip }
             };
             this.Materias.Add(p1);
 
@@ -46,7 +46,7 @@ namespace Planificador.Data.PlanesDeEstudio
             {
                 IdMateria = 3,
                 Nombre = "Programacion 2",
-                EsCorrelativaCon = new List<Materia> { p1 }
+                Correlativas = new List<Materia> { p1 }
             };
             this.Materias.Add(p2);
 
@@ -54,7 +54,7 @@ namespace Planificador.Data.PlanesDeEstudio
             {
                 IdMateria = 4,
                 Nombre = "Programacion 3",
-                EsCorrelativaCon = new List<Materia> { p2 }
+                Correlativas = new List<Materia> { p2 }
             };
             this.Materias.Add(p3);
 
@@ -69,7 +69,7 @@ namespace Planificador.Data.PlanesDeEstudio
             {
                 IdMateria = 6,
                 Nombre = "Logica y teoria de numeros",
-                EsCorrelativaCon = new List<Materia> { im }
+                Correlativas = new List<Materia> { im }
             };
             this.Materias.Add(lg);
 
@@ -78,7 +78,7 @@ namespace Planificador.Data.PlanesDeEstudio
             {
                 IdMateria = 7,
                 Nombre = "Matematica Discreta",
-                EsCorrelativaCon = new List<Materia> { lg }
+                Correlativas = new List<Materia> { lg }
             };
             this.Materias.Add(md);
 

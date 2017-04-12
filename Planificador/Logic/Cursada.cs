@@ -32,13 +32,13 @@ namespace Planificador.Logic
             }
 
             //Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
-            List<PlanDeEstudios> planesDeEstudios = alumno.PlanDeEstudios.ToList();
+            List<PlanDeEstudios> planesDeEstudios = alumno.PlanesDeEstudios.ToList();
 
             //TODO: Patron observer? Nico V: noup, observer es para el front
             List<Materia> materiasDeCarreras = new List<Materia>();
             foreach (PlanDeEstudios plan in planesDeEstudios)
             {
-                materiasDeCarreras.AddRange(plan.Materia);
+                materiasDeCarreras.AddRange(plan.Materias);
             }
 
 

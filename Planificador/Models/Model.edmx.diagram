@@ -5,15 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="252a76b40faf47eeab1695d71e0c37d7" Name="Diagram1" ZoomLevel="92" >
-        <EntityTypeShape EntityType="Model.Alumno" Width="1.5" PointX="7.625" PointY="7.25" FillColor="Yellow" />
+        <EntityTypeShape EntityType="Model.Alumno" Width="1.75" PointX="7.625" PointY="7.25" FillColor="Yellow" />
         <EntityTypeShape EntityType="Model.Materia" Width="1.5" PointX="3.75" PointY="7.75" FillColor="Lime" />
         <EntityTypeShape EntityType="Model.Carrera" Width="1.5" PointX="7.125" PointY="3" FillColor="Red" />
-        <AssociationConnector Association="Model.AlumnoMateria" />
-        <EntityTypeShape EntityType="Model.PlanDeEstudios" Width="1.5" PointX="3.25" PointY="3.625" />
-        <AssociationConnector Association="Model.CarreraPlanDeEstudios" />
+        <EntityTypeShape EntityType="Model.PlanDeEstudios" Width="1.5" PointX="3.375" PointY="4.625" />
+        <AssociationConnector Association="Model.MateriaMateria" />
         <AssociationConnector Association="Model.PlanDeEstudiosMateria" />
+        <AssociationConnector Association="Model.CarreraPlanDeEstudios" />
         <AssociationConnector Association="Model.AlumnoPlanDeEstudios" />
-        <AssociationConnector Association="Model.EsCorrelativa" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

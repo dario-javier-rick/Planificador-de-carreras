@@ -17,13 +17,13 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Carrera()
         {
-            this.PlanDeEstudios = new HashSet<PlanDeEstudios>();
+            this.PlanesDeEstudios = new HashSet<PlanDeEstudios>();
         }
     
         public int IdCarrera { get; set; }
         public string Nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PlanDeEstudios> PlanDeEstudios { get; set; }
+        public virtual ICollection<PlanDeEstudios> PlanesDeEstudios { get; set; }
     }
 }
