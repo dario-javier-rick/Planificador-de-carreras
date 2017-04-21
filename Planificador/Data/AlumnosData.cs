@@ -2,45 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Planificador.Data.PlanesDeEstudio;
 using Planificador.Models;
 namespace Planificador.Data
 {
     public class AlumnosData : IData<Alumno>
     {
+        private PlanEstudiosLicenciaturaSistemas _licenciaturaSistemas;
+        private PlanEstudiosLicenciaturaEconomia _licentuEconomia;
+
         public IEnumerable<Alumno> GetData()
         {
             var dataList = new List<Alumno>
             {
                 new Alumno
                 {
-                    IdUsuario = 1,
+                    IdAlumno = 1,
                     Nombre = "Dario",
                     Apellido = "Rick",
                     Dni = "37170404",
-                   // PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
+                    PlanesDeEstudios = new List<PlanDeEstudios> { _licenciaturaSistemas.GetPlanEstudio() }
                 },
                 new Alumno
                 {
-                    IdUsuario = 2,
+                    IdAlumno = 2,
                     Nombre = "Nicolas",
                     Apellido = "Fernandez",
-                   // PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
+                    PlanesDeEstudios = new List<PlanDeEstudios> { _licenciaturaSistemas.GetPlanEstudio() }
                 },
 
                 new Alumno
                 {
-                    IdUsuario = 3,
+                    IdAlumno = 3,
                     Nombre = "Nicolas",
                     Apellido = "Videla Rivero",
-                    //PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas, PlanDeEstudiosEconomia }
+                    PlanesDeEstudios = new List<PlanDeEstudios> { _licenciaturaSistemas.GetPlanEstudio(), _licentuEconomia.GetPlanEstudio() }
                 },
 
                 new Alumno
                 {
-                    IdUsuario = 4,
+                    IdAlumno = 4,
                     Nombre = "Adam",
                     Apellido = "Smith",
-                   // PlanDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosEconomia }
+                    PlanesDeEstudios = new List<PlanDeEstudios> { _licentuEconomia.GetPlanEstudio() }
                 }
             };
             return dataList;

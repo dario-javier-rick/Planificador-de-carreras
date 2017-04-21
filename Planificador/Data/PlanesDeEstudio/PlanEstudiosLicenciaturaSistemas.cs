@@ -7,7 +7,7 @@ namespace Planificador.Data.PlanesDeEstudio
 {
     public class PlanEstudiosLicenciaturaSistemas : IPlanEstudio
     {
-        private List<Materia> Materias;
+        private List<Materia> _materias;
 
         public PlanDeEstudios GetPlanEstudio()
         {
@@ -21,18 +21,18 @@ namespace Planificador.Data.PlanesDeEstudio
 
         public List<Materia> GetListaMaterias()
         {
-            if (this.Materias != null)
+            if (this._materias != null)
             {
-                return this.Materias;
+                return this._materias;
             }
 
-            this.Materias = new List<Materia>();
+            this._materias = new List<Materia>();
             Materia ip = new Materia
             {
                 IdMateria = 1,
                 Nombre = "Introduccion a la Programacion"
             };
-            this.Materias.Add(ip);
+            this._materias.Add(ip);
 
             Materia p1 = new Materia
             {
@@ -40,7 +40,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 1",
                 Correlativas = new List<Materia> { ip }
             };
-            this.Materias.Add(p1);
+            this._materias.Add(p1);
 
             Materia p2 = new Materia
             {
@@ -48,7 +48,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 2",
                 Correlativas = new List<Materia> { p1 }
             };
-            this.Materias.Add(p2);
+            this._materias.Add(p2);
 
             Materia p3 = new Materia
             {
@@ -56,14 +56,14 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 3",
                 Correlativas = new List<Materia> { p2 }
             };
-            this.Materias.Add(p3);
+            this._materias.Add(p3);
 
             Materia im = new Materia
             {
                 IdMateria = 5,
                 Nombre = "Introduccion a la Matematica",
             };
-            this.Materias.Add(im);
+            this._materias.Add(im);
             
             Materia lg = new Materia
             {
@@ -71,7 +71,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Logica y teoria de numeros",
                 Correlativas = new List<Materia> { im }
             };
-            this.Materias.Add(lg);
+            this._materias.Add(lg);
 
 
             Materia md = new Materia
@@ -80,9 +80,10 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Matematica Discreta",
                 Correlativas = new List<Materia> { lg }
             };
-            this.Materias.Add(md);
+            this._materias.Add(md);
 
-            return this.Materias;
+            return this._materias;
         }
+
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Planificador.Data.Constantes;
 using Planificador.Logic;
 
 namespace Planificador.Models
@@ -16,9 +15,12 @@ namespace Planificador.Models
         public List<Materia> ListarMateriasAprobadas()
         {
             List<Materia> materiasAprobadas = new List<Materia>();
-            foreach (var plan in this.PlanesDeEstudios)
+            foreach (HistorialAcademico historial in HistorialAcademico)
             {
-                materiasAprobadas.AddRange(plan.Materias);
+                if (historial.Estado == Constantes.Aprobado)
+                {
+                    materiasAprobadas.Add(historial.Materia);
+                }
             } 
             return materiasAprobadas;
         }
@@ -26,9 +28,28 @@ namespace Planificador.Models
         public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
         {
             List<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas).ToList();
-            List<Materia> materiasSinAprobarSinCorrelativasDeMateriasAprobadas = null; //TODO QuitarCorrelativasDeMateriasAprobadas(materiasSinAprobar);
-                                                                                       //List<Materia> materiasQuePudenSerCursadas = materiasSinAprobarSinCorrelativasDeMateriasAprobadas.Where(x => !x.Correlativas.Any()).ToList();
-            return materiasSinAprobar;//materiasQuePudenSerCursadas;
+
+            //De las sin aprobar, saco las que requieren correlativas que no tengo aprobadas
+            List<Materia> materiasQuePudenSerCursadas = ObtenerMateriasQueNoRequierenCorrelativas(materiasSinAprobar, materiasAprobadas);
+
+            return materiasQuePudenSerCursadas;
+        }
+
+        private List<Materia> ObtenerMateriasQueNoRequierenCorrelativas(List<Materia> materias, IEnumerable<Materia> correlativasAprobadas)
+        {
+            List<Materia> materiasQueNoRequierenCorrelativas = new List<Materia>();
+            foreach (Materia materia in materias)
+            {
+                foreach (Materia posibleCorrelativa in correlativasAprobadas)
+                {
+                    if (!materia.Correlativas.Contains(posibleCorrelativa))
+                    {
+                        materiasQueNoRequierenCorrelativas.Add(materia);
+                    }
+                }
+            }
+
+            return materiasQueNoRequierenCorrelativas;
         }
 
         /*

@@ -62,16 +62,26 @@
             <End Role="Alumno" EntitySet="AlumnoSet" />
             <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
           </AssociationSet>
+          <EntitySet Name="HistorialAcademicoSet" EntityType="Model.HistorialAcademico" />
+          <AssociationSet Name="AlumnoHistorialAcademico" Association="Model.AlumnoHistorialAcademico">
+            <End Role="Alumno" EntitySet="AlumnoSet" />
+            <End Role="HistorialAcademico" EntitySet="HistorialAcademicoSet" />
+          </AssociationSet>
+          <AssociationSet Name="HistorialAcademicoMateria" Association="Model.HistorialAcademicoMateria">
+            <End Role="HistorialAcademico" EntitySet="HistorialAcademicoSet" />
+            <End Role="Materia" EntitySet="MateriaSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Alumno">
           <Key>
-            <PropertyRef Name="IdUsuario" />
+            <PropertyRef Name="IdAlumno" />
           </Key>
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Dni" Type="String" Nullable="false" />
           <Property Name="Nombre" Type="String" Nullable="false" />
           <Property Name="Apellido" Type="String" Nullable="false" />
           <NavigationProperty Name="PlanesDeEstudios" Relationship="Model.AlumnoPlanDeEstudios" FromRole="Alumno" ToRole="PlanDeEstudios" />
+          <NavigationProperty Name="HistorialAcademico" Relationship="Model.AlumnoHistorialAcademico" FromRole="Alumno" ToRole="HistorialAcademico" />
         </EntityType>
         <EntityType Name="Materia">
           <Key>
@@ -81,6 +91,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" />
           <NavigationProperty Name="Correlativas" Relationship="Model.MateriaMateria" FromRole="Materia" ToRole="Materia1" />
           <Property Name="PlanDeEstudiosId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="HistorialAcademico" Relationship="Model.HistorialAcademicoMateria" FromRole="Materia" ToRole="HistorialAcademico" />
           </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -114,6 +125,43 @@
           <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
           <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
         </Association>
+        <EntityType Name="HistorialAcademico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Estado" Type="String" Nullable="false" />
+          <Property Name="Nota" Type="Double" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoHistorialAcademico" FromRole="HistorialAcademico" ToRole="Alumno" />
+          <Property Name="AlumnoIdAlumno" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.HistorialAcademicoMateria" FromRole="HistorialAcademico" ToRole="Materia" />
+          <Property Name="MateriaIdMateria" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="AlumnoHistorialAcademico">
+          <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="Model.HistorialAcademico" Role="HistorialAcademico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumno">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="HistorialAcademico">
+              <PropertyRef Name="AlumnoIdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="HistorialAcademicoMateria">
+          <End Type="Model.HistorialAcademico" Role="HistorialAcademico" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Materia">
+              <PropertyRef Name="IdMateria" />
+            </Principal>
+            <Dependent Role="HistorialAcademico">
+              <PropertyRef Name="MateriaIdMateria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -123,7 +171,7 @@
     <EntitySetMapping Name="AlumnoSet">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Alumno)">
         <MappingFragment StoreEntitySet="UsuarioSet">
-          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+          <ScalarProperty Name="IdAlumno" ColumnName="IdUsuario" />
           <ScalarProperty Name="Dni" ColumnName="DNI" />
           <ScalarProperty Name="Nombre" ColumnName="Nombre" />
           <ScalarProperty Name="Apellido" ColumnName="Apellido" />

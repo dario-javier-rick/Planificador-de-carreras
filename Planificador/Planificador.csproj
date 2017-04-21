@@ -196,7 +196,9 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Data\Constantes\Constantes.cs" />
     <Compile Include="Data\PlanesDeEstudio\IPlanEstudio.cs" />
+    <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaEconomia.cs" />
     <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaSistemas.cs" />
     <Compile Include="Data\AlumnosData.cs" />
     <Compile Include="Data\IData.cs" />
@@ -207,12 +209,15 @@
     <Compile Include="Logic\Cursada.cs" />
     <Compile Include="Logic\Entidades\Alumno.cs" />
     <Compile Include="Logic\Entidades\Materia.cs" />
-    <Compile Include="Logic\DatosDePrueba.cs" />
+    <Compile Include="Data\DatosDePrueba.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Carrera.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HistorialAcademico.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />

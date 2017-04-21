@@ -31,16 +31,20 @@ namespace Planificador.Logic
                 return Enumerable.Empty<Materia>();
             }
 
-            //Me fijo en que carrera / plan de estudios esta el alumno, y obtengo las materias correspondientes
-            List<PlanDeEstudios> planesDeEstudios = alumno.PlanesDeEstudios.ToList();
-
             //TODO: Patron observer? Nico V: noup, observer es para el front
-            List<Materia> materiasDeCarreras = new List<Materia>();
+
+
+            //Recorro todos los planes de estudios del alumno, y obtengo las materias correspondientes
+            List<PlanDeEstudios> planesDeEstudios = alumno.PlanesDeEstudios.ToList();
+            HashSet<Materia> materiasDeCarreras = new HashSet<Materia>();
+
             foreach (PlanDeEstudios plan in planesDeEstudios)
             {
-                materiasDeCarreras.AddRange(plan.Materias);
+                foreach (Materia materia in plan.Materias)
+                {
+                    materiasDeCarreras.Add(materia);
+                }
             }
-
 
             //Me fijo que materias aprobadas tiene el alumno
             IEnumerable<Materia> materiasAprobadas = alumno.ListarMateriasAprobadas();

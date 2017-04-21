@@ -25,7 +25,7 @@ namespace Planificador.Logic
 
             new Alumno
             {
-                IdUsuario = 1,
+                IdAlumno = 1,
                 Nombre = "Dario",
                 Apellido = "Rick",
                 Dni = "37170404",
@@ -34,7 +34,7 @@ namespace Planificador.Logic
 
             new Alumno
             {
-                IdUsuario = 2,
+                IdAlumno = 2,
                 Nombre = "Nicolas",
                 Apellido = "Fernandez",
                 PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas }
@@ -42,7 +42,7 @@ namespace Planificador.Logic
 
             new Alumno
             {
-                IdUsuario = 3,
+                IdAlumno = 3,
                 Nombre = "Nicolas",
                 Apellido = "Videla Rivero",
                 PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosSistemas, PlanDeEstudiosEconomia }
@@ -50,7 +50,7 @@ namespace Planificador.Logic
 
             new Alumno
             {
-                IdUsuario = 4,
+                IdAlumno = 4,
                 Nombre = "Adam",
                 Apellido = "Smith",
                 PlanesDeEstudios = new List<PlanDeEstudios> { PlanDeEstudiosEconomia }

@@ -39,5 +39,13 @@ namespace Planificador.Controllers
 		    return model;
 		}
 
+
+        /*
+        private ActionResult GenerarCaminoMinimo()
+        {
+            throw new NotImplementedException();
+        }
+        */
+
     }
 }
