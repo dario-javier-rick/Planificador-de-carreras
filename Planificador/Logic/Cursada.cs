@@ -28,7 +28,14 @@ namespace Planificador.Logic
         {
             if (alumno == null)
             {
-                return Enumerable.Empty<Materia>();
+                //return Enumerable.Empty<Materia>();
+                List<Materia> lm = new List<Materia>();
+                Materia m = new Materia();
+                m.Nombre = "No existe ninguna materia";
+                lm.Add(m);
+
+                return lm;
+
             }
 
             //TODO: Patron observer? Nico V: noup, observer es para el front

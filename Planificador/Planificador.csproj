@@ -200,7 +200,6 @@
     <Compile Include="Data\PlanesDeEstudio\IPlanEstudio.cs" />
     <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaEconomia.cs" />
     <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaSistemas.cs" />
-    <Compile Include="Data\AlumnosData.cs" />
     <Compile Include="Data\IData.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

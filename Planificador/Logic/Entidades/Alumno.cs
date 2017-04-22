@@ -32,20 +32,48 @@ namespace Planificador.Models
             //De las sin aprobar, saco las que requieren correlativas que no tengo aprobadas
             List<Materia> materiasQuePudenSerCursadas = ObtenerMateriasQueNoRequierenCorrelativas(materiasSinAprobar, materiasAprobadas);
 
+            //TODO: Sacar if
+            if (!materiasQuePudenSerCursadas.Any())
+            {
+                Materia m = new Materia();
+                m.Nombre = "El alumno no esta registrado en ningun plan de estudios";
+                materiasQuePudenSerCursadas.Add(m);
+            }
+
             return materiasQuePudenSerCursadas;
         }
 
-        private List<Materia> ObtenerMateriasQueNoRequierenCorrelativas(List<Materia> materias, IEnumerable<Materia> correlativasAprobadas)
+        private List<Materia> ObtenerMateriasQueNoRequierenCorrelativas(List<Materia> materiasNoCursadas, IEnumerable<Materia> materiasAprobadas)
         {
             List<Materia> materiasQueNoRequierenCorrelativas = new List<Materia>();
-            foreach (Materia materia in materias)
+            foreach (Materia materia in materiasNoCursadas)
             {
-                foreach (Materia posibleCorrelativa in correlativasAprobadas)
+                if (materia.Correlativas.Any())
                 {
-                    if (!materia.Correlativas.Contains(posibleCorrelativa))
+                    //Valido si aprobe las correlativas
+                    List<Materia> correlativas = materia.Correlativas.ToList();
+                    int indice = 0;
+                    bool ingresaMateria = true;
+
+                    while(ingresaMateria == true && indice < correlativas.Count)
+                    {
+                        if (!materiasAprobadas.Contains(correlativas[indice]))
+                        {
+                            ingresaMateria = false;
+                        }
+
+                        indice++;
+                    }
+
+                    if (ingresaMateria)
                     {
                         materiasQueNoRequierenCorrelativas.Add(materia);
                     }
+
+                }
+                else
+                {
+                    materiasQueNoRequierenCorrelativas.Add(materia);
                 }
             }
 
