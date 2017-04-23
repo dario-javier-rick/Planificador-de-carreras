@@ -1,38 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using Planificador.Models;
+
 namespace Planificador.Data.PlanesDeEstudio
 {
     public class PlanEstudiosLicenciaturaSistemas : IPlanEstudio
     {
-        private List<Materia> _materias;
+        private static List<Materia> _materias;
 
-        public PlanDeEstudios GetPlanEstudio()
+        PlanDeEstudios IPlanEstudio.GetPlanEstudio()
+        {
+            return GetPlanEstudio();
+        }
+
+        List<Materia> IPlanEstudio.GetListaMaterias()
+        {
+            return GetListaMaterias();
+        }
+
+        public static PlanDeEstudios GetPlanEstudio()
         {
             var planDeEstudios = new PlanDeEstudios
             {
                 Id = 1,
-                Materias = this.GetListaMaterias(),                
+                Materias = GetListaMaterias(),   
+                Vigente = true
             };
             return planDeEstudios;
         }
 
-        public List<Materia> GetListaMaterias()
+        public static List<Materia> GetListaMaterias()
         {
-            if (this._materias != null)
+            if (_materias != null)
             {
-                return this._materias;
+                return _materias;
             }
 
-            this._materias = new List<Materia>();
+            _materias = new List<Materia>();
+
             Materia ip = new Materia
             {
                 IdMateria = 1,
                 Nombre = "Introduccion a la Programacion"
             };
-            this._materias.Add(ip);
+            _materias.Add(ip);
 
             Materia p1 = new Materia
             {
@@ -40,7 +50,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 1",
                 Correlativas = new List<Materia> { ip }
             };
-            this._materias.Add(p1);
+            _materias.Add(p1);
 
             Materia p2 = new Materia
             {
@@ -48,7 +58,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 2",
                 Correlativas = new List<Materia> { p1 }
             };
-            this._materias.Add(p2);
+            _materias.Add(p2);
 
             Materia p3 = new Materia
             {
@@ -56,14 +66,14 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Programacion 3",
                 Correlativas = new List<Materia> { p2 }
             };
-            this._materias.Add(p3);
+            _materias.Add(p3);
 
             Materia im = new Materia
             {
                 IdMateria = 5,
                 Nombre = "Introduccion a la Matematica",
             };
-            this._materias.Add(im);
+            _materias.Add(im);
             
             Materia lg = new Materia
             {
@@ -71,7 +81,7 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Logica y teoria de numeros",
                 Correlativas = new List<Materia> { im }
             };
-            this._materias.Add(lg);
+            _materias.Add(lg);
 
 
             Materia md = new Materia
@@ -80,9 +90,9 @@ namespace Planificador.Data.PlanesDeEstudio
                 Nombre = "Matematica Discreta",
                 Correlativas = new List<Materia> { lg }
             };
-            this._materias.Add(md);
+            _materias.Add(md);
 
-            return this._materias;
+            return _materias;
         }
 
     }

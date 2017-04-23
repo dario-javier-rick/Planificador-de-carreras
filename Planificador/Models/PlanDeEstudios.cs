@@ -22,6 +22,7 @@ namespace Planificador.Models
     
         public int Id { get; set; }
         public int CarreraIdCarrera { get; set; }
+        public bool Vigente { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Materia> Materias { get; set; }

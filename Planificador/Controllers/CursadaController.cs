@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using Planificador.Models;
 using Planificador.Models.ViewModels;
@@ -32,7 +29,7 @@ namespace Planificador.Controllers
 		private CursadaViewModel Index(Alumno alumno)
 		{
 			Cursada cursada = new Cursada(); //Facade object
-			IEnumerable<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno);
+			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno);
 
 		    CursadaViewModel model = new CursadaViewModel {Materias = materias};
 
@@ -40,10 +37,16 @@ namespace Planificador.Controllers
 		}
 
 
+        public JsonResult ObtenerDatosAlumno(string nombreAlumno)
+        {
+            return Json(Alumno.ObtenerAlumno(nombreAlumno));
+        }
+
         /*
         private ActionResult GenerarCaminoMinimo()
         {
             throw new NotImplementedException();
+            //CalcularPesoEnCaminoCritico
         }
         */
 

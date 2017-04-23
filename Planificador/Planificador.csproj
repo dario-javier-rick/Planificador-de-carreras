@@ -196,7 +196,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Data\Constantes\Constantes.cs" />
+    <Compile Include="Logic\Constantes\Constantes.cs" />
     <Compile Include="Data\PlanesDeEstudio\IPlanEstudio.cs" />
     <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaEconomia.cs" />
     <Compile Include="Data\PlanesDeEstudio\PlanEstudiosLicenciaturaSistemas.cs" />

@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using Planificador.Models;
 
 namespace Planificador.Logic
 {
     public class CaminoCritico
     {
-        public IEnumerable<Models.Materia> GetCaminoCritico(Planificador.Models.PlanDeEstudios planDeEstudios)
+        public IEnumerable<Models.Materia> GetCaminoCritico(Models.PlanDeEstudios planDeEstudios)
         {
-            this.CalcularPesoEnCaminoCritico(planDeEstudios.Materias);
-            var a = this.ArmarCaminoCritico(planDeEstudios.Materias);
+            CalcularPesoEnCaminoCritico(planDeEstudios.Materias);
+            var a = ArmarCaminoCritico(planDeEstudios.Materias);
             return a;
         }
 
@@ -19,23 +18,29 @@ namespace Planificador.Logic
             var mayorNivel = materias.Max(x => x.Nivel);
             return materias.Where(x => x.Nivel == mayorNivel);
         }
-        private void CalcularCaminoCritico(Planificador.Models.PlanDeEstudios planDeEstudios)
+        private void CalcularCaminoCritico(Models.PlanDeEstudios planDeEstudios)
         {
-            this.CalcularPesoEnCaminoCritico(planDeEstudios.Materias);
+            CalcularPesoEnCaminoCritico(planDeEstudios.Materias);
         }
 
-        private void CalcularPesoEnCaminoCritico(IEnumerable<Models.Materia> materias, int nivel = 0)
+
+        /// <summary>
+        /// Dada una lista de materias, indica el camino crítico y la prioridad a tener en cuenta para cursarlas
+        /// </summary>
+        /// <param name="materias"></param>
+        /// <param name="nivel"></param>
+        private void CalcularPesoEnCaminoCritico(IEnumerable<Materia> materias, int nivel = 0)
         {
-            var tieneMaterias = materias != null && materias.Count() > 0;
+            var tieneMaterias = materias != null && materias.Any();
             if (tieneMaterias)
             {
-                List<Models.Materia> materiasSinCorrelativas = materias.Where(x => x.Correlativas == null || !x.Correlativas.Any()).ToList() ?? new List<Models.Materia>();
+                List<Materia> materiasSinCorrelativas = materias.Where(x => x.Correlativas == null || !x.Correlativas.Any()).ToList();
                 foreach (var materiaSinCorrelativas in materiasSinCorrelativas)
                 {
                     materiaSinCorrelativas.Nivel = nivel;
                 }
 
-                List<Models.Materia> materiasConCorrelativas = materias.Where(x => x.Correlativas != null && x.Correlativas.Any()).ToList() ?? new List<Models.Materia>();
+                List<Materia> materiasConCorrelativas = materias.Where(x => x.Correlativas != null && x.Correlativas.Any()).ToList();
                 foreach (var materiaConCorrelativas in materiasConCorrelativas)
                 {
                     var materiasCorrelativasParaBorrar = materiaConCorrelativas.Correlativas.Intersect(materiasSinCorrelativas);
@@ -44,7 +49,6 @@ namespace Planificador.Logic
 
                 CalcularPesoEnCaminoCritico(materiasConCorrelativas, ++nivel);
             }
-            return;
         }
         /// <summary>
         /// recorro la lista de materias que tienen correlativas

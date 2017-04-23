@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Planificador.Models.ViewModels
 {
     public class CursadaViewModel
     {
-        public IEnumerable<Materia> Materias { get; set; }
+        public List<Materia> Materias { get; set; }
     }
 }

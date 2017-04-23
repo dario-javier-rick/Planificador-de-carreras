@@ -1,15 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Planificador.Data;
 using Planificador.Data.Constantes;
-using Planificador.Logic;
 
 namespace Planificador.Models
 {
     public partial class Alumno
     {
+        private static readonly Alumnos Alumnos = new Alumnos();
+
         public static Alumno ObtenerAlumno(string nombreAlumno)
         {
-            return Alumnos.ListaAlumnos.FirstOrDefault(alumno => alumno.Nombre == nombreAlumno);
+            return Alumnos.GetData().FirstOrDefault(alumno => alumno.Nombre == nombreAlumno);
+        }
+
+        public static Alumno ObtenerAlumno(int dni)
+        {
+            return Alumnos.GetData().FirstOrDefault(alumno => alumno.Dni == dni);
         }
 
         public List<Materia> ListarMateriasAprobadas()
@@ -27,10 +34,11 @@ namespace Planificador.Models
 
         public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
         {
-            List<Materia> materiasSinAprobar = materiasDeCarrera.Except(materiasAprobadas).ToList();
+            var enumerable = materiasAprobadas as Materia[] ?? materiasAprobadas.ToArray();
+            List<Materia> materiasSinAprobar = materiasDeCarrera.Except(enumerable).ToList();
 
             //De las sin aprobar, saco las que requieren correlativas que no tengo aprobadas
-            List<Materia> materiasQuePudenSerCursadas = ObtenerMateriasQueNoRequierenCorrelativas(materiasSinAprobar, materiasAprobadas);
+            List<Materia> materiasQuePudenSerCursadas = ObtenerMateriasQueNoRequierenCorrelativas(materiasSinAprobar, enumerable);
 
             //TODO: Sacar if
             if (!materiasQuePudenSerCursadas.Any())

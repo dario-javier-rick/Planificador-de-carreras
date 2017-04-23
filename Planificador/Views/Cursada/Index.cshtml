@@ -1,4 +1,5 @@
-﻿@using Planificador.Models.ViewModels;
+﻿@using Planificador.Controllers
+@using Planificador.Models.ViewModels;
 @model CursadaViewModel
 @{
     ViewBag.Title = "Cursada";
@@ -17,11 +18,31 @@
     <div>
         <h1> Programador de cursadas </h1>
 
-        <div></div>
-        <table class="table table-bordered table-inverse text-center">
+        <div id="divDatosAlumno" style="display:none">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Nombre</td>
+                        <td><label id="lblNombre"></label></td>
+                    </tr>
+                    <tr>
+                        <td>Apellido</td>
+                        <td><label id="lblApellido"></label></td>
+                    </tr>
+                    <tr>
+                        <td>Dni</td>
+                        <td><label id="lblDni"></label></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <table id="tblMateriasPendientes" class="table table-bordered text-center">
             <thead>
                 <tr>
                     <th>Materia</th>
+                    <!--<th>Nivel criticidad</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -52,9 +73,14 @@
                 }
             </tbody>
         </table>
+        <!-- Botones para consultar vía AJAX
+        <label>Ingrese su Nombre</label>
+        <input id="txtNombreAlumno" type="text" name="nombreAlumno" value="" />
+        <button id="btnObtenerDatosAlumno" class="btn btn-default">Obtener Datos</button>
+            -->
         @using (Html.BeginForm("Index", "Cursada", FormMethod.Post))
         {
-	        <label>Ingrese su Nombre</label>
+            <label>Ingrese su Nombre</label>
             <input id="nombreAlumno" type="text" name="nombreAlumno" value="" />
             <input type="submit" />
         }
@@ -64,13 +90,47 @@
 
 @section scripts{
 
+    <script src="~/Scripts/Cursada.js"></script>
+
     <script>
         $(document).ready(function(){
-            if('@Model.Materias.Any()' == "False"){
+            if('@Model.Materias.Any()' === "False"){
   //              alert("El usuario no existe");
             }
         });
+
+
+        $(function () {
+            $('#btnObtenerDatosAlumno').click(function (e) {
+                var nombre = $('#txtNombreAlumno').val();
+                var url = '@Url.Action("ObtenerDatosAlumno","Cursada")';
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: { nombreAlumno: nombre },
+                    dataType: 'json',
+                    success: function (result) {
+                        console.log(result);
+
+                        $("#lblNombre").empty();
+                        $("#lblNombre").append(result.Nombre);
+
+                        $("#lblApellido").empty();
+                        $("#lblApellido").append(result.Apellido);
+
+                        $("#lblDni").empty();
+                        $("#lblDni").append(result.Dni);
+
+                        $("#divDatosAlumno").css("display", "inline");
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
     </script>
-  
+
 
 }

@@ -1,8 +1,6 @@
 ﻿using Planificador.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Planificador.Logic
 {
@@ -24,10 +22,10 @@ namespace Planificador.Logic
         /// </summary>
         /// <param name="alumno"></param>
         /// <returns></returns>
-        public IEnumerable<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
+        public List<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
         {
             if (alumno == null)
-            {
+            {   //TODO: If a sacar
                 //return Enumerable.Empty<Materia>();
                 List<Materia> lm = new List<Materia>();
                 Materia m = new Materia();
@@ -35,11 +33,9 @@ namespace Planificador.Logic
                 lm.Add(m);
 
                 return lm;
-
             }
 
             //TODO: Patron observer? Nico V: noup, observer es para el front
-
 
             //Recorro todos los planes de estudios del alumno, y obtengo las materias correspondientes
             List<PlanDeEstudios> planesDeEstudios = alumno.PlanesDeEstudios.ToList();

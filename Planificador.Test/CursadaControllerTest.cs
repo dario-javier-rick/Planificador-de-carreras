@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Planificador.Controllers;
 using Planificador.Models;
 using System.Web.Mvc;
@@ -22,14 +19,14 @@ namespace PlanificadorTest
         [SetUp]
         public void Setup()
         {
-            this.Controller = new CursadaController();
+            Controller = new CursadaController();
         }
 
         [Test]
         public void Index_ListaVacia()
         {
             //Consulto al controlador
-            ViewResult result = this.Controller.Index(null) as ViewResult;
+            ViewResult result = Controller.Index(null) as ViewResult;
 
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
@@ -42,13 +39,14 @@ namespace PlanificadorTest
         public void Index_Alumno_LicenciaturaInformatica()
         {
             //Consulto al controlador
-            ViewResult result = this.Controller.Index("Dario") as ViewResult;
+            const string alumno = "Dario";
+            ViewResult result = Controller.Index(alumno) as ViewResult;
 
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
             //Valido resultado de ViewModel
-            IEnumerable<Materia> listaMateriasLicenciaturaInformatica = MateriasPorCarrera.ListarMateriasLicenciaturaSistemas();
+            IEnumerable<Materia> listaMateriasLicenciaturaInformatica = PlanEstudiosLicenciaturaSistemas.GetListaMaterias();
             CollectionAssert.AreEqual(listaMateriasLicenciaturaInformatica.ToList(), model.Materias.ToList());
         }
 
@@ -56,19 +54,37 @@ namespace PlanificadorTest
         public void Index_Alumno_LicenciaturaEconomia()
         {
             //Consulto al controlador
-            const string Alumno = "Adam";
-            ViewResult result = this.Controller.Index(Alumno) as ViewResult;
+            const string alumno = "Adam";
+            ViewResult result = Controller.Index(alumno) as ViewResult;
 
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
             //Valido resultado de ViewModel
-            IEnumerable<Materia> listaMateriasLicenciaturaEconomia = MateriasPorCarrera.ListarMateriasLicenciaturaEconomia();
+            IEnumerable<Materia> listaMateriasLicenciaturaEconomia = PlanEstudiosLicenciaturaEconomia.GetListaMaterias();
             CollectionAssert.AreEqual(listaMateriasLicenciaturaEconomia.ToList(), model.Materias.ToList());
         }
 
         [Test]
-        public void Lalalala()
+        public void CaminoCritico()
+        {
+            //Consulto al controlador
+            IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
+            var b = new CaminoCritico();
+            var g = b.GetCaminoCritico(a.GetPlanEstudio());
+        }
+
+        [Test]
+        public void CaminoCritico_LicenciaturaEconomia()
+        {
+            //Consulto al controlador
+            IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
+            var b = new CaminoCritico();
+            var g = b.GetCaminoCritico(a.GetPlanEstudio());
+        }
+
+        [Test]
+        public void CaminoCritico_LicenciaturaInformatica()
         {
             //Consulto al controlador
             IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
