@@ -32,7 +32,7 @@ namespace Planificador.Models
             return materiasAprobadas;
         }
 
-        public List<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
+        public IEnumerable<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
         {
             var enumerable = materiasAprobadas as Materia[] ?? materiasAprobadas.ToArray();
             List<Materia> materiasSinAprobar = materiasDeCarrera.Except(enumerable).ToList();
@@ -43,9 +43,7 @@ namespace Planificador.Models
             //TODO: Sacar if
             if (!materiasQuePudenSerCursadas.Any())
             {
-                Materia m = new Materia();
-                m.Nombre = "El alumno no esta registrado en ningun plan de estudios";
-                materiasQuePudenSerCursadas.Add(m);
+                return Enumerable.Empty<Materia>();
             }
 
             return materiasQuePudenSerCursadas;

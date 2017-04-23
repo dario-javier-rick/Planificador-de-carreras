@@ -33,7 +33,7 @@ namespace Planificador.Data
             new Alumno
             {
                 IdAlumno = 3,
-                Nombre = "Nicolas",
+                Nombre = "Nicolas V",
                 Apellido = "Videla Rivero",
                 PlanesDeEstudios = new List<PlanDeEstudios> { PlanEstudiosLicenciaturaSistemas.GetPlanEstudio(), PlanEstudiosLicenciaturaEconomia.GetPlanEstudio() }
             },

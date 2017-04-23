@@ -35,55 +35,85 @@
                     </tr>
                 </tbody>
             </table>
-
         </div>
 
-        <table id="tblMateriasPendientes" class="table table-bordered text-center">
-            <thead>
+        <div id="divPlanesDeEstudio" style="display: none">
+            <table id="tblPlanesEstudio" class="table table-bordered text-center"></table>
+        </div>
+
+        <div id="divMateriasAprobadas" style="display: none">
+            <table id="tblMateriasAprobadas" class="table table-bordered text-center"></table>
+        </div>
+
+        <div id="divMateriasPendientes" style="display: none">
+            <table id="tblMateriasPendientes" class="table table-bordered text-center">
+                <!--                <thead>
                 <tr>
                     <th>Materia</th>
-                    <!--<th>Nivel criticidad</th> -->
                 </tr>
-            </thead>
-            <tbody>
-                @{
-                    foreach (var materia in Model.Materias)
-                    {
-                        <tr>
-                            <td>@materia.Nombre</td>
-                            @*<table class="table table-bordered table-inverse text-center">
-                                    <thead>
-                                        <tr>
-                                            <th>Horarios</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
-                                            foreach (var Horario in Materia.Horarios)
-                                            {
-                                                <tr>
-                                                    <td scope="row">@Horario.Turno</td>
-                                                </tr>
-                                            }
-                                        }
-                                    </tbody>
-                                </table>*@
-                        </tr>
-                    }
+                </thead>
+                <tbody>
+                {
+                foreach (var materia in Model.Materias)
+                {
+                <tr>
+                    <td>materia.Nombre</td>
+                </tr>
                 }
-            </tbody>
-        </table>
-        <!-- Botones para consultar vía AJAX
+                }
+                </tbody>
+                    -->
+            </table>
+        </div>
+
+        <div id="divCaminoCritico" style="display: none">
+            <table id="tblCaminoCritico" class="table table-bordered text-center"></table>
+        </div>
+
+        <!-- Botones para consultar vía AJAX -->
+
         <label>Ingrese su Nombre</label>
         <input id="txtNombreAlumno" type="text" name="nombreAlumno" value="" />
         <button id="btnObtenerDatosAlumno" class="btn btn-default">Obtener Datos</button>
-            -->
-        @using (Html.BeginForm("Index", "Cursada", FormMethod.Post))
-        {
-            <label>Ingrese su Nombre</label>
-            <input id="nombreAlumno" type="text" name="nombreAlumno" value="" />
-            <input type="submit" />
-        }
+        <button id="btnObtenerPlanesEstudio" class="btn btn-default">Obtener Planes de estudio</button>
+        <button id="btnObtenerMateriasAprobadas" class="btn btn-default">Obtener Materias Aprobadas</button>
+        <button id="btnObtenerMateriasPendientes" class="btn btn-default">Obtener Materias Pendientes</button>
+        <button id="btnObtenerCaminoCritico" class="btn btn-default">Obtener Camino crítico</button>
+
+
+        <!--
+        using (Html.BeginForm("Index", "Cursada", FormMethod.Post))
+             {
+             <label>Ingrese su Nombre</label>
+             <input id="nombreAlumno" type="text" name="nombreAlumno" value="" />
+             <input type="submit" />
+         }
+        -->
+
+    </div>
+
+
+    <!--Modal para los popup-->
+    <div class="modal fade" id="modalPopUp" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="tituloPopUp"></h4>
+                </div>
+                <div class="modal-body" width="200px">
+                    <p>
+                        <div id="detalleModal">
+
+                        </div>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="aceptarModal" class="btn btn-success btn-sm" data-dismiss="modal">Aceptar</button>
+                    <!--<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancelar</button>-->
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
@@ -93,35 +123,34 @@
     <script src="~/Scripts/Cursada.js"></script>
 
     <script>
-        $(document).ready(function(){
-            if('@Model.Materias.Any()' === "False"){
-  //              alert("El usuario no existe");
-            }
+        $(document).ready(function () {
+            OcultarBotones();
+            $("#btnObtenerDatosAlumno").show();
+        });
+
+
+        $("#modalPopUp").on("show.bs.modal", function (e) {
+        });
+
+        $('#aceptarModal').click(function (e) {
         });
 
 
         $(function () {
             $('#btnObtenerDatosAlumno').click(function (e) {
                 var nombre = $('#txtNombreAlumno').val();
-                var url = '@Url.Action("ObtenerDatosAlumno","Cursada")';
+                var url = '@Url.Action("ObtenerDatosAlumno", "Cursada")';
                 $.ajax({
                     method: "POST",
                     url: url,
                     data: { nombreAlumno: nombre },
                     dataType: 'json',
                     success: function (result) {
-                        console.log(result);
-
-                        $("#lblNombre").empty();
-                        $("#lblNombre").append(result.Nombre);
-
-                        $("#lblApellido").empty();
-                        $("#lblApellido").append(result.Apellido);
-
-                        $("#lblDni").empty();
-                        $("#lblDni").append(result.Dni);
-
-                        $("#divDatosAlumno").css("display", "inline");
+                        if (jQuery.isEmptyObject(result)) {
+                            MostrarModal("No se ha encontrado al alumno");
+                        } else {
+                            CargarDatosAlumno(result.Nombre, result.Apellido, result.Dni);
+                        }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
                         alert("Status: " + textStatus);
@@ -130,6 +159,222 @@
                 });
             });
         });
+
+         $(function() {
+             $('#btnObtenerPlanesEstudio').click(function(e) {
+                var nombre = $('#txtNombreAlumno').val();
+                var url = '@Url.Action("ObtenerPlanesDeEstudio", "Cursada")';
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: { nombreAlumno: nombre },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (jQuery.isEmptyObject(result)) {
+                            MostrarModal("El alumno no tiene planes de estudio asignados");
+                        } else {
+                            CargarPlanDeEstudio(result);
+                        }
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
+
+        $(function() {
+             $('#btnObtenerMateriasAprobadas').click(function(e) {
+                var nombre = $('#txtNombreAlumno').val();
+                var url = '@Url.Action("ObtenerHistorial", "Cursada")';
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: { nombreAlumno: nombre },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (jQuery.isEmptyObject(result)) {
+                            MostrarModal("El alumno no tiene materias aprobadas");
+                            OcultarBotones();
+                            $("#btnObtenerMateriasPendientes").show();
+                        } else {
+                            CargarMateriasAprobadas(result);
+                        }
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+         });
+
+
+        $(function() {
+             $('#btnObtenerMateriasPendientes').click(function(e) {
+                var nombre = $('#txtNombreAlumno').val();
+                var url = '@Url.Action("ObtenerMateriasPendientes", "Cursada")';
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: { nombreAlumno: nombre },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (jQuery.isEmptyObject(result)) {
+                            MostrarModal("El alumno no tiene materias pendientes");
+                        } else {
+                            CargarMateriasPendientes(result);
+                        }
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
+
+
+      $(function() {
+             $('#btnObtenerCaminoCritico').click(function(e) {
+                var nombre = $('#txtNombreAlumno').val();
+                var url = '@Url.Action("ObtenerCaminoCritico", "Cursada")';
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: { nombreAlumno: nombre },
+                    dataType: 'json',
+                    success: function (result) {
+                        if (jQuery.isEmptyObject(result)) {
+                            MostrarModal("No se pudo calcular el camino crítico");
+                        } else {
+                            CargarCaminoCritico(result);
+                        }
+                    },
+                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                        alert("Status: " + textStatus);
+                        alert("Error: " + errorThrown);
+                    }
+                });
+            });
+        });
+
+        function CargarDatosAlumno(nombre, apellido, dni) {
+            $("#lblNombre").empty();
+            $("#lblNombre").append(nombre);
+
+            $("#lblApellido").empty();
+            $("#lblApellido").append(apellido);
+
+            $("#lblDni").empty();
+            $("#lblDni").append(dni);
+
+            $("#divDatosAlumno").css("display", "inline");
+
+            OcultarBotones();
+            $("#btnObtenerPlanesEstudio").show();
+        };
+
+        function CargarPlanDeEstudio(planes) {
+            const table = document.getElementById("tblPlanesEstudio");
+            const tableBody = document.createElement('TBODY');
+
+            for (let i = 0; i < planes.length; i++) {
+                const tr = document.createElement('TR');
+                const td = document.createElement('TD');
+                td.appendChild(document.createTextNode(planes[i].Id));
+                tr.appendChild(td);
+
+                tableBody.appendChild(tr);
+            }
+
+            table.appendChild(tableBody);
+            $("#divPlanesDeEstudio").css("display", "inline");
+
+            OcultarBotones();
+            $("#btnObtenerMateriasAprobadas").show();
+        };
+
+        function CargarMateriasAprobadas(materias) {
+
+            const table = document.getElementById("tblMateriasAprobadas");
+            const tableBody = document.createElement('TBODY');
+
+            for (let i = 0; i < materias.length; i++) {
+                const tr = document.createElement('TR');
+                const td = document.createElement('TD');
+                td.appendChild(document.createTextNode(materias[i].Nombre));
+                tr.appendChild(td);
+
+                tableBody.appendChild(tr);
+            }
+            table.appendChild(tableBody);
+
+            $("#divMateriasAprobadas").css("display", "inline");
+
+            OcultarBotones();
+            $("#btnObtenerMateriasPendientes").show();
+        };
+
+        function CargarMateriasPendientes(materias) {
+            const table = document.getElementById("tblMateriasPendientes");
+            const tableBody = document.createElement('TBODY');
+
+            for (let i = 0; i < materias.length; i++) {
+                const tr = document.createElement('TR');
+                const td = document.createElement('TD');
+                td.appendChild(document.createTextNode(materias[i].Nombre));
+                tr.appendChild(td);
+
+                tableBody.appendChild(tr);
+            }
+            table.appendChild(tableBody);
+
+
+            $("#divMateriasPendientes").css("display", "inline");
+
+            OcultarBotones();
+            $("#btnObtenerCaminoCritico").show();
+        };
+
+        function CargarCaminoCritico(materias) {
+            const table = document.getElementById("tblCaminoCritico");
+            const tableBody = document.createElement('TBODY');
+
+            for (let i = 0; i < materias.length; i++) {
+                const tr = document.createElement('TR');
+                const td = document.createElement('TD');
+                td.appendChild(document.createTextNode(materias[i].Nombre));
+                tr.appendChild(td);
+
+                const td2 = document.createElement('TD');
+                td.appendChild(document.createTextNode(materias[i].Peso));
+                tr.appendChild(td);
+
+                tableBody.appendChild(tr);
+            }
+            table.appendChild(tableBody);
+
+
+
+            $("#divCaminoCritico").css("display", "inline");
+        };
+
+        function MostrarModal(texto) {
+            $("#detalleModal").text("");
+            $("#detalleModal").text(texto);
+            $('#modalPopUp').modal('show');
+        };
+
+        function OcultarBotones() {
+            $("#btnObtenerDatosAlumno").hide();  
+            $("#btnObtenerPlanesEstudio").hide();  
+            $("#btnObtenerMateriasAprobadas").hide();  
+            $("#btnObtenerMateriasPendientes").hide();  
+            $("#btnObtenerCaminoCritico").hide();  
+        };
+
     </script>
 
 

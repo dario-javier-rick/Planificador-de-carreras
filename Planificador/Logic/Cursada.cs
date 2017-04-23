@@ -5,13 +5,14 @@ using System.Linq;
 namespace Planificador.Logic
 {
     /// <summary>
-    /// Patron Facade. Proveo una interfaz única para manejar la lógica de 3 subsistemas diferentes
+    /// Patron Facade. Proveo una interfaz única para manejar la lógica de  subsistemas diferentes
     /// </summary>
     public class Cursada
     {
         private Carrera _carrera = new Carrera();
         private Materia _materia = new Materia();
         private Alumno _alumno = new Alumno();
+        public CaminoCritico CaminoCritico { get; } = new CaminoCritico();
 
         public Cursada()
         {
@@ -22,17 +23,11 @@ namespace Planificador.Logic
         /// </summary>
         /// <param name="alumno"></param>
         /// <returns></returns>
-        public List<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
+        public IEnumerable<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
         {
             if (alumno == null)
-            {   //TODO: If a sacar
-                //return Enumerable.Empty<Materia>();
-                List<Materia> lm = new List<Materia>();
-                Materia m = new Materia();
-                m.Nombre = "No existe ninguna materia";
-                lm.Add(m);
-
-                return lm;
+            {   
+                return Enumerable.Empty<Materia>();
             }
 
             //TODO: Patron observer? Nico V: noup, observer es para el front
@@ -55,5 +50,11 @@ namespace Planificador.Logic
 			//Devuelvo las que realmente pueden ser cursadas.
 			return alumno.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarreras);
 		}
+
+        public Dictionary<Materia,int> CalcularPesoEnCaminoCritico(List<Materia> materias)
+        {
+            CaminoCritico.CalcularPesoEnCaminoCritico(materias);
+            return CaminoCritico.DiccionarioCriticidad;
+        }
     }
 }

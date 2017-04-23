@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Planificador.Models;
 using Planificador.Models.ViewModels;
@@ -15,9 +16,9 @@ namespace Planificador.Controllers
         /// <returns></returns>
         public ActionResult Index(string nombreAlumno)
         {
-		    Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
-			CursadaViewModel viewModel = Index(alumno);
-			return View(viewModel); 
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            CursadaViewModel viewModel = Index(alumno);
+            return View(viewModel);
         }
 
 
@@ -27,28 +28,77 @@ namespace Planificador.Controllers
         /// </summary>
         /// <param name="alumno"></param>
 		private CursadaViewModel Index(Alumno alumno)
-		{
-			Cursada cursada = new Cursada(); //Facade object
-			List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno);
+        {
+            Cursada cursada = new Cursada();
+            List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
 
-		    CursadaViewModel model = new CursadaViewModel {Materias = materias};
+            CursadaViewModel model = new CursadaViewModel { Materias = materias };
 
-		    return model;
-		}
+            return model;
+        }
 
 
         public JsonResult ObtenerDatosAlumno(string nombreAlumno)
         {
-            return Json(Alumno.ObtenerAlumno(nombreAlumno));
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            if (alumno != null)
+            {
+                return Json(alumno);
+            }
+            return Json(new { });
         }
 
-        /*
-        private ActionResult GenerarCaminoMinimo()
+
+        public JsonResult ObtenerPlanesDeEstudio(string nombreAlumno)
         {
-            throw new NotImplementedException();
-            //CalcularPesoEnCaminoCritico
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            if (alumno != null)
+            {
+                return Json(alumno.PlanesDeEstudios);
+            }
+            return Json(new { });
         }
-        */
+
+        public JsonResult ObtenerHistorial(string nombreAlumno)
+        {
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            if (alumno != null)
+            {
+                return Json(alumno.HistorialAcademico);
+            }
+            return Json(new { });
+        }
+
+        public JsonResult ObtenerMateriasPendientes(string nombreAlumno)
+        {
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            if (alumno != null)
+            {
+                Cursada cursada = new Cursada();
+                List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
+
+                return Json(materias);
+            }
+
+            return Json(new { });
+        }
+
+        public JsonResult ObtenerCaminoCritico(string nombreAlumno)
+        {
+            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
+            if (alumno != null)
+            {
+                Cursada cursada = new Cursada();
+                List<Materia> materias = cursada.ObtenerPosiblesMateriasACursar(alumno).ToList();
+                cursada.CalcularPesoEnCaminoCritico(materias);
+                Dictionary<Materia,int> diccionario = cursada.CaminoCritico.DiccionarioCriticidad;
+
+                return Json(diccionario);
+            }
+
+            return Json(new { });
+        }
+
 
     }
 }

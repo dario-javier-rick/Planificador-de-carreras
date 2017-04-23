@@ -6,6 +6,9 @@ namespace Planificador.Logic
 {
     public class CaminoCritico
     {
+        internal Dictionary<Materia,int> DiccionarioCriticidad { get; } = new Dictionary<Materia,int>() ;
+
+
         public IEnumerable<Models.Materia> GetCaminoCritico(Models.PlanDeEstudios planDeEstudios)
         {
             CalcularPesoEnCaminoCritico(planDeEstudios.Materias);
@@ -13,7 +16,7 @@ namespace Planificador.Logic
             return a;
         }
 
-        private IEnumerable<Models.Materia> ArmarCaminoCritico(IEnumerable<Models.Materia> materias)
+        private IEnumerable<Models.Materia> ArmarCaminoCritico(IEnumerable<Materia> materias)
         {
             var mayorNivel = materias.Max(x => x.Nivel);
             return materias.Where(x => x.Nivel == mayorNivel);
@@ -29,7 +32,7 @@ namespace Planificador.Logic
         /// </summary>
         /// <param name="materias"></param>
         /// <param name="nivel"></param>
-        private void CalcularPesoEnCaminoCritico(IEnumerable<Materia> materias, int nivel = 0)
+        internal void CalcularPesoEnCaminoCritico(IEnumerable<Materia> materias, int nivel = 0)
         {
             var tieneMaterias = materias != null && materias.Any();
             if (tieneMaterias)
@@ -38,6 +41,7 @@ namespace Planificador.Logic
                 foreach (var materiaSinCorrelativas in materiasSinCorrelativas)
                 {
                     materiaSinCorrelativas.Nivel = nivel;
+                    DiccionarioCriticidad.Add(materiaSinCorrelativas,nivel);
                 }
 
                 List<Materia> materiasConCorrelativas = materias.Where(x => x.Correlativas != null && x.Correlativas.Any()).ToList();
