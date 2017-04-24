@@ -79,6 +79,8 @@
         <button id="btnObtenerMateriasAprobadas" class="btn btn-default">Obtener Materias Aprobadas</button>
         <button id="btnObtenerMateriasPendientes" class="btn btn-default">Obtener Materias Pendientes</button>
         <button id="btnObtenerCaminoCritico" class="btn btn-default">Obtener Camino crítico</button>
+        
+        <input type="button" id="btnLimpiar" value="Limpiar" class="btn btn-default" onClick="window.location.reload()">
 
 
         <!--
@@ -222,7 +224,7 @@
                     dataType: 'json',
                     success: function (result) {
                         if (jQuery.isEmptyObject(result)) {
-                            MostrarModal("El alumno no tiene materias pendientes");
+                            MostrarModal("El alumno no tiene materias pendientes de cursar");
                         } else {
                             CargarMateriasPendientes(result);
                         }
