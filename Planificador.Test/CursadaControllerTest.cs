@@ -72,13 +72,32 @@ namespace PlanificadorTest
             IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
             var b = new CaminoCritico();
             var g = b.GetCaminoCritico(a.GetPlanEstudio());
+            var diccionario = b.DiccionarioCriticidad;
+
+            Dictionary<Materia,int> ff = new Dictionary<Materia,int>();
+            ff.Add(new Materia{Nombre="Introduccion a la Programcaión" }, 1);
+
+            foreach (var element in diccionario)
+            {
+                /* Parecido al Any (Ojo no es lo mismo.). */
+                Materia q = (from matf in ff
+                             where matf.Key == element.Key
+                             select matf.Key).FirstOrDefault();
+
+                if (ff.Any(matf => matf.Key == element.Key))
+                {
+                    //if (element)
+                }
+            }
         }
 
         [Test]
         public void CaminoCritico_LicenciaturaEconomia()
         {
             //Consulto al controlador
-            IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
+            IPlanEstudio a = new PlanEstudiosLicenciaturaEconomia();
+            /* Se comenta porque el teesteo va para el plan de estudio licenciatura. */
+            //IPlanEstudio a = new PlanEstudiosLicenciaturaSistemas();
             var b = new CaminoCritico();
             var g = b.GetCaminoCritico(a.GetPlanEstudio());
         }

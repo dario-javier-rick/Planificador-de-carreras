@@ -198,7 +198,7 @@
                     success: function (result) {
                         if (jQuery.isEmptyObject(result)) {
                             MostrarModal("El alumno no tiene materias aprobadas");
-                            OcultarBotones();
+                            //OcultarBotones();
                             $("#btnObtenerMateriasPendientes").show();
                         } else {
                             CargarMateriasAprobadas(result);
@@ -286,7 +286,13 @@
                 const tr = document.createElement('TR');
                 const td = document.createElement('TD');
                 td.appendChild(document.createTextNode(planes[i].Id));
+
                 tr.appendChild(td);
+                /* me parece que mas que el Id del plan se deberia visualizar el nombre del plan de estudio. */
+                const td1 = document.createElement('td');
+                td1.appendChild(document.createTextNode(planes[i].Nombre));
+
+                tr.appendChild(td1);
 
                 tableBody.appendChild(tr);
             }
@@ -294,8 +300,10 @@
             table.appendChild(tableBody);
             $("#divPlanesDeEstudio").css("display", "inline");
 
+            /* Me parece mejor que el usuario luego de elegir el plan de estudio pueda elegir entre ver las aprobadas o las no cursadas. */
             OcultarBotones();
             $("#btnObtenerMateriasAprobadas").show();
+            $("#btnObtenerMateriasPendientes").show();
         };
 
         function CargarMateriasAprobadas(materias) {
@@ -315,6 +323,7 @@
 
             $("#divMateriasAprobadas").css("display", "inline");
 
+            /* Se comneta porque me parece mejor que el usuario pueda elegir el boton que desea apretar. */
             OcultarBotones();
             $("#btnObtenerMateriasPendientes").show();
         };
@@ -323,11 +332,34 @@
             const table = document.getElementById("tblMateriasPendientes");
             const tableBody = document.createElement('TBODY');
 
+            /*--> Inicio - Nicolas Fernandez - 27/04/2017. Agregado de cabecera de la table. */
+            var th = document.createElement('th');
+            th.appendChild(document.createTextNode('Materias'));
+
+            var tr0 = document.createElement('tr');
+            tr0.appendChild(th);
+            table.appendChild(tr0);
+            /*<-- Fin - Nicolás Fernandez - 27/04/2017. */
+
             for (let i = 0; i < materias.length; i++) {
                 const tr = document.createElement('TR');
                 const td = document.createElement('TD');
+
                 td.appendChild(document.createTextNode(materias[i].Nombre));
                 tr.appendChild(td);
+
+                /*--> Inicio - Nicolas Fernandez - 27/04/2017. Me parece necesario el boton que ponga a la materia como aprobada. */
+                var inp = document.createElement('Input');
+                inp.id = materias[i].nombre;
+                inp.type = "Button";
+                inp.value = "Aprobar Materia";
+                inp.classList = "btn btn-default";
+
+                var td1 = document.createElement('td');
+
+                td1.appendChild(inp);
+                tr.appendChild(td1);
+                /*<-- Fin - Nicolas Fernandez - 27/04/2017. */
 
                 tableBody.appendChild(tr);
             }
@@ -335,9 +367,10 @@
 
 
             $("#divMateriasPendientes").css("display", "inline");
-
-            OcultarBotones();
-            $("#btnObtenerCaminoCritico").show();
+            /*--> Inicio - Nicolas Fernandez - 27/04/2017. Me parece que no deberia ocultar botones en este evento. */
+            //OcultarBotones();
+            //$("#btnObtenerCaminoCritico").show();
+            /*<-- Fin - Nicolas Fernandez - 27/04/2017. */
         };
 
         function CargarCaminoCritico(materias) {

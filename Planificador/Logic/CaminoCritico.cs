@@ -6,7 +6,7 @@ namespace Planificador.Logic
 {
     public class CaminoCritico
     {
-        internal Dictionary<Materia,int> DiccionarioCriticidad { get; } = new Dictionary<Materia,int>() ;
+        public Dictionary<Materia,int> DiccionarioCriticidad { get; } = new Dictionary<Materia,int>() ;
 
 
         public IEnumerable<Models.Materia> GetCaminoCritico(Models.PlanDeEstudios planDeEstudios)
