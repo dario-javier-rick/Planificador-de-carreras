@@ -6,7 +6,7 @@ namespace Planificador.Logic
 {
     public class CaminoCritico
     {
-        public Dictionary<Materia,int> DiccionarioCriticidad { get; } = new Dictionary<Materia,int>() ;
+        public Dictionary<Materia, int> DiccionarioCriticidad { get; } = new Dictionary<Materia, int>();
 
 
         public IEnumerable<Models.Materia> GetCaminoCritico(Models.PlanDeEstudios planDeEstudios)
@@ -34,25 +34,27 @@ namespace Planificador.Logic
         /// <param name="nivel"></param>
         internal void CalcularPesoEnCaminoCritico(IEnumerable<Materia> materias, int nivel = 0)
         {
-            var tieneMaterias = materias != null && materias.Any();
-            if (tieneMaterias)
+            if (!materias.Any())
             {
-                List<Materia> materiasSinCorrelativas = materias.Where(x => x.Correlativas == null || !x.Correlativas.Any()).ToList();
-                foreach (var materiaSinCorrelativas in materiasSinCorrelativas)
-                {
-                    materiaSinCorrelativas.Nivel = nivel;
-                    DiccionarioCriticidad.Add(materiaSinCorrelativas,nivel);
-                }
-
-                List<Materia> materiasConCorrelativas = materias.Where(x => x.Correlativas != null && x.Correlativas.Any()).ToList();
-                foreach (var materiaConCorrelativas in materiasConCorrelativas)
-                {
-                    var materiasCorrelativasParaBorrar = materiaConCorrelativas.Correlativas.Intersect(materiasSinCorrelativas);
-                    materiaConCorrelativas.Correlativas = materiaConCorrelativas.Correlativas.Except(materiasCorrelativasParaBorrar).ToList();
-                }
-
-                CalcularPesoEnCaminoCritico(materiasConCorrelativas, ++nivel);
+                return;
             }
+
+            List<Materia> materiasSinCorrelativas = materias.Where(x => x.Correlativas == null || !x.Correlativas.Any()).ToList();
+            foreach (var materiaSinCorrelativas in materiasSinCorrelativas)
+            {
+                materiaSinCorrelativas.Nivel = nivel;
+                DiccionarioCriticidad.Add(materiaSinCorrelativas, nivel);
+            }
+
+            List<Materia> materiasConCorrelativas = materias.Where(x => x.Correlativas != null && x.Correlativas.Any()).ToList();
+            foreach (var materiaConCorrelativas in materiasConCorrelativas)
+            {
+                var materiasCorrelativasParaBorrar = materiaConCorrelativas.Correlativas.Intersect(materiasSinCorrelativas);
+                materiaConCorrelativas.Correlativas = materiaConCorrelativas.Correlativas.Except(materiasCorrelativasParaBorrar).ToList();
+            }
+
+            CalcularPesoEnCaminoCritico(materiasConCorrelativas, ++nivel);
+
         }
         /// <summary>
         /// recorro la lista de materias que tienen correlativas

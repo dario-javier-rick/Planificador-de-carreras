@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using Planificador.Models.ViewModels;
 using Planificador.Logic;
 using Planificador.Data.PlanesDeEstudio;
-
+using System;
 
 namespace PlanificadorTest
 {
@@ -74,22 +74,32 @@ namespace PlanificadorTest
             var g = b.GetCaminoCritico(a.GetPlanEstudio());
             var diccionario = b.DiccionarioCriticidad;
 
-            Dictionary<Materia,int> ff = new Dictionary<Materia,int>();
-            ff.Add(new Materia{Nombre="Introduccion a la Programcaión" }, 1);
+            Dictionary<Materia, int> ff = new Dictionary<Materia, int>();
+            Materia ip = new Materia {  Nombre = "Introduccion a la Programacion" }; ff.Add(ip, 0);
 
-            foreach (var element in diccionario)
-            {
+            ff.Add(new Materia { Nombre = "Introduccion a la Matematica" }, 0);
+            ff.Add(new Materia { Nombre = "Programacion 1", Correlativas = { ip } }, 1);
+            ff.Add(new Materia { Nombre = "Logica y teoria de numeros" }, 1);
+            ff.Add(new Materia { Nombre = "Programacion 2" }, 2);
+            ff.Add(new Materia { Nombre = "Matematica Discreta" }, 2);
+            ff.Add(new Materia { Nombre = "Programacion 3" }, 3);
+
+            CollectionAssert.AreEqual(ff,diccionario);
+            //foreach (var element in diccionario)
+            //{
                 /* Parecido al Any (Ojo no es lo mismo.). */
-                Materia q = (from matf in ff
-                             where matf.Key == element.Key
-                             select matf.Key).FirstOrDefault();
+             //   Materia q = (from matf in ff
+               //              where matf.Key == element.Key
+                 //            select matf.Key).FirstOrDefault();
 
-                if (ff.Any(matf => matf.Key == element.Key))
-                {
+                //if (ff.Any(matf => matf.Key == element.Key))
+                //{
                     //if (element)
-                }
-            }
+
+                //}
+            //}
         }
+        
 
         [Test]
         public void CaminoCritico_LicenciaturaEconomia()
