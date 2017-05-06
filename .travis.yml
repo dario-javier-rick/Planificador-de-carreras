@@ -6,3 +6,10 @@ install:
 script:
 - xbuild /p:Configuration=Release Planificador.sln
 - mono ./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe ./Planificador.Test/bin/Release/PlanificadorTest.dll
+notifications:
+  email:
+    recipients:
+      - nikin179@hotmail.com
+      - dario.rick@outlook.com
+    on_success: always # default: change
+    on_failure: always # default: always
