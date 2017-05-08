@@ -70,23 +70,25 @@ namespace Planificador.Data
     /// </summary>
     public class Carreras : IData<Carrera>
     {
-        public static Carrera LicenciaturaSistemas = new Carrera
+        public static readonly List<Carrera> ListaCarreras = new List<Carrera>
         {
-            IdCarrera = 1,
-            Nombre = "Licenciatura en Sistemas",
-            PlanesDeEstudios = new List<PlanDeEstudios> { PlanEstudiosLicenciaturaSistemas.GetPlanEstudio() }
-        };
-
-        public static Carrera LicenciaturaEconomia = new Carrera
-        {
-            IdCarrera = 2,
-            Nombre = "Licenciatura en Economía",
-            PlanesDeEstudios = new List<PlanDeEstudios> { PlanEstudiosLicenciaturaEconomia.GetPlanEstudio() }
+            new Carrera
+            {
+                IdCarrera = 1,
+                Nombre = "Licenciatura en Sistemas",
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanEstudiosLicenciaturaSistemas.GetPlanEstudio() }
+            },
+            new Carrera
+            {
+                IdCarrera = 2,
+                Nombre = "Licenciatura en Economía",
+                PlanesDeEstudios = new List<PlanDeEstudios> { PlanEstudiosLicenciaturaEconomia.GetPlanEstudio() }
+            }
         };
 
         public IEnumerable<Carrera> GetData()
         {
-            return new List<Carrera> { LicenciaturaEconomia, LicenciaturaSistemas };
+            return ListaCarreras;//new List<Carrera> { LicenciaturaEconomia, LicenciaturaSistemas };
         }
     }
 

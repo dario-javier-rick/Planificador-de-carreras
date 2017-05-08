@@ -21,7 +21,8 @@ namespace Planificador.Data.PlanesDeEstudio
         {
             var planDeEstudios = new PlanDeEstudios
             {
-                Id = 1,
+                Id = 2,
+                CarreraIdCarrera = 2,
                 Materias = GetListaMaterias(),
                 Vigente = true
             };

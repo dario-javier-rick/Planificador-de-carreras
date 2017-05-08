@@ -51,10 +51,15 @@ namespace Planificador.Controllers
 
         public JsonResult ObtenerPlanesDeEstudio(string nombreAlumno)
         {
-            Alumno alumno = Alumno.ObtenerAlumno(nombreAlumno);
-            if (alumno != null)
+            List<PlanDeEstudios> listaPlanes = Alumno.ObtenerAlumno(nombreAlumno)?.PlanesDeEstudios.ToList();
+            var jsonResult = from p in listaPlanes
+                             join c in Data.Carreras.ListaCarreras
+                                on p.CarreraIdCarrera equals c.IdCarrera
+                             select new { p.Id, c.Nombre };
+
+            if (listaPlanes != null)
             {
-                return Json(alumno.PlanesDeEstudios);
+                return Json(jsonResult);
             }
             return Json(new { });
         }

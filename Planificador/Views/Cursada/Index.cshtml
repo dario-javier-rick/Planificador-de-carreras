@@ -155,8 +155,8 @@
                         }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
+                        //alert("Status: " + textStatus);
+                        //alert("Error: " + errorThrown);
                     }
                 });
             });
@@ -175,12 +175,13 @@
                         if (jQuery.isEmptyObject(result)) {
                             MostrarModal("El alumno no tiene planes de estudio asignados");
                         } else {
+                            console.log(result);
                             CargarPlanDeEstudio(result);
                         }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
+                        //alert("Status: " + textStatus);
+                        //alert("Error: " + errorThrown);
                     }
                 });
             });
@@ -205,8 +206,8 @@
                         }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
+                        //alert("Status: " + textStatus);
+                        //alert("Error: " + errorThrown);
                     }
                 });
             });
@@ -230,8 +231,8 @@
                         }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
+                        //alert("Status: " + textStatus);
+                        //alert("Error: " + errorThrown);
                     }
                 });
             });
@@ -255,8 +256,8 @@
                         }
                     },
                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                        alert("Status: " + textStatus);
-                        alert("Error: " + errorThrown);
+                        //alert("Status: " + textStatus);
+                        //alert("Error: " + errorThrown);
                     }
                 });
             });
@@ -275,6 +276,9 @@
             $("#divDatosAlumno").css("display", "inline");
 
             OcultarBotones();
+            /*--> Inicio, Nicolás Fernández, 08/05/2017, Se agrega linea que desavilita el ingreso del nombre del alumno para que no se pueda modificar en los siguientes pasos. */
+            document.getElementById("txtNombreAlumno").disabled = true;
+            /*<-- Fin, Nicolas Fernández, 08/05/2017. */
             $("#btnObtenerPlanesEstudio").show();
         };
 
@@ -288,11 +292,28 @@
                 td.appendChild(document.createTextNode(planes[i].Id));
 
                 tr.appendChild(td);
-                /* me parece que mas que el Id del plan se deberia visualizar el nombre del plan de estudio. */
+
+                /*--> Inicio, Nicolás Fernández, 01/05/2017. Se agrega el nombre del plan de carrera. */
                 const td1 = document.createElement('td');
                 td1.appendChild(document.createTextNode(planes[i].Nombre));
-
                 tr.appendChild(td1);
+                /*<-- Fin, Nicolás Fernández, 01/05/2017. */
+
+                /*--> Inicio, Nicolás Fernández, 08/05/2017. Se agrega botones a nivel de row. */
+                const txtBtnVerPlan = document.createTextNode("Ver Plan De Estudio");
+                const btnVerPlan = document.createElement('button');
+                btnVerPlan.appendChild(txtBtnVerPlan);
+                const tdVerPlan = document.createElement("td");
+                tdVerPlan.appendChild(btnVerPlan);
+                tr.appendChild(tdVerPlan);
+
+                const txtBtnVerMateriasPendientes = document.createTextNode("Ver Materias Pendientes");
+                const btnVerMateriasPendientes = document.createElement('button');
+                btnVerMateriasPendientes.appendChild(txtBtnVerMateriasPendientes);
+                const tdVermateriasPendientes = document.createElement("td");
+                tdVermateriasPendientes.appendChild(btnVerMateriasPendientes);
+                tr.appendChild(tdVermateriasPendientes);
+                /*<-- Fin, Nicolás Fernández, 08/05/2017. */
 
                 tableBody.appendChild(tr);
             }
