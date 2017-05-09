@@ -283,10 +283,14 @@
         };
 
         function CargarPlanDeEstudio(planes) {
-            const table = document.getElementById("tblPlanesEstudio");
-            const tableBody = document.createElement('TBODY');
+            /*--> Inicio, Nicolás Fernández, 08/05/2017, Se separan los planes de estudio en diferentes tablas para despues poder cargar las materias independientemente por cada plan. */
+            const div = document.getElementById("divPlanesDeEstudio");
+            //const table = document.getElementById("tblPlanesEstudio");
+            //const tableBody = document.createElement('TBODY');
 
             for (let i = 0; i < planes.length; i++) {
+                const table = document.createElement('table');
+                table.className = "table table-bordered text-center";
                 const tr = document.createElement('TR');
                 const td = document.createElement('TD');
                 td.appendChild(document.createTextNode(planes[i].Id));
@@ -302,23 +306,29 @@
                 /*--> Inicio, Nicolás Fernández, 08/05/2017. Se agrega botones a nivel de row. */
                 const txtBtnVerPlan = document.createTextNode("Ver Plan De Estudio");
                 const btnVerPlan = document.createElement('button');
+                btnVerPlan.className = "btn btn-default";
                 btnVerPlan.appendChild(txtBtnVerPlan);
                 const tdVerPlan = document.createElement("td");
+                //tdVerPlan.style = "max-width:30px";
                 tdVerPlan.appendChild(btnVerPlan);
                 tr.appendChild(tdVerPlan);
 
                 const txtBtnVerMateriasPendientes = document.createTextNode("Ver Materias Pendientes");
                 const btnVerMateriasPendientes = document.createElement('button');
+                btnVerMateriasPendientes.className = "btn btn-default";
                 btnVerMateriasPendientes.appendChild(txtBtnVerMateriasPendientes);
                 const tdVermateriasPendientes = document.createElement("td");
                 tdVermateriasPendientes.appendChild(btnVerMateriasPendientes);
                 tr.appendChild(tdVermateriasPendientes);
                 /*<-- Fin, Nicolás Fernández, 08/05/2017. */
 
-                tableBody.appendChild(tr);
+                //tableBody.appendChild(tr);
+                table.appendChild(tr);
+                div.appendChild(table);
             }
 
-            table.appendChild(tableBody);
+            //table.appendChild(tableBody);
+            /* <-- Fin, Nicolás Fernández, '08/05/2017. */
             $("#divPlanesDeEstudio").css("display", "inline");
 
             /* Me parece mejor que el usuario luego de elegir el plan de estudio pueda elegir entre ver las aprobadas o las no cursadas. */
