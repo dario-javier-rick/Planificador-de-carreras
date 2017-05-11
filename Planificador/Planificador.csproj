@@ -242,7 +242,7 @@
     <Compile Include="Models\PlanDeEstudios.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewModels\CursadaViewModel.cs" />
+    <Compile Include="ViewModels\CursadaViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\CursadaController.cs" />
