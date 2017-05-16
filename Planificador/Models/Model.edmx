@@ -9,7 +9,7 @@
     <EntitySet Name="UsuarioSet" EntityType="Model.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="MateriaSet" EntityType="Model.Store.MateriaSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="CarreraSet" EntityType="Model.Store.CarreraSet" store:Type="Tables" Schema="dbo" />
-    </EntityContainer>
+  </EntityContainer>
   <EntityType Name="UsuarioSet">
     <Key>
       <PropertyRef Name="IdUsuario" />
@@ -47,12 +47,12 @@
           <EntitySet Name="CarreraSet" EntityType="Model.Carrera" />
           <EntitySet Name="PlanDeEstudiosSet" EntityType="Model.PlanDeEstudios" />
           <AssociationSet Name="CarreraPlanDeEstudios" Association="Model.CarreraPlanDeEstudios">
-            <End Role="Carrera" EntitySet="CarreraSet" />
-            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
+            <End EntitySet="CarreraSet" Role="Carrera" />
+            <End EntitySet="PlanDeEstudiosSet" Role="PlanDeEstudios" />
           </AssociationSet>
           <AssociationSet Name="AlumnoPlanDeEstudios" Association="Model.AlumnoPlanDeEstudios">
-            <End Role="Alumno" EntitySet="AlumnoSet" />
-            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
+            <End EntitySet="AlumnoSet" Role="Alumno" />
+            <End EntitySet="PlanDeEstudiosSet" Role="PlanDeEstudios" />
           </AssociationSet>
           <EntitySet Name="CursadaSet" EntityType="Model.Cursada" />
           <AssociationSet Name="AlumnoCursada" Association="Model.AlumnoCursada">
@@ -74,8 +74,17 @@
             <End Role="ResultadoCursada" EntitySet="ResultadoCursadaSet" />
           </AssociationSet>
           <AssociationSet Name="PlanDeEstudiosMateria" Association="Model.PlanDeEstudiosMateria">
-            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
+            <End EntitySet="PlanDeEstudiosSet" Role="PlanDeEstudios" />
+            <End EntitySet="MateriaSet" Role="Materia" />
+          </AssociationSet>
+          <EntitySet Name="CorrelativasSet" EntityType="Model.Correlativas" />
+          <AssociationSet Name="PlanDeEstudiosCorrelativas" Association="Model.PlanDeEstudiosCorrelativas">
+            <End EntitySet="PlanDeEstudiosSet" Role="PlanDeEstudios" />
+            <End EntitySet="CorrelativasSet" Role="Correlativas" />
+          </AssociationSet>
+          <AssociationSet Name="MateriaCorrelativas" Association="Model.MateriaCorrelativas">
             <End Role="Materia" EntitySet="MateriaSet" />
+            <End Role="Correlativas" EntitySet="CorrelativasSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Alumno">
@@ -97,6 +106,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" />
           <NavigationProperty Name="Cursada" Relationship="Model.CursadaMateria" FromRole="Materia" ToRole="Cursada" />
           <NavigationProperty Name="PlanDeEstudios" Relationship="Model.PlanDeEstudiosMateria" FromRole="Materia" ToRole="PlanDeEstudios" />
+          <NavigationProperty Name="Correlativas" Relationship="Model.MateriaCorrelativas" FromRole="Materia" ToRole="Correlativas" />
           </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -110,18 +120,19 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CarreraIdCarrera" Type="Int32" Nullable="false" />
-          <Property Name="Vigente" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="CarreraIdCarrera" Nullable="false" Type="Int32" />
+          <Property Name="Vigente" Nullable="false" Type="Boolean" />
           <NavigationProperty Name="Materia" Relationship="Model.PlanDeEstudiosMateria" FromRole="PlanDeEstudios" ToRole="Materia" />
+          <NavigationProperty Name="Correlativas" Relationship="Model.PlanDeEstudiosCorrelativas" FromRole="PlanDeEstudios" ToRole="Correlativas" />
         </EntityType>
         <Association Name="CarreraPlanDeEstudios">
-          <End Type="Model.Carrera" Role="Carrera" Multiplicity="1" />
-          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
+          <End Type="Model.Carrera" Multiplicity="1" Role="Carrera" />
+          <End Type="Model.PlanDeEstudios" Multiplicity="*" Role="PlanDeEstudios" />
         </Association>
         <Association Name="AlumnoPlanDeEstudios">
-          <End Type="Model.Alumno" Role="Alumno" Multiplicity="*" />
-          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
+          <End Type="Model.Alumno" Multiplicity="*" Role="Alumno" />
+          <End Type="Model.PlanDeEstudios" Multiplicity="*" Role="PlanDeEstudios" />
         </Association>
         <EntityType Name="Cursada">
           <Property Name="Semestre" Type="DateTime" Nullable="false" />
@@ -180,8 +191,29 @@
           <End Type="Model.ResultadoCursada" Role="ResultadoCursada" Multiplicity="1" />
         </Association>
         <Association Name="PlanDeEstudiosMateria">
-          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
+          <End Type="Model.PlanDeEstudios" Multiplicity="*" Role="PlanDeEstudios" />
+          <End Type="Model.Materia" Multiplicity="*" Role="Materia" />
+        </Association>
+        <EntityType Name="Correlativas">
+          <NavigationProperty Name="PlanDeEstudios" Relationship="Model.PlanDeEstudiosCorrelativas" FromRole="Correlativas" ToRole="PlanDeEstudios" />
+          <Property Name="PlanDeEstudiosId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.MateriaCorrelativas" FromRole="Correlativas" ToRole="Materia" />
+        </EntityType>
+        <Association Name="PlanDeEstudiosCorrelativas">
+          <End Type="Model.PlanDeEstudios" Multiplicity="1" Role="PlanDeEstudios" />
+          <End Type="Model.Correlativas" Multiplicity="*" Role="Correlativas" />
+          <ReferentialConstraint>
+            <Principal Role="PlanDeEstudios">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Correlativas">
+              <PropertyRef Name="PlanDeEstudiosId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MateriaCorrelativas">
           <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
+          <End Type="Model.Correlativas" Role="Correlativas" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
