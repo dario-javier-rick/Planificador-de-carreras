@@ -46,14 +46,6 @@
           <EntitySet Name="MateriaSet" EntityType="Model.Materia" />
           <EntitySet Name="CarreraSet" EntityType="Model.Carrera" />
           <EntitySet Name="PlanDeEstudiosSet" EntityType="Model.PlanDeEstudios" />
-          <AssociationSet Name="MateriaMateria" Association="Model.MateriaMateria">
-            <End Role="Materia" EntitySet="MateriaSet" />
-            <End Role="Materia1" EntitySet="MateriaSet" />
-          </AssociationSet>
-          <AssociationSet Name="PlanDeEstudiosMateria" Association="Model.PlanDeEstudiosMateria">
-            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
-            <End Role="Materia" EntitySet="MateriaSet" />
-          </AssociationSet>
           <AssociationSet Name="CarreraPlanDeEstudios" Association="Model.CarreraPlanDeEstudios">
             <End Role="Carrera" EntitySet="CarreraSet" />
             <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
@@ -62,13 +54,27 @@
             <End Role="Alumno" EntitySet="AlumnoSet" />
             <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
           </AssociationSet>
-          <EntitySet Name="HistorialAcademicoSet" EntityType="Model.HistorialAcademico" />
-          <AssociationSet Name="AlumnoHistorialAcademico" Association="Model.AlumnoHistorialAcademico">
+          <EntitySet Name="CursadaSet" EntityType="Model.Cursada" />
+          <AssociationSet Name="AlumnoCursada" Association="Model.AlumnoCursada">
             <End Role="Alumno" EntitySet="AlumnoSet" />
-            <End Role="HistorialAcademico" EntitySet="HistorialAcademicoSet" />
+            <End Role="Cursada" EntitySet="CursadaSet" />
           </AssociationSet>
-          <AssociationSet Name="HistorialAcademicoMateria" Association="Model.HistorialAcademicoMateria">
-            <End Role="HistorialAcademico" EntitySet="HistorialAcademicoSet" />
+          <AssociationSet Name="CursadaMateria" Association="Model.CursadaMateria">
+            <End Role="Cursada" EntitySet="CursadaSet" />
+            <End Role="Materia" EntitySet="MateriaSet" />
+          </AssociationSet>
+          <EntitySet Name="ProfesorSet" EntityType="Model.Profesor" />
+          <AssociationSet Name="ProfesorCursada" Association="Model.ProfesorCursada">
+            <End Role="Profesor" EntitySet="ProfesorSet" />
+            <End Role="Cursada" EntitySet="CursadaSet" />
+          </AssociationSet>
+          <EntitySet Name="ResultadoCursadaSet" EntityType="Model.ResultadoCursada" />
+          <AssociationSet Name="CursadaResultadoCursada" Association="Model.CursadaResultadoCursada">
+            <End Role="Cursada" EntitySet="CursadaSet" />
+            <End Role="ResultadoCursada" EntitySet="ResultadoCursadaSet" />
+          </AssociationSet>
+          <AssociationSet Name="PlanDeEstudiosMateria" Association="Model.PlanDeEstudiosMateria">
+            <End Role="PlanDeEstudios" EntitySet="PlanDeEstudiosSet" />
             <End Role="Materia" EntitySet="MateriaSet" />
           </AssociationSet>
         </EntityContainer>
@@ -81,7 +87,7 @@
           <Property Name="Nombre" Type="String" Nullable="false" />
           <Property Name="Apellido" Type="String" Nullable="false" />
           <NavigationProperty Name="PlanesDeEstudios" Relationship="Model.AlumnoPlanDeEstudios" FromRole="Alumno" ToRole="PlanDeEstudios" />
-          <NavigationProperty Name="HistorialAcademico" Relationship="Model.AlumnoHistorialAcademico" FromRole="Alumno" ToRole="HistorialAcademico" />
+          <NavigationProperty Name="Cursada" Relationship="Model.AlumnoCursada" FromRole="Alumno" ToRole="Cursada" />
         </EntityType>
         <EntityType Name="Materia">
           <Key>
@@ -89,9 +95,8 @@
           </Key>
           <Property Name="IdMateria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" />
-          <NavigationProperty Name="Correlativas" Relationship="Model.MateriaMateria" FromRole="Materia" ToRole="Materia1" />
-          <Property Name="PlanDeEstudiosId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="HistorialAcademico" Relationship="Model.HistorialAcademicoMateria" FromRole="Materia" ToRole="HistorialAcademico" />
+          <NavigationProperty Name="Cursada" Relationship="Model.CursadaMateria" FromRole="Materia" ToRole="Cursada" />
+          <NavigationProperty Name="PlanDeEstudios" Relationship="Model.PlanDeEstudiosMateria" FromRole="Materia" ToRole="PlanDeEstudios" />
           </EntityType>
         <EntityType Name="Carrera">
           <Key>
@@ -107,61 +112,76 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CarreraIdCarrera" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Materias" Relationship="Model.PlanDeEstudiosMateria" FromRole="PlanDeEstudios" ToRole="Materia" />
           <Property Name="Vigente" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.PlanDeEstudiosMateria" FromRole="PlanDeEstudios" ToRole="Materia" />
         </EntityType>
-        <Association Name="MateriaMateria">
-          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
-          <End Type="Model.Materia" Role="Materia1" Multiplicity="*" />
-        </Association>
-        <Association Name="PlanDeEstudiosMateria">
-          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="1" />
-          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
-        </Association>
         <Association Name="CarreraPlanDeEstudios">
           <End Type="Model.Carrera" Role="Carrera" Multiplicity="1" />
           <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
         </Association>
         <Association Name="AlumnoPlanDeEstudios">
-          <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="Model.Alumno" Role="Alumno" Multiplicity="*" />
           <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
         </Association>
-        <EntityType Name="HistorialAcademico">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Estado" Type="String" Nullable="false" />
-          <Property Name="Nota" Type="Double" Nullable="false" />
-          <Property Name="Fecha" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoHistorialAcademico" FromRole="HistorialAcademico" ToRole="Alumno" />
+        <EntityType Name="Cursada">
+          <Property Name="Semestre" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoCursada" FromRole="Cursada" ToRole="Alumno" />
           <Property Name="AlumnoIdAlumno" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Materia" Relationship="Model.HistorialAcademicoMateria" FromRole="HistorialAcademico" ToRole="Materia" />
-          <Property Name="MateriaIdMateria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.CursadaMateria" FromRole="Cursada" ToRole="Materia" />
+          <NavigationProperty Name="Profesor" Relationship="Model.ProfesorCursada" FromRole="Cursada" ToRole="Profesor" />
+          <Property Name="ProfesorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ResultadoCursada" Relationship="Model.CursadaResultadoCursada" FromRole="Cursada" ToRole="ResultadoCursada" />
         </EntityType>
-        <Association Name="AlumnoHistorialAcademico">
+        <Association Name="AlumnoCursada">
           <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
-          <End Type="Model.HistorialAcademico" Role="HistorialAcademico" Multiplicity="*" />
+          <End Type="Model.Cursada" Role="Cursada" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Alumno">
               <PropertyRef Name="IdAlumno" />
             </Principal>
-            <Dependent Role="HistorialAcademico">
+            <Dependent Role="Cursada">
               <PropertyRef Name="AlumnoIdAlumno" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="HistorialAcademicoMateria">
-          <End Type="Model.HistorialAcademico" Role="HistorialAcademico" Multiplicity="*" />
-          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
+        <Association Name="CursadaMateria">
+          <End Type="Model.Cursada" Role="Cursada" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Profesor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Cursada" Relationship="Model.ProfesorCursada" FromRole="Profesor" ToRole="Cursada" />
+        </EntityType>
+        <Association Name="ProfesorCursada">
+          <End Type="Model.Profesor" Role="Profesor" Multiplicity="1" />
+          <End Type="Model.Cursada" Role="Cursada" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Materia">
-              <PropertyRef Name="IdMateria" />
+            <Principal Role="Profesor">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="HistorialAcademico">
-              <PropertyRef Name="MateriaIdMateria" />
+            <Dependent Role="Cursada">
+              <PropertyRef Name="ProfesorId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ResultadoCursada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Cursada" Relationship="Model.CursadaResultadoCursada" FromRole="ResultadoCursada" ToRole="Cursada" />
+          <Property Name="Nota" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <Association Name="CursadaResultadoCursada">
+          <End Type="Model.Cursada" Role="Cursada" Multiplicity="1" />
+          <End Type="Model.ResultadoCursada" Role="ResultadoCursada" Multiplicity="1" />
+        </Association>
+        <Association Name="PlanDeEstudiosMateria">
+          <End Type="Model.PlanDeEstudios" Role="PlanDeEstudios" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
