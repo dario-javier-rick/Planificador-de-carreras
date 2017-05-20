@@ -14,6 +14,15 @@ namespace Planificador.Models
     
     public partial class Profesor
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Profesor()
+        {
+            this.Cursada = new HashSet<Cursada>();
+        }
+    
         public int Id { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cursada> Cursada { get; set; }
     }
 }

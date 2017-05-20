@@ -4,24 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="252a76b40faf47eeab1695d71e0c37d7" Name="Diagram1" ZoomLevel="92" >
-        <EntityTypeShape EntityType="Model.Alumno" Width="1.75" PointX="9.5" PointY="5.5" FillColor="Yellow" />
-        <EntityTypeShape EntityType="Model.Materia" Width="1.5" PointX="3.875" PointY="8.5" FillColor="Lime" />
-        <EntityTypeShape EntityType="Model.Carrera" Width="1.5" PointX="7.25" PointY="3.5" FillColor="Red" />
-        <EntityTypeShape EntityType="Model.PlanDeEstudios" PointX="3.25" PointY="5.125" Width="1.5" />
+      <Diagram DiagramId="d3370e6f3672470a82dfe9a76d8a2542" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model.Alumno" PointX="7.375" PointY="2.75" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Carrera" PointX="1.25" PointY="0.625" Width="1.5" />
+        <EntityTypeShape EntityType="Model.PlanDeEstudio" PointX="3.5" PointY="2.5" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Profesor" PointX="11" PointY="1.25" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Cursada" PointX="11.125" PointY="4.375" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Correlativa" PointX="0.75" PointY="5.625" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Materia" PointX="3.375" PointY="6.5" Width="1.5" />
         <AssociationConnector Association="Model.CarreraPlanDeEstudios" />
-        <AssociationConnector Association="Model.AlumnoPlanDeEstudios" />
-        <EntityTypeShape EntityType="Model.Cursada" Width="1.5" PointX="6.5" PointY="6.5" />
         <AssociationConnector Association="Model.AlumnoCursada" />
-        <AssociationConnector Association="Model.CursadaMateria" />
-        <EntityTypeShape EntityType="Model.Profesor" Width="1.5" PointX="4.625" PointY="3" />
-        <AssociationConnector Association="Model.ProfesorCursada" />
-        <EntityTypeShape EntityType="Model.ResultadoCursada" Width="1.625" PointX="7" PointY="10.125" />
-        <AssociationConnector Association="Model.CursadaResultadoCursada" />
-        <AssociationConnector Association="Model.PlanDeEstudiosMateria" />
-        <EntityTypeShape EntityType="Model.Correlativas" Width="1.5" PointX="0.625" PointY="7.375" />
-        <AssociationConnector Association="Model.PlanDeEstudiosCorrelativas" />
+        <AssociationConnector Association="Model.CorrelativasPlanDeEstudios" />
         <AssociationConnector Association="Model.MateriaCorrelativas" />
+        <AssociationConnector Association="Model.ProfesorCursada" />
+        <AssociationConnector Association="Model.MateriaCursada" />
+        <AssociationConnector Association="Model.PlanDeEstudioMateria" />
+        <AssociationConnector Association="Model.PlanDeEstudioAlumno" />
+        <EntityTypeShape EntityType="Model.Libreta" Width="1.5" PointX="7.625" PointY="6.125" />
+        <AssociationConnector Association="Model.AlumnoLibreta" />
+        <AssociationConnector Association="Model.LibretaMateria" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

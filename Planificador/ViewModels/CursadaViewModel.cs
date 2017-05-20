@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Planificador.Models;
 
-namespace Planificador.Models.ViewModels
+namespace Planificador.ViewModels
 {
     public class CursadaViewModel
     {
