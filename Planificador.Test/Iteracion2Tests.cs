@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Planificador.BLL;
+using Planificador.BLL.Entidades;
 using Planificador.Models;
 
 namespace Planificador.Test
@@ -37,7 +38,8 @@ namespace Planificador.Test
         public void NoExisteCarrera()
         {
             bool noExiste = true;
-            Carrera c = new Carrera{Nombre = "Pepe"};
+            //Carrera c = new Carrera{Nombre = "Pepe"};
+            Carrera c = CarreraBLL.CrearCarrera("Pepe");
 
             //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
@@ -51,7 +53,7 @@ namespace Planificador.Test
         [Test]
         public void ExisteCarrera()
         {
-            bool Existe = true;
+/*            bool Existe = true;
             Carrera c = new Carrera{Nombre = "Pepe"};
 
             //DataManager dm = DataManager.Instance;
@@ -62,7 +64,7 @@ namespace Planificador.Test
             Existe = dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
 
             Assert.IsTrue(Existe);
-        }
+*/        }
 
         /*[Test]
         public void ExisteCarrera()
