@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Planificador.BLL;
+using Planificador.BLL.Entidades;
 using Planificador.Models;
 
 namespace Planificador.Test
@@ -36,32 +37,36 @@ namespace Planificador.Test
         [Test]
         public void NoExisteCarrera()
         {
-            bool noExiste = true;
-            Carrera c = new Carrera{Nombre = "Pepe"};
+            //bool noExiste = true;
+            //Carrera c = new Carrera{Nombre = "Pepe"};
+            /* Nicolas Fernandez, 2/05/2017, Se crea la carrera con la clase CarreraBLL. */
+            Carrera c = CarreraBLL.CrearCarrera("Pepe");
 
             //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
 
-            noExiste = !dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
+            Carrera c1 = dm.ObtenerCarrera(c);
 
-            Assert.IsTrue(noExiste);
+            //noExiste = !dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
+
+            //Assert.IsTrue(noExiste);
+            Assert.IsNull(c1);
         }
 
 
         [Test]
         public void ExisteCarrera()
         {
-            bool Existe = true;
-            Carrera c = new Carrera{Nombre = "Pepe"};
+            //bool Existe = true;
+            Carrera c = CarreraBLL.CrearCarrera("Pepe");
 
             //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
 
             dm.RegistrarCarrera(c);
 
-            Existe = dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
-
-            Assert.IsTrue(Existe);
+            //Existe = dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
+            //Assert.IsTrue(Existe);
         }
 
         /*[Test]

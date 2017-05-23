@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Planificador.BLL.Entidades;
 using Planificador.Models;
-using AlumnoBLL = Planificador.BLL.Entidades.AlumnoBLL;
 
 namespace Planificador.BLL
 {
@@ -74,10 +71,10 @@ namespace Planificador.BLL
             //EliminarDatosDe(path + @"\Planificador\Data\NewData.txt");
 
             CargarDatos(path + @"\Data.txt");
-            CargarDatos(path + @"\NewData.txt");
+            //CargarDatos(path + @"\NewData.txt");
 
-            GuardarDatosEn(path + @"\Data.txt");
-            EliminarDatosDe(path + @"\NewData.txt");
+            //GuardarDatosEn(path + @"\Data.txt");
+            //EliminarDatosDe(path + @"\NewData.txt");
         }
 
         /* Nicolás Fernández, 18/05/2017, Carga datos desde el archivo. */
@@ -99,7 +96,6 @@ namespace Planificador.BLL
                 if (line.Contains("[Carrera]"))
                 {
                     carreras.Add(CarreraBLL.GenerateFromDataLine(line));
-                    //RegistrarCarrera(carrera);
                 }
                 i++;
             }
@@ -129,7 +125,7 @@ namespace Planificador.BLL
         private void GuardarDatosEn(string path)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter(path);
-            file.WriteLine("HOla");
+            //file.WriteLine("HOla");
             foreach (Alumno a in alumnos)
             {
                 file.WriteLine("a");
@@ -225,6 +221,18 @@ namespace Planificador.BLL
             PlanDeEstudio planIngIndustrial = new PlanDeEstudio(carreras.Find(x => x.NombreCarrera.Equals("Ingenieria Industrial")));
             PlanDeEstudio planLicEconomia = new PlanDeEstudio(carreras.Find(x => x.NombreCarrera.Equals("Licenciatura en Economia")));
     */
+        }
+
+        /* Nicolas Fernandez, 2/05/2017, Obtiene una carrera en particular. */
+        public Carrera ObtenerCarrera(Carrera carrera)
+        {
+            foreach (Carrera c in this.carreras)
+            {
+                if (CarreraBLL.Mismas(carrera, c))
+                    return c;
+            }
+
+            return null;
         }
 
         /** Obtencion de datos. **/
