@@ -58,19 +58,20 @@ namespace Planificador.BLL
         private DataManager(string path)
         {
             alumnos = new List<Alumno>();
-            carreras = new List<Carrera>();
             planes = new List<PlanDeEstudio>();
+            carreras = new List<Carrera>();
             materias = new List<Materia>();
 
             //path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)).FullName).FullName).FullName;
-            this.path = path;
+            this.path = path + @"\Data.txt";
 
             //CargarDatos(path + @"\Planificador\Data\Data.txt");
             //CargarDatos(path + @"\Planificador\Data\NewData.txt");
             //GuardarDatosEn(path + @"\Planificador\Data\Data.txt");
             //EliminarDatosDe(path + @"\Planificador\Data\NewData.txt");
 
-            CargarDatos(path + @"\Data.txt");
+            CargarDatos();
+            //CargarDatos(path + @"\Data.txt");
             //CargarDatos(path + @"\NewData.txt");
 
             //GuardarDatosEn(path + @"\Data.txt");
@@ -78,14 +79,14 @@ namespace Planificador.BLL
         }
 
         /* Nicolás Fernández, 18/05/2017, Carga datos desde el archivo. */
-        public void CargarDatos(string fromData)
+        //public void CargarDatos(string fromData)
+        public void CargarDatos()
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(fromData);
+            //System.IO.StreamReader file = new System.IO.StreamReader(fromData);
+            System.IO.StreamReader file = new System.IO.StreamReader(this.path);
 
             string line = "";
 
-
-            int i = 1;
             while ((line = file.ReadLine()) != null)
             {
                 if (line.Contains("[Alumno]"))
@@ -97,7 +98,24 @@ namespace Planificador.BLL
                 {
                     carreras.Add(CarreraBLL.GenerateFromDataLine(line));
                 }
-                i++;
+
+                if (PlanDeEstudioBLL.DataLineToMe(line))
+                {
+                    PlanDeEstudio plan = PlanDeEstudioBLL.GerateFromDataLine(line);
+
+                    foreach (Carrera carreraPlan in carreras)
+                    {
+                        //tengo que agregar las materias
+                        //agrego correlativas
+                        //agrego alumno
+                        if (plan.CodigoCarrera == carreraPlan.CodigoCarrera)
+                        {
+                            plan.Carrera = carreraPlan;
+                            carreraPlan.PlanDeEstudios.Add(plan);
+                        }
+                    }
+                }
+
             }
 
             file.Close();
@@ -153,18 +171,34 @@ namespace Planificador.BLL
         {
             if (carrera.CodigoCarrera == 0)
             {
-                string dataCarrera = "[Carrera],";
-                int cod = AsignarCodCarrera();
-                carreras.Add(new Carrera{CodigoCarrera = cod, Nombre = carrera.Nombre});
-                dataCarrera += cod + "," + carrera.Nombre;
-                System.IO.StreamWriter file = new System.IO.StreamWriter(path + @"\Planificador\Data\NewData.txt", true);
-                file.WriteLine(dataCarrera);
-                file.Close();
+                //string dataCarrera = "[Carrera],";
+                //int cod = AsignarCodCarrera();
+                //carreras.Add(new Carrera{CodigoCarrera = cod, Nombre = carrera.Nombre});
+                //dataCarrera += cod + "," + carrera.Nombre;
+                //System.IO.StreamWriter file = new System.IO.StreamWriter(path + @"\Planificador\Data\NewData.txt", true);
+                //file.WriteLine(dataCarrera);
+                //System.IO.StreamWriter file = new System.IO.StreamWriter(this.path);
+                //file.Close();
+                bool registrada = false;
+                foreach (Carrera c in carreras)
+                {
+                    if (CarreraBLL.Mismas(c, carrera))
+                        registrada = true;
+                }
+
+                if (!registrada)
+                {
+                    carrera.CodigoCarrera = AsignarCodCarrera();
+                    carreras.Add(carrera);
+                    System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
+                    file.WriteLine(CarreraBLL.ToDataLine(carrera));
+                    file.Close();
+                }
             }
-            else
-            {
-                carreras.Add(carrera);
-            }
+            //else
+            //{
+                //carreras.Add(carrera);
+            //}
         }
 
         /* Nicolás Fernández, 12/05/2017, Creación de metodo interno para generar datos de testeo. */
@@ -239,6 +273,20 @@ namespace Planificador.BLL
         public List<Carrera> ObtenerCarrerasEnApp()
         {
             return carreras;
+        }
+
+        /* Nicolas Fernandez, 23/05/2017, Obtiene plan de esudio especifico. */
+        public PlanDeEstudio ObtenerPlanesEstudio(PlanDeEstudio plan)
+        {
+            foreach (PlanDeEstudio pe in planes)
+            {
+                if (PlanDeEstudioBLL.Mismos(plan, pe))
+                {
+                    return pe;
+                }
+            }
+
+            return null;
         }
 
         public List<PlanDeEstudio> ObtenerPlanesdeEstudioEnApp()
