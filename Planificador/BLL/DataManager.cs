@@ -228,6 +228,12 @@ namespace Planificador.BLL
         }
 
         /** Obtencion de datos. **/
+
+        public List<Alumno> ObtenerAlumnosEnApp()
+        {
+            return alumnos;
+        }
+
         public List<Carrera> ObtenerCarrerasEnApp()
         {
             return carreras;

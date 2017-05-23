@@ -22,8 +22,7 @@ namespace Planificador.Controllers
         public ActionResult Index(string nombreAlumno)
         {
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
-            CursadaViewModel viewModel = new CursadaViewModel();
-            viewModel.Materias = alumno.Libreta.MateriasAprobadas.ToList();
+            CursadaViewModel viewModel = new CursadaViewModel {Materias = alumno?.Libreta?.MateriasAprobadas?.ToList()};
             return View(viewModel);
         }
 
