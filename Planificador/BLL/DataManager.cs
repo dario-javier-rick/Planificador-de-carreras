@@ -226,11 +226,11 @@ namespace Planificador.BLL
 
                 {
 
-                    PlanDeEstudio plan = PlanDeEstudioBLL.GerateFromDataLine(line);
+                    //PlanDeEstudio plan = PlanDeEstudioBLL.GerateFromDataLine(line);
 
 
 
-                    planes.Add(plan);
+                    //planes.Add(plan);
 
                     //foreach (Carrera carreraPlan in carreras)
 

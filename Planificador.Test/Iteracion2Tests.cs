@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Planificador.BLL;
+using Planificador.BLL.Constantes;
 using Planificador.BLL.Entidades;
 using Planificador.Models;
 
@@ -20,7 +21,8 @@ namespace Planificador.Test
 
         public void Setup()
         {
-            DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
+            string path = Constantes.DataManagerPath;
+            dm = DataManager.Instance(path);
         }
 
 

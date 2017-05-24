@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planificador", "Planificador\Planificador.csproj", "{82E793B1-5573-475D-9ADE-B5DE3CFB88F0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Planificador.Test", "Planificador.Test\Planificador.Test.csproj", "{2A5CA2A7-2881-4E18-88BF-A202C1FBA046}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DF1CFCC8-1BA4-4FE2-8A84-FF31B7C8083B}"
+	ProjectSection(SolutionItems) = preProject
+		Data\Data.txt = Data\Data.txt
+		Data\NewData.txt = Data\NewData.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

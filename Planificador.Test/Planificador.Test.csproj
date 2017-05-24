@@ -80,9 +80,10 @@
       <Name>Planificador</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data.txt" />
-  </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Debug/Data" /Y /I
+xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Release/Data" /Y /I</PostBuildEvent>
+  </PropertyGroup>
 </Project>
