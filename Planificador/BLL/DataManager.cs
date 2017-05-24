@@ -12,7 +12,7 @@ namespace Planificador.BLL
 
         //private static readonly Lazy<DataManager> instancia = new Lazy<DataManager>(() => new DataManager());
         private string path { get; set; }
-
+        private bool readed { set; get; }
         private List<Correlativa> correlativas { get; set; }
         private List<PlanDeEstudio> planes { get; set; }
         private List<Alumno> alumnos { get; set; }
@@ -47,6 +47,7 @@ namespace Planificador.BLL
             if (instancia == null)
             {
                 instancia = new DataManager(path);
+                instancia.ComienzaLectura();
             }
             return instancia;
         }
@@ -57,33 +58,43 @@ namespace Planificador.BLL
         /// <param name="path"></param>
         private DataManager(string path)
         {
-            alumnos = new List<Alumno>();
-            planes = new List<PlanDeEstudio>();
-            carreras = new List<Carrera>();
-            materias = new List<Materia>();
-
-            //path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)).FullName).FullName).FullName;
             this.path = path + @"\Data.txt";
+            if (!readed)
+            {
+                alumnos = new List<Alumno>();
+                planes = new List<PlanDeEstudio>();
+                carreras = new List<Carrera>();
+                materias = new List<Materia>();
 
-            //CargarDatos(path + @"\Planificador\Data\Data.txt");
-            //CargarDatos(path + @"\Planificador\Data\NewData.txt");
-            //GuardarDatosEn(path + @"\Planificador\Data\Data.txt");
-            //EliminarDatosDe(path + @"\Planificador\Data\NewData.txt");
+                //path = System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Directory.GetParent(System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory)).FullName).FullName).FullName;
 
-            CargarDatos();
-            //CargarDatos(path + @"\Data.txt");
-            //CargarDatos(path + @"\NewData.txt");
 
-            //GuardarDatosEn(path + @"\Data.txt");
-            //EliminarDatosDe(path + @"\NewData.txt");
+                //CargarDatos(path + @"\Planificador\Data\Data.txt");
+                //CargarDatos(path + @"\Planificador\Data\NewData.txt");
+                //GuardarDatosEn(path + @"\Planificador\Data\Data.txt");
+                //EliminarDatosDe(path + @"\Planificador\Data\NewData.txt");
+
+                CargarDatos();
+                //CargarDatos(path + @"\Data.txt");
+                //CargarDatos(path + @"\NewData.txt");
+
+                //GuardarDatosEn(path + @"\Data.txt");
+                //EliminarDatosDe(path + @"\NewData.txt");
+            }
+        }
+
+        private void ComienzaLectura()
+        {
+            this.readed = false;
         }
 
         /* Nicolás Fernández, 18/05/2017, Carga datos desde el archivo. */
         //public void CargarDatos(string fromData)
         public void CargarDatos()
         {
+            this.readed = true;
             //System.IO.StreamReader file = new System.IO.StreamReader(fromData);
-            System.IO.StreamReader file = new System.IO.StreamReader(this.path);
+            System.IO.StreamReader file = new System.IO.StreamReader(path);
 
             string line = "";
 
@@ -103,17 +114,18 @@ namespace Planificador.BLL
                 {
                     PlanDeEstudio plan = PlanDeEstudioBLL.GerateFromDataLine(line);
 
-                    foreach (Carrera carreraPlan in carreras)
-                    {
+                    planes.Add(plan);
+                    //foreach (Carrera carreraPlan in carreras)
+                    //{
                         //tengo que agregar las materias
                         //agrego correlativas
                         //agrego alumno
-                        if (plan.CodigoCarrera == carreraPlan.CodigoCarrera)
-                        {
-                            plan.Carrera = carreraPlan;
-                            carreraPlan.PlanDeEstudios.Add(plan);
-                        }
-                    }
+                    //    if (plan.CodigoCarrera == carreraPlan.CodigoCarrera)
+                    //    {
+                    //        plan.Carrera = carreraPlan;
+                    //        carreraPlan.PlanDeEstudios.Add(plan);
+                    //    }
+                    //}
                 }
 
             }
@@ -190,9 +202,10 @@ namespace Planificador.BLL
                 {
                     carrera.CodigoCarrera = AsignarCodCarrera();
                     carreras.Add(carrera);
-                    System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
-                    file.WriteLine(CarreraBLL.ToDataLine(carrera));
-                    file.Close();
+                    //System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
+                    //file.WriteLine("");
+                    //file.WriteLine(CarreraBLL.ToDataLine(carrera));
+                    //file.Close();
                 }
             }
             //else

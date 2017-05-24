@@ -2,4 +2,4 @@
 [Carrera],2,Licenciatura Sistemas
 [Carrera],3,Licenciatura Historia
 [Carrera],4,Ingenieria Industrial
-[PlanEstudio],2,1
+[CarreraPlan],2,1

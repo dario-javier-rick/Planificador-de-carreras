@@ -64,6 +64,26 @@ namespace Planificador.Test
             //Assert.IsTrue(Existe);
         }
 
+        /*[Test]
+        public void NoExisteMateria()
+        {
+            /*bool existe = false;
+            Materia materia = MateriaBLL.CrearMateria("noexiste");
+
+            DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
+
+            foreach(Materia ma in dm.ObtenerMateriasEnApp())
+            {
+                if (MateriaBLL.Misma(ma, materia))
+                {
+                    existe = true;
+                }
+            }
+
+            Assert.IsTrue(!existe);
+        }*/
+
+
         [Test]
         public void NoExistePlanEstudioParaCarreraNoExistente()
         {
@@ -102,7 +122,7 @@ namespace Planificador.Test
             PlanDeEstudio pe = PlanDeEstudioBLL.CrearPlan(c, 1);
 
             DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
-
+            
             /* Este metodo lo tendria que saber el bll no el data. */
             foreach (PlanDeEstudio pe1 in dm.ObtenerPlanesdeEstudioEnApp())
             {

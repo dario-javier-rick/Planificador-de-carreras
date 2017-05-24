@@ -40,5 +40,14 @@ namespace Planificador.BLL.Entidades
             }
             return false;
         }
+
+        public static bool MismodId(Carrera carre, int codigoCarrera)
+        {
+            if (carre.CodigoCarrera == codigoCarrera)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
