@@ -151,6 +151,7 @@
             Starts the <paramref name="asyncMethod"/>, catches and logs any exceptions it may throw.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.Implementation.TaskTimerInternal">
             <summary>
             Runs a task after a certain delay and log any error.
@@ -193,6 +194,8 @@
             </summary>
             <param name="exception">Exception to log.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.Implementation.IApplicationFolderProvider.GetApplicationFolder">
             <summary>
             Returns a per-user/per-application folder.
@@ -257,6 +260,7 @@
             Gets or sets the maximum number of telemetry items that can be buffered before transmission.
             </summary>
             <exception cref="T:System.ArgumentOutOfRangeException">The value is zero or less.</exception>
+<<<<<<< HEAD
             <exception cref="T:System.ArgumentException">The value is greater than the MaximumBacklogSize.</exception>
         </member>
         <member name="P:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.Implementation.TelemetryBuffer.BacklogSize">
@@ -266,6 +270,8 @@
             </summary>
             <exception cref="T:System.ArgumentOutOfRangeException">The value is zero or less.</exception>
             <exception cref="T:System.ArgumentException">The value is less than the Capacity.</exception>
+=======
+>>>>>>> TestSegundaIteración
         </member>
         <member name="M:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.Implementation.TelemetryBuffer.Dispose">
             <summary>
@@ -485,6 +491,7 @@
             <summary>
             Gets or sets the maximum number of telemetry items will accumulate in a memory before 
             the <see cref="N:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel"/> serializing them for transmission to Application Insights.
+<<<<<<< HEAD
             This is not a hard limit on how many unsent items can be in the buffer.
             </summary>
         </member>
@@ -493,6 +500,8 @@
             Gets or sets the maximum number of telemetry items that can be in the backlog to send. This is a hard limit
             and Items will be dropped by the <see cref="T:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.ServerTelemetryChannel"/> once this limit is hit until items
             are drained from the buffer.
+=======
+>>>>>>> TestSegundaIteración
             </summary>
         </member>
         <member name="P:Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.ServerTelemetryChannel.MaxTransmissionBufferCapacity">

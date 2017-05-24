@@ -8,6 +8,66 @@ namespace Planificador.BLL.Entidades
 {
     public class PlanDeEstudioBLL
     {
+        private static string carreraPlan = "[CarreraPlan]";
+
+        /* Nicolas Fernandez, 23/05/2017, Etiqueta de identificacion. */
+        public static bool DataLineToMe(string dataline)
+        {
+            string[] data = dataline.Split(',');
+            if (data[0].Equals(carreraPlan))
+                return true;
+            return false; }
+
+        /* Nicolas Fernandez, 23/05/2017. Crea plan de estudio */
+        public static PlanDeEstudio CrearPlan(Carrera carrera, int codigo)
+        {
+            /* Se crea el plan de estudio. */
+            PlanDeEstudio pe = new PlanDeEstudio { Carrera = carrera,
+                CodigoCarrera = carrera.CodigoCarrera,
+                Id = codigo };
+
+            /* Se asigna el plan de estudio a la carrera. */
+            carrera.PlanDeEstudios.Add(pe);
+
+            return pe;
+        }
+
+        public static bool Mismos(PlanDeEstudio plan1, PlanDeEstudio plan2)
+        {
+            if (plan1.Id == plan2.Id
+                && CarreraBLL.Mismas(plan1.Carrera, plan2.Carrera))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /* Nicolas Fernande, 27/05/2017, Genera plan a partir de lectura de datos de un string. */
+        public static PlanDeEstudio GerateFromDataLine(string line)
+        {
+            DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
+
+            string[] data = line.Split(',');
+            PlanDeEstudio pe = null;
+
+            if (data[0].Equals(carreraPlan))
+            {
+                pe = new PlanDeEstudio
+                {
+                    CodigoCarrera = int.Parse(data[1]),
+                    Id = int.Parse(data[2])
+                };
+                foreach (Carrera carre in dm.ObtenerCarrerasEnApp())
+                {
+                    if (CarreraBLL.MismodId(carre, pe.CodigoCarrera))
+                    {
+                        pe.Carrera = carre;
+                    }
+                }
+            }
+
+            return pe;
+        }
 
         public static List<Materia> ObtenerMateriasQueNoRequierenCorrelativas(List<Materia> materiasNoCursadas, IEnumerable<Materia> materiasAprobadas)
         {
@@ -47,6 +107,5 @@ namespace Planificador.BLL.Entidades
 
             return materiasQueNoRequierenCorrelativas;
         }
-
     }
 }

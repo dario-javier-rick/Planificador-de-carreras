@@ -71,7 +71,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <None Include="app.config" />
+=======
+>>>>>>> TestSegundaIteración
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

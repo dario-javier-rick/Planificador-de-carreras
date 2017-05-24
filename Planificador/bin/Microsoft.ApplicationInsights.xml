@@ -9,11 +9,14 @@
             The .NET 4.0 and 4.5 implementation of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.IPlatform"/> interface.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformImplementation.#ctor">
             <summary>
             Initializes a new instance of the PlatformImplementation class.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Platform.PlatformImplementation.ReadConfigurationXml">
             <summary>
             Returns contents of the ApplicationInsights.config file in the application directory.
@@ -57,6 +60,7 @@
             This property is a test isolation "pinch point" that allows us to test <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/> without using reflection.
             </remarks>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.External.AjaxCallData">
             <summary>
             Partial class to add the EventData attribute and any additional customizations to the generated type.
@@ -143,6 +147,69 @@
             </summary>
             <summary>
             Event Source exposes Application Insights telemetry information as ETW events.
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource">
+            <summary>
+            Define the telemetry handlers.
+            Create anonymous type for each AI telemetry data type.
+            </summary>
+            <summary>
+            RichPayload Event Source (.Net 4.5 version)
+            It dynamically checks the runtime version and only emits the event if the runtime is .Net Framework 4.6 and above.
+            As .Net 4.5 project doesn't support EventDataAttribute, the class uses the anonymous type (RichPayloadEventSource.TelemetryHandler.cs) for the corresponding telemetry data type.
+            The anonymous type keeps the same properties and layout as the telemetry data type schema. 
+            Once you update the data type, you should also update the anonymous type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateTelemetryHandlers(System.Diagnostics.Tracing.EventSource)">
+            <summary>
+            Create handlers for all AI telemetry types.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForRequestTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for request telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForTraceTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for trace telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForEventTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for event telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForDependencyTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for dependency telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForMetricTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for metric telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForExceptionTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for exception telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForPerformanceCounterTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for performance counter telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForPageViewTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for page view telemetry.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.CreateHandlerForSessionStateTelemetry(System.Diagnostics.Tracing.EventSource,System.Reflection.MethodInfo,System.Type,System.Reflection.PropertyInfo)">
+            <summary>
+            Create handler for session state telemetry.
+>>>>>>> TestSegundaIteración
             </summary>
         </member>
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Log">
@@ -154,6 +221,12 @@
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.EventProviderName">
             <summary>Event provider name.</summary>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.telemetryHandlers">
+            <summary>A dictionary mapping each telemetry item type to its handler.</summary>
+        </member>
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.#ctor">
             <summary>
             Initializes a new instance of the RichPayloadEventSource class.
@@ -165,6 +238,7 @@
             </summary>
             <param name="item">A collected Telemetry item.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.ProcessOperationStart(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry)">
             <summary>
             Record an operation start.
@@ -177,6 +251,8 @@
             </summary>
             <param name="operation">The operation.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Dispose">
             <summary>
             Disposes the object.
@@ -238,6 +314,7 @@
             Keyword for session state.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.RichPayloadEventSource.Keywords.Availability">
             <summary>
             Keyword for availability.
@@ -248,6 +325,8 @@
             Keyword for operations (Start/Stop).
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.ComponentContext">
             <summary>
             Encapsulates information describing an Application Insights component.
@@ -263,6 +342,7 @@
             Gets or sets the application version.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper">
             <summary>
             HttpWebResponse wrapper object.
@@ -330,6 +410,51 @@
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.Dispose">
             <summary>
             Releases unmanaged and - optionally - managed resources.
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.External.ContextTagKeys">
+            <summary>
+            Holds the static singleton instance of ContextTagKeys.
+            </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.External.ExceptionDetails">
+            <summary>
+            Additional implementation for ExceptionDetails.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.External.ExceptionDetails.CreateWithoutStackInfo(System.Exception,Microsoft.ApplicationInsights.Extensibility.Implementation.External.ExceptionDetails)">
+            <summary>
+            Creates a new instance of ExceptionDetails from a System.Exception and a parent ExceptionDetails.
+            </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.External.Tags">
+            <summary>
+            Base class for tags backed context.
+            </summary>
+        </member>
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper">
+            <summary>
+            HttpWebResponse wrapper object.
+            </summary>
+        </member>
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper.Content">
+            <summary>
+            Gets or sets HttpWebResponse content.
+            </summary>
+        </member>
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper.StatusCode">
+            <summary>
+            Gets or sets HttpWebResponse StatusCode. 
+            </summary>
+        </member>
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper.RetryAfterHeader">
+            <summary>
+            Gets or sets HttpWebResponse Retry-After header value.
+            </summary>
+        </member>
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.HttpWebResponseWrapper.StatusDescription">
+            <summary>
+            Gets or sets HttpWebResponse StatusDescription.
+>>>>>>> TestSegundaIteración
             </summary>
         </member>
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TelemetryDebugWriter">
@@ -636,11 +761,14 @@
             Gets or sets the duration of the operation.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Metrics">
             <summary>
             Gets the custom metrics collection.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry.Properties">
             <summary>
             Gets the custom properties collection.
@@ -697,43 +825,75 @@
             Gets or sets the IsFirst Session for the user.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal">
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer">
+>>>>>>> TestSegundaIteración
             <summary>
             Runs a task after a certain delay and log any error.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.InfiniteTimeSpan">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.InfiniteTimeSpan">
+>>>>>>> TestSegundaIteración
             <summary>
             Represents an infinite time span.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.Delay">
+=======
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.Delay">
+>>>>>>> TestSegundaIteración
             <summary>
             Gets or sets the delay before the task starts. 
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.IsStarted">
+=======
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.IsStarted">
+>>>>>>> TestSegundaIteración
             <summary>
             Gets a value indicating whether value that indicates if a task has already started.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.Start(System.Func{System.Threading.Tasks.Task})">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.Start(System.Func{System.Threading.Tasks.Task})">
+>>>>>>> TestSegundaIteración
             <summary>
             Start the task.
             </summary>
             <param name="elapsed">The task to run.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.Cancel">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.Cancel">
+>>>>>>> TestSegundaIteración
             <summary>
             Cancels the current task.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.Dispose">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.Dispose">
+>>>>>>> TestSegundaIteración
             <summary>
             Releases unmanaged and - optionally - managed resources.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimerInternal.LogException(System.Exception)">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.TaskTimer.LogException(System.Exception)">
+>>>>>>> TestSegundaIteración
             <summary>
             Log exception thrown by outer code.
             </summary>
@@ -900,12 +1060,15 @@
             Disposes this object.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.DiagnosticsTelemetryModule.Dispose(System.Boolean)">
             <summary>
             Disposes of resources.
             </summary>
             <param name="managed">Indicates if managed code is being disposed.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.EventMetaData">
             <summary>
             Event metadata from event source method attribute.
@@ -922,6 +1085,25 @@
             appropriate for diagnostics tracing.
             </summary>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.F5DiagnosticsSender">
+            <summary>
+            This class is responsible for sending diagnostics information into VS debug output
+            for F5 experience.
+            </summary>
+        </member>
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.F5DiagnosticsSender.debugOutput">
+            <summary>
+            VS debug output.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.F5DiagnosticsSender.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.F5DiagnosticsSender"/> class. 
+            </summary>
+        </member>
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.IDiagnosticsSender.Send(Microsoft.ApplicationInsights.Extensibility.Implementation.Tracing.TraceEvent)">
             <summary>
             Sends diagnostics data to the appropriate output.
@@ -1195,16 +1377,25 @@
             Gets the telemetry modules collection.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1">
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1">
+>>>>>>> TestSegundaIteración
             <summary>
             Operation class that holds the telemetry item and the corresponding telemetry client.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.ParentContext">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.ParentContext">
+>>>>>>> TestSegundaIteración
             <summary>
             Parent context store that is used to restore call context.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.isDisposed">
             <summary>
             Indicates if this instance has been disposed of.
@@ -1213,60 +1404,110 @@
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.#ctor(Microsoft.ApplicationInsights.TelemetryClient,`0)">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1"/> class.
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.#ctor(Microsoft.ApplicationInsights.TelemetryClient,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1"/> class.
+>>>>>>> TestSegundaIteración
             Initializes telemetry client.
             </summary>
             <param name="telemetryClient">Initializes telemetry client object.</param>
             <param name="telemetry">Operation telemetry item that is assigned to the telemetry associated to the current operation item.</param>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.Telemetry">
+=======
+        <member name="P:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Telemetry">
+>>>>>>> TestSegundaIteración
             <summary>
             Gets Telemetry item of interest that is created when StartOperation function of ClientExtensions is invoked.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.Dispose">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Dispose">
+>>>>>>> TestSegundaIteración
             <summary>
             Dispose method to clear the variables.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalBasedOperationHolder`1.Dispose(System.Boolean)">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextBasedOperationHolder`1.Dispose(System.Boolean)">
+>>>>>>> TestSegundaIteración
             <summary>
             Computes the duration and tracks the respective telemetry item on dispose.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalHelpers.SaveOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal)">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.OperationContextSlotName">
+            <summary>
+            Name of the operation context store item present in the context.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.SaveOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext)">
+>>>>>>> TestSegundaIteración
             <summary>
             Saves the context store to the call context.
             </summary>
             <param name="operationContext">Operation context store instance.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalHelpers.GetCurrentOperationContext">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.GetCurrentOperationContext">
+>>>>>>> TestSegundaIteración
             <summary>
             Returns the current operation context store present in the call context.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.AsyncLocalHelpers.RestoreOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal)">
+=======
+        <member name="M:Microsoft.ApplicationInsights.Extensibility.Implementation.CallContextHelpers.RestoreOperationContext(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext)">
+>>>>>>> TestSegundaIteración
             <summary>
             Clears the call context and restores the parent operation.
             </summary>
             <param name="parentContext">Parent operation context store to replace child operation context store.</param>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal">
+=======
+        <member name="T:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext">
+>>>>>>> TestSegundaIteración
             <summary>
             Operation class that holds operation id and operation name for the current call context.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal.ParentOperationId">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.ParentOperationId">
+>>>>>>> TestSegundaIteración
             <summary>
             Operation id that will be assigned to all the child telemetry items.
             Parent Operation id that will be assigned to all the child telemetry items.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal.RootOperationId">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.RootOperationId">
+>>>>>>> TestSegundaIteración
             <summary>
             Root Operation id that will be assigned to all the child telemetry items.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForAsyncLocal.RootOperationName">
+=======
+        <member name="F:Microsoft.ApplicationInsights.Extensibility.Implementation.OperationContextForCallContext.RootOperationName">
+>>>>>>> TestSegundaIteración
             <summary>
             Operation name that will be assigned to all the child telemetry items.
             </summary>
@@ -1347,6 +1588,7 @@
             telemetry configuration provided by this class.
             </remarks>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.isDisposed">
             <summary>
             Indicates if this instance has been disposed of.
@@ -1375,6 +1617,8 @@
             <param name="instrumentationKey">The instrumentation key this configuration instance will provide.</param>
             <param name="channel">The telemetry channel to provide with this configuration instance.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="P:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Active">
             <summary>
             Gets the active <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/> instance loaded from the ApplicationInsights.config file. 
@@ -1453,12 +1697,15 @@
             Releases resources used by the current instance of the <see cref="T:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration"/> class.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration.Dispose(System.Boolean)">
             <summary>
             Disposes of resources.
             </summary>
             <param name="disposing">Indicates if managed code is being disposed.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Extensibility.SequencePropertyInitializer">
             <summary>
             An <see cref="T:Microsoft.ApplicationInsights.Extensibility.ITelemetryInitializer"/> that that populates <see cref="P:Microsoft.ApplicationInsights.Channel.ITelemetry.Sequence"/> property for 
@@ -1472,7 +1719,11 @@
         </member>
         <member name="T:Microsoft.ApplicationInsights.Extensibility.OperationCorrelationTelemetryInitializer">
             <summary>
+<<<<<<< HEAD
             Telemetry initializer that populates OperationContext for the telemetry item based on context stored in AsyncLocal variable.
+=======
+            Telemetry initializer that populates OperationContext for the telemetry item based on context stored in CallContext.
+>>>>>>> TestSegundaIteración
             </summary>
         </member>
         <member name="M:Microsoft.ApplicationInsights.Extensibility.OperationCorrelationTelemetryInitializer.Initialize(Microsoft.ApplicationInsights.Channel.ITelemetry)">
@@ -1481,6 +1732,7 @@
             </summary>
             <param name="telemetryItem">Target telemetry item to add operation id.</param>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Extensibility.SdkInternalOperationsMonitor">
             <summary>
             Helps to define whether thread is performing SDK internal operation at the moment.
@@ -1502,17 +1754,22 @@
             Unmarks the thread as executing the internal operation.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Channel.InMemoryChannel">
             <summary>
             Represents a communication channel for sending telemetry to Application Insights via HTTPS. There will be a buffer that will not be persisted, to enforce the 
             queued telemetry items to be sent, <see cref="M:Microsoft.ApplicationInsights.Channel.ITelemetryChannel.Flush"/> should be called.    
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.Channel.InMemoryChannel.isDisposed">
             <summary>
             Indicates if this instance has been disposed of.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Channel.InMemoryChannel.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.Channel.InMemoryChannel" /> class.
@@ -1545,6 +1802,7 @@
             <summary>
             Gets or sets the maximum number of telemetry items will accumulate in a memory before 
             the <see cref="T:Microsoft.ApplicationInsights.Channel.InMemoryChannel"/> serializing them for transmission to Application Insights.
+<<<<<<< HEAD
             This is not a hard limit on how many unsent items can be in the buffer.
             </summary>
         </member>
@@ -1552,6 +1810,8 @@
             <summary>
             Gets or sets the maximum number of telemetry items that can be in the backlog to send. This is a hard limit
             and Items will be dropped by the <see cref="T:Microsoft.ApplicationInsights.Channel.InMemoryChannel"/> once this limit is hit until items are drained from the buffer.
+=======
+>>>>>>> TestSegundaIteración
             </summary>
         </member>
         <member name="M:Microsoft.ApplicationInsights.Channel.InMemoryChannel.Send(Microsoft.ApplicationInsights.Channel.ITelemetry)">
@@ -1694,6 +1954,7 @@
         <member name="P:Microsoft.ApplicationInsights.Channel.TelemetryBuffer.Capacity">
             <summary>
             Gets or sets the maximum number of telemetry items that can be buffered before transmission.
+<<<<<<< HEAD
             </summary>        
         </member>
         <member name="P:Microsoft.ApplicationInsights.Channel.TelemetryBuffer.BacklogSize">
@@ -1701,6 +1962,10 @@
             Gets or sets the maximum number of telemetry items that can be in the backlog to send. Items will be dropped
             once this limit is hit.
             </summary>        
+=======
+            </summary>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value is zero or less.</exception>
+>>>>>>> TestSegundaIteración
         </member>
         <member name="T:Microsoft.ApplicationInsights.Channel.Transmission">
             <summary>
@@ -2116,6 +2381,7 @@
             </summary>
             <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown. </param><param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination. </param><exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null. </exception><exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0). </exception>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.DataContracts.ISupportMetrics">
             <summary>
             Represents an object that supports application-defined metrics.
@@ -2126,6 +2392,8 @@
             Gets a dictionary of application-defined metric names and values providing additional information about telemetry.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.DataContracts.ISupportProperties">
             <summary>
             Represents an object that supports application-defined properties.
@@ -2164,6 +2432,7 @@
             </summary>
             <exception cref="T:System.ArgumentException">The <paramref name="metricName"/> is null or empty string.</exception>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.#ctor(System.String,System.Int32,System.Double,System.Double,System.Double,System.Double)">
             <summary>
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry"/> class with properties provided.
@@ -2178,6 +2447,8 @@
             <param name="max">Maximum of values taken during aggregation interval.</param>
             <param name="standardDeviation">Standard deviation of values taken during aggregation interval.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="P:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Timestamp">
             <summary>
             Gets or sets date and time when event was recorded.
@@ -2203,11 +2474,14 @@
             Gets or sets the value of this metric.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Sum">
             <summary>
             Gets or sets sum of the values of the metric samples.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="P:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry.Count">
             <summary>
             Gets or sets the number of samples for this metric.
@@ -2809,17 +3083,21 @@
             Extension functions to operation telemetry that start and stop the timer.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="F:Microsoft.ApplicationInsights.OperationTelemetryExtensions.StopwatchTicksToTimeSpanTicks">
             <summary>
             Multiplier to convert Stopwatch ticks to TimeSpan ticks.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.Start(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry)">
             <summary>
             An extension to telemetry item that starts the timer for the the respective telemetry.
             </summary>
             <param name="telemetry">Telemetry item object that calls this extension method.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.Start(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry,System.Int64)">
             <summary>
             An extension to telemetry item that initializes the timer for the the respective telemetry
@@ -2828,12 +3106,15 @@
             <param name="telemetry">Telemetry item object that calls this extension method.</param>
             <param name="timestamp">A high-resolution timestamp from <see cref="T:System.Diagnostics.Stopwatch"/>.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.Stop(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry)">
             <summary>
             An extension method to telemetry item that stops the timer and computes the duration of the request or dependency.
             </summary>
             <param name="telemetry">Telemetry item object that calls this extension method.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.Stop(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry,System.Int64)">
             <summary>
             An extension method to telemetry item that stops the timer and computes the duration of the request or dependency.
@@ -2841,12 +3122,15 @@
             <param name="telemetry">Telemetry item object that calls this extension method.</param>
             <param name="timestamp">A high-resolution timestamp from <see cref="T:System.Diagnostics.Stopwatch"/>.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.GenerateOperationId(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry)">
             <summary>
             Generate random operation Id and set it to OperationContext.
             </summary>
             <param name="telemetry">Telemetry to initialize Operation id for.</param>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.OperationTelemetryExtensions.StopImpl(Microsoft.ApplicationInsights.Extensibility.Implementation.OperationTelemetry,System.Int64)">
             <summary>
             Set the duration given a timestamp from a high-resolution <see cref="T:System.Diagnostics.Stopwatch"/>.
@@ -2861,6 +3145,8 @@
             <param name="telemetry">Telemetry item object to update.</param>
             <param name="duration">The duration of the operation.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.TelemetryClient">
             <summary>
             Send events, metrics and other telemetry to the Application Insights service.
@@ -2876,7 +3162,10 @@
             Initializes a new instance of the <see cref="T:Microsoft.ApplicationInsights.TelemetryClient" /> class. Send telemetry with the specified <paramref name="configuration"/>.
             </summary>
             <exception cref="T:System.ArgumentNullException">The <paramref name="configuration"/> is null.</exception>
+<<<<<<< HEAD
             <exception cref="T:System.ArgumentException">The <paramref name="configuration"/> does not contain a telemetry channel.</exception>
+=======
+>>>>>>> TestSegundaIteración
         </member>
         <member name="P:Microsoft.ApplicationInsights.TelemetryClient.Context">
             <summary>
@@ -2958,7 +3247,11 @@
         </member>
         <member name="M:Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(Microsoft.ApplicationInsights.DataContracts.MetricTelemetry)">
             <summary>
+<<<<<<< HEAD
             Send a <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry"/> for representing aggregated metric data.
+=======
+            Send a <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry"/> for aggregation in Metric Explorer.
+>>>>>>> TestSegundaIteración
             Create a separate <see cref="T:Microsoft.ApplicationInsights.DataContracts.MetricTelemetry"/> instance for each call to <see cref="M:Microsoft.ApplicationInsights.TelemetryClient.TrackMetric(Microsoft.ApplicationInsights.DataContracts.MetricTelemetry)"/>.
             </summary>
         </member>
@@ -3005,18 +3298,28 @@
             Create a separate <see cref="T:Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry"/> instance for each call to <see cref="M:Microsoft.ApplicationInsights.TelemetryClient.TrackDependency(Microsoft.ApplicationInsights.DataContracts.DependencyTelemetry)"/>
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Double})">
+=======
+        <member name="M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(System.String,System.DateTimeOffset,System.TimeSpan,System.String,System.Boolean,System.String)">
+>>>>>>> TestSegundaIteración
             <summary>
             Send information about availability of an application.
             </summary>
             <param name="name">Availability test name.</param>
             <param name="timeStamp">The time when the availability was captured.</param>
             <param name="duration">The time taken for the availability test to run.</param>
+<<<<<<< HEAD
             <param name="runLocation">Name of the location the availability test was run from.</param>
             <param name="success">True if the availability test ran successfully.</param>
             <param name="message">Error message on availability test run failure.</param>
             <param name="properties">Named string values you can use to classify and search for this availability telemetry.</param>
             <param name="metrics">Additional values associated with this availability telemetry.</param>
+=======
+            <param name="runLocation">Name of the location the availability test was run from.</param>        
+            <param name="success">True if the availability test ran successfully.</param>
+            <param name="message">Error message on availability test run failure.</param>
+>>>>>>> TestSegundaIteración
         </member>
         <member name="M:Microsoft.ApplicationInsights.TelemetryClient.TrackAvailability(Microsoft.ApplicationInsights.DataContracts.AvailabilityTelemetry)">
             <summary>
@@ -3102,6 +3405,7 @@
             <param name="operationName">Name of the operation that customer is planning to propagate.</param>
             <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StartOperation``1(Microsoft.ApplicationInsights.TelemetryClient,System.String,System.String,System.String)">
             <summary>
             Start operation creates an operation object with a respective telemetry item. 
@@ -3122,6 +3426,8 @@
             <param name="operationTelemetry">Operation to start.</param>
             <returns>Operation item object with a new telemetry item having current start time and timestamp.</returns>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.TelemetryClientExtensions.StopOperation``1(Microsoft.ApplicationInsights.TelemetryClient,Microsoft.ApplicationInsights.Extensibility.IOperationHolder{``0})">
             <summary>
             Stop operation computes the duration of the operation and tracks it using the respective telemetry client.

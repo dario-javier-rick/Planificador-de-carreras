@@ -84,6 +84,39 @@
             Keyword for errors that trace at Verbose level.
             </summary>
         </member>
+<<<<<<< HEAD
+=======
+        <member name="T:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher">
+            <summary>
+            Class provides methods to post event about Web event like begin or end of the request.
+            </summary>
+        </member>
+        <member name="F:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher.Instance">
+            <summary>
+            WebEventsPublisher static instance.
+            </summary>
+        </member>
+        <member name="P:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher.Log">
+            <summary>
+            Gets the instance of WebEventsPublisher type.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher.OnBegin">
+            <summary>
+            Method generates event about begin of the request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher.OnEnd">
+            <summary>
+            Method generates event about end of the request.
+            </summary>
+        </member>
+        <member name="M:Microsoft.ApplicationInsights.Web.Implementation.WebEventsPublisher.OnError">
+            <summary>
+            Method generates event in case if request failed.
+            </summary>
+        </member>
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Web.Implementation.WebTelemetryInitializerBase">
             <summary>
             Base class for WebOperationTelemetryInitializers.
@@ -185,12 +218,15 @@
             Required IDisposable implementation.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Web.ApplicationInsightsHttpModule.AddCorreleationHeaderOnSendRequestHeaders(System.Web.HttpApplication)">
             <summary>
             When sending the response headers, allow request module to add the IKey's target hash.
             </summary>
             <param name="httpApplication">HttpApplication instance.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:Microsoft.ApplicationInsights.Web.AuthenticatedUserIdTelemetryInitializer">
             <summary>
             A telemetry initializer that will set the User properties of Context corresponding to a RequestTelemetry object.
@@ -308,6 +344,7 @@
             if request was successful.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="P:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.SetComponentCorrelationHttpHeaders">
             <summary>
             Gets or sets a value indicating whether the component correlation headers would be set on http responses.
@@ -318,6 +355,8 @@
             Gets or sets the endpoint that is to be used to get the application insights resource's profile (appId etc.).
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.OnBeginRequest(System.Web.HttpContext)">
             <summary>
             Implements on begin callback of http module.
@@ -328,11 +367,14 @@
             Implements on end callback of http module.
             </summary>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.AddTargetHashForResponseHeader(System.Web.HttpContext)">
             <summary>
             Adds target response header response object.
             </summary>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.Initialize(Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration)">
             <summary>
             Initializes the telemetry module.
@@ -346,12 +388,15 @@
             <param name="httpContext">Current http context.</param>
             <returns>True if request needs to be processed, otherwise - False.</returns>
         </member>
+<<<<<<< HEAD
         <member name="M:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.OverrideCorrelationIdLookupHelper(Microsoft.ApplicationInsights.Common.CorrelationIdLookupHelper)">
             <summary>
             Simple test hook, that allows for using a stub rather than the implementation that calls the original service.
             </summary>
             <param name="correlationIdLookupHelper">Lookup header to use.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="M:Microsoft.ApplicationInsights.Web.RequestTrackingTelemetryModule.IsHandlerToFilter(System.Web.IHttpHandler)">
             <summary>
             Checks whether or not handler is a transfer handler.
@@ -418,6 +463,7 @@
             <param name="requestTelemetry">Request telemetry object associated with the current request.</param>
             <param name="telemetry">Telemetry item to initialize.</param>
         </member>
+<<<<<<< HEAD
         <member name="T:Microsoft.ApplicationInsights.Common.CrossComponentCorrelationEventSource">
             <summary>
             ETW EventSource tracing class.
@@ -575,6 +621,8 @@
             <param name="keyName">Name in the name value pair.</param>
             <param name="value">Value in the name value pair.</param>
         </member>
+=======
+>>>>>>> TestSegundaIteración
         <member name="T:System.Web.HttpContextExtension">
             <summary>
             HttpContextExtension class provides extensions methods for accessing Web Application Insights objects.
