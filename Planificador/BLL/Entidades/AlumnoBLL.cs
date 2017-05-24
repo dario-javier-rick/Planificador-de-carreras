@@ -10,7 +10,7 @@ namespace Planificador.BLL.Entidades
         public static Alumno ObtenerAlumno(string nombreAlumno)
         {
             DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
-            return dm.ObtenerAlumnosEnApp().FirstOrDefault(a => a.Nombre == nombreAlumno);
+            return dm.ObtenerAlumnosEnApp(); //.FirstOrDefault(a => a.Nombre == nombreAlumno);
         }
 
         public static Alumno GenerateFromDataLine(string fromDataLine)
