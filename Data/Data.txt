@@ -1,0 +1,10 @@
+[Carrera],1,Tecnicatura Sistemas
+
+[Carrera],2,Licenciatura Sistemas
+
+[Carrera],3,Licenciatura Historia
+
+[Carrera],4,Ingenieria Industrial
+
+[CarreraPlan],2,1
+

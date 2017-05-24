@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using NUnit.Framework;
 using Planificador.BLL;
+using Planificador.BLL.Constantes;
 using Planificador.Controllers;
 using Planificador.Models;
 using Planificador.ViewModels;
@@ -19,7 +20,7 @@ namespace Planificador.Test
         public void Setup()
         {
             Controller = new CursadaController();
-            path = System.AppDomain.CurrentDomain.BaseDirectory;
+            path = Constantes.DataManagerPath;
             dm = DataManager.Instance(path);
         }
 
