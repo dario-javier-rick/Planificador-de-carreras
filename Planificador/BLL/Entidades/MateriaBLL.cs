@@ -6,8 +6,23 @@ using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
-    public class MateriaBLL
+    public class MateriaBLL : IDataReader<Materia>
     {
+		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+
+		public string ToDataLine(Materia materia)
+		{
+            return "[Materia]," + materia.Id;
+		}
+
+		public Materia GenerateFromDataLine(string dataLine)
+		{
+			string[] datos = dataLine.Split(',');
+            Materia m = new Materia { Id = int.Parse(datos[1]) };
+
+			return m;
+		}
+
         public static Materia CrearMateria(string nombre)
         {
             return new Materia { Nombre=nombre};

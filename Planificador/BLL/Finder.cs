@@ -8,7 +8,7 @@ namespace Planificador.BLL
     public class Finder
     {
         /*
-        protected static List<T> ObtenerObjetos<T>(ref object objeto) where T : Models.Correlativa
+        protected static List<T> ObtenerObjetos<T>(ref T objeto) where T : class
         {
             List<T> dtoList = new List<T>();
             OracleDataReader reader = null;
@@ -31,7 +31,7 @@ namespace Planificador.BLL
                     }
                     reader.Close();
                 }
-                /*              else
+                              else
                                 {
                                     // Whenver there's no data, we return null. 
                                     dtoList = null;

@@ -6,14 +6,16 @@ using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
-    public class CarreraBLL
+    public class CarreraBLL : IDataReader<Carrera>
     {
-        public static string ToDataLine(Carrera carrera)
-        {
+		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+
+		public string ToDataLine(Carrera carrera)
+        {
             return "[Carrera]," + carrera.CodigoCarrera + "," + carrera.Nombre;
         }
 
-        public static Carrera GenerateFromDataLine(string dataLine)
+        public Carrera GenerateFromDataLine(string dataLine)
         {
             string[] datos = dataLine.Split(',');
             Carrera c = new Carrera {CodigoCarrera = int.Parse(datos[1]), Nombre = datos[2]};

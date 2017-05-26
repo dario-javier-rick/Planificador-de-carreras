@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
-    public class AlumnoBLL
+    public class AlumnoBLL : IDataReader<Alumno>, IDisposable
     {
-        public static Alumno ObtenerAlumno(string nombreAlumno)
-        {
-            DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
-            return dm.ObtenerAlumnosEnApp(); //.FirstOrDefault(a => a.Nombre == nombreAlumno);
-        }
+		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
 
-        public static Alumno GenerateFromDataLine(string fromDataLine)
+		public string ToDataLine(Alumno alumno)
+		{
+			return "[Alumno]," + alumno.Id + "," + alumno.Dni + "," + alumno.Nombre;
+		}
+
+        public Alumno GenerateFromDataLine(string fromDataLine)
         {
             string[] alumnoArray = fromDataLine.Split(',');
             Alumno alumno = new Alumno
@@ -26,10 +28,10 @@ namespace Planificador.BLL.Entidades
             return alumno;
         }
 
-        public static string ToDataLine(Alumno alumno)
-        {
-            return "[Alumno]," + alumno.Id + "," + alumno.Dni + "," + alumno.Nombre;
-        }
+		public static Alumno ObtenerAlumno(string nombreAlumno)
+		{
+            return null;//dm.ObtenerAlumnosEnApp(); //.FirstOrDefault(a => a.Nombre == nombreAlumno);
+		}
 
         public static List<Materia> ListarMateriasAprobadas(Alumno alumno)
         {
@@ -52,6 +54,142 @@ namespace Planificador.BLL.Entidades
 
             return materiasQuePudenSerCursadas;
         }
+
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DataTable GetSchemaTable()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool NextResult()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Read()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetBoolean(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte GetByte(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetBytes(int i, long fieldOffset, byte[] buffer, int bufferoffset, int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public char GetChar(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetChars(int i, long fieldoffset, char[] buffer, int bufferoffset, int length)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IDataReader GetData(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDataTypeName(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime GetDateTime(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal GetDecimal(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double GetDouble(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Type GetFieldType(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public float GetFloat(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Guid GetGuid(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public short GetInt16(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetInt32(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long GetInt64(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetName(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetOrdinal(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetString(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object GetValue(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetValues(object[] values)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsDBNull(int i)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
 
         /*
         private static List<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)

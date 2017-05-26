@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Planificador.BLL.Entidades
 {
-    public class CursadaBLL
+    public class CorrelativaBLL
     {
-        public CursadaBLL()
+        public CorrelativaBLL()
         {
         }
     }

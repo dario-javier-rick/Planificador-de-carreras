@@ -6,17 +6,33 @@ using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
-    public class PlanDeEstudioBLL
+    public class PlanDeEstudioBLL: IDataReader<PlanDeEstudio>
     {
-        private static string carreraPlan = "[CarreraPlan]";
+		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+
+		public string ToDataLine(PlanDeEstudio plan)
+		{
+            return "[CarreraPlan]," + plan.Id;
+		}
+
+        public PlanDeEstudio GenerateFromDataLine(string fromDataLine)
+		{
+			string[] planArray = fromDataLine.Split(',');
+            PlanDeEstudio plan = new PlanDeEstudio
+			{
+                Id = Convert.ToInt32(planArray[1]),
+			};
+            return plan;
+		}
 
         /* Nicolas Fernandez, 23/05/2017, Etiqueta de identificacion. */
         public static bool DataLineToMe(string dataline)
         {
             string[] data = dataline.Split(',');
-            if (data[0].Equals(carreraPlan))
-                return true;
-            return false; }
+//            if (data[0].Equals(carreraPlan))
+//                return true;
+            return false; 
+        }
 
         /* Nicolas Fernandez, 23/05/2017. Crea plan de estudio */
         public static PlanDeEstudio CrearPlan(Carrera carrera, int codigo)
@@ -50,7 +66,7 @@ namespace Planificador.BLL.Entidades
             string[] data = line.Split(',');
             PlanDeEstudio pe = null;
 
-            if (data[0].Equals(carreraPlan))
+            if (/*data[0].Equals(carreraPlan)*/true)
             {
                 pe = new PlanDeEstudio
                 {

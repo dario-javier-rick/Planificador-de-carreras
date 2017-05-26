@@ -1,15 +1,4 @@
-﻿using System;
-
-using System.Collections.Generic;
-
-using System.Configuration;
-
-using System.IO;
-
-using System.Linq;
-
-using System.Web;
-
+﻿using System.IO;
 
 
 namespace Planificador.BLL.Constantes
@@ -17,19 +6,9 @@ namespace Planificador.BLL.Constantes
 {
 
     public class Constantes
-
     {
-
-        public const string Aprobado = "Aprobado";
-
-
-
-        //public static readonly string DataManagerPath = AppDomain.CurrentDomain.BaseDirectory;            
-
-        public static readonly string DataManagerPath = System.IO.Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + @"\Data";
-
-        //ConfigurationManager.AppSettings["DataManagerPath"];
-
+        public const string NombreArchivo = "Data.txt";
+        public static readonly string DataManagerPath = Path.GetDirectoryName(System.AppDomain.CurrentDomain.BaseDirectory) + @"\Data";
     }
 
 }

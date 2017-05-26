@@ -85,7 +85,7 @@ namespace Planificador.Controllers
             if (alumno != null)
             {
                 Cursada cursada = new Cursada();
-                List<Materia> materias = CursadaBLL.ObtenerPosiblesMateriasACursar(alumno).ToList();
+                List<Materia> materias = null;//CursadaBLL.ObtenerPosiblesMateriasACursar(alumno).ToList();
 
                 return Json(materias);
             }
@@ -98,7 +98,7 @@ namespace Planificador.Controllers
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
             if (alumno != null)
             {
-                CursadaBLL cursada = new CursadaBLL();
+                FacadeCursada cursada = new FacadeCursada();
                 List<Materia> materias = null; //cursada.ObtenerPosiblesMateriasACursar(alumno).ToList(); //TODO
                 cursada.CalcularPesoEnCaminoCritico(materias);
                 Dictionary<Materia, int> diccionario = cursada.CaminoCritico.DiccionarioCriticidad;
