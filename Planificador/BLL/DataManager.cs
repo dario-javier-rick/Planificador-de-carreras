@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Planificador.BLL.Entidades;
 using Planificador.Models;
 using Planificador.BLL.Factory;
@@ -69,6 +70,20 @@ namespace Planificador.BLL
                     case nameof(Libreta):
                         List<Libreta> libBll = fc.ObtenerLibretas();
                         libBll.Add(fc.GenerarObjeto<Libreta>(line));
+                        break;
+                    case "PlanDeEstudioMateria":
+                        string[] array = line.Split(',');
+                        PlanDeEstudio plan = fc.ObtenerPlanesDeEstudio().FirstOrDefault(p => p.Id == Convert.ToInt32(array[1]));
+                        Materia materia = fc.ObtenerMaterias().FirstOrDefault(m => m.Id == Convert.ToInt32(array[2]));
+                        plan.Materia.Add(materia);
+                        materia.PlanDeEstudio.Add(plan);
+                        break;
+                    case "PlanDeEstudioAlumno":
+                        string[] array2 = line.Split(',');
+                        PlanDeEstudio plan2 = fc.ObtenerPlanesDeEstudio().FirstOrDefault(p => p.Id == Convert.ToInt32(array2[1]));
+                        Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Id == Convert.ToInt32(array2[2]));
+                        plan2.Alumno.Add(alumno);
+                        alumno.PlanDeEstudio.Add(plan2);
                         break;
                 }
 

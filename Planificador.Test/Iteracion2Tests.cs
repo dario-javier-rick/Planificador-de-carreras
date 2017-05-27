@@ -32,12 +32,11 @@ namespace Planificador.Test
         [Test]
         public void NoExisteCarrera()
         {
-
             //bool noExiste = true;
             //Carrera c = new Carrera{Nombre = "Pepe"};
             /* Nicolas Fernandez, 2/05/2017, Se crea la carrera con la clase CarreraBLL. */
 
-            Carrera c = CarreraBLL.CrearCarrera("Pepe");
+            Carrera c = new Carrera {Nombre = "Pepe"};
             //DataManager dm = DataManager.Instance;
             Carrera c1 = fc.ObtenerCarrera(c);
             //noExiste = !dm.ObtenerCarrerasEnApp().Exists(x => x.Equals(c));
@@ -102,12 +101,10 @@ namespace Planificador.Test
         public void ExistePlanEstudioParaCarrera()
         {
             bool existe = false;
-            Carrera c = CarreraBLL.CrearCarrera("Licenciatura Sistemas");
-
+            Carrera c = CarreraBLL.CrearCarrera("Tecnicatura Sistemas");
             PlanDeEstudio pe = PlanDeEstudioBLL.CrearPlan(c, 1);
 
             /* Este metodo lo tendria que saber el bll no el data. */
-
             foreach (PlanDeEstudio pe1 in fc.ObtenerPlanesDeEstudio())
             {
                 if (PlanDeEstudioBLL.Mismos(pe, pe1))
@@ -115,7 +112,6 @@ namespace Planificador.Test
                     existe = true;
                 }
             }
-
             Assert.IsTrue(existe);
         }
 

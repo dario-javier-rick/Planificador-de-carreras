@@ -36,7 +36,7 @@ namespace Planificador.BLL.Entidades
         public Carrera GenerateFromDataLine(string dataLine)
         {
             string[] datos = dataLine.Split(',');
-            Carrera c = new Carrera {CodigoCarrera = int.Parse(datos[1]), Nombre = datos[2]};
+            Carrera c = new Carrera { CodigoCarrera = int.Parse(datos[1]), Nombre = datos[2] };
 
             return c;
         }
@@ -44,16 +44,15 @@ namespace Planificador.BLL.Entidades
 
 
         /* Nicolás Fernandez, 22/05/2017, Se crea una materia con codigo 0 ya que no esta registrada en la aplicacion
-
          * se le asigna codigo una vez registrada. */
-
         public static Carrera CrearCarrera(string nombre)
-
         {
+            Carrera c = new Carrera
+            {
+                CodigoCarrera = 0,
 
-            Carrera c = new Carrera { CodigoCarrera = 0,
-
-                                        Nombre = nombre};
+                Nombre = nombre
+            };
             return c;
         }
 
@@ -81,88 +80,92 @@ namespace Planificador.BLL.Entidades
         }
 
 
-		internal bool ExisteCarrera(Carrera carrera)
-		{
+        internal bool ExisteCarrera(Carrera carrera)
+        {
             return ListaObj.Exists(x => x.Nombre.Equals(carrera.Nombre));
-		}
+        }
 
-		/* Nicolás Fernández, 18/05/2017, Adignacion de código a carrera. */
-		public int AsignarCodCarrera()
-		{
+        /* Nicolás Fernández, 18/05/2017, Adignacion de código a carrera. */
+        public int AsignarCodCarrera()
+        {
             return ListaObj.Count + 1;
-		}
+        }
 
 
 
-		/* Nicolás Fernández, 18/05/2017, Metodo para saber si la carrera exite. */
-		public int CodigoDeCarrera(Carrera carrera)
-		{
-			if (ListaObj.Exists(x => x.Nombre.Equals(carrera.Nombre)))
-			{
-				return ListaObj.Find(x => x.Nombre.Equals(carrera.Nombre)).CodigoCarrera;
-			}
-			return 0;
-		}
+        /* Nicolás Fernández, 18/05/2017, Metodo para saber si la carrera exite. */
+        public int CodigoDeCarrera(Carrera carrera)
+        {
+            if (ListaObj.Exists(x => x.Nombre.Equals(carrera.Nombre)))
+            {
+                return ListaObj.Find(x => x.Nombre.Equals(carrera.Nombre)).CodigoCarrera;
+            }
+            return 0;
+        }
 
 
-		/* Nicolas Fernandez, 19/05/2017, Agregar Carrera */
+        /* Nicolas Fernandez, 19/05/2017, Agregar Carrera */
 
-		public void RegistrarCarrera(Carrera carrera)
-		{
-			if (carrera.CodigoCarrera == 0)
-			{
+        public void RegistrarCarrera(Carrera carrera)
+        {
+            if (carrera.CodigoCarrera == 0)
+            {
 
-				//string dataCarrera = "[Carrera],";
-				//int cod = AsignarCodCarrera();
-				//carreras.Add(new Carrera{CodigoCarrera = cod, Nombre = carrera.Nombre});
-				//dataCarrera += cod + "," + carrera.Nombre;
-				//System.IO.StreamWriter file = new System.IO.StreamWriter(path + @"\Planificador\Data\NewData.txt", true);
-				//file.WriteLine(dataCarrera);
-				//System.IO.StreamWriter file = new System.IO.StreamWriter(this.path);
-				//file.Close();
+                //string dataCarrera = "[Carrera],";
+                //int cod = AsignarCodCarrera();
+                //carreras.Add(new Carrera{CodigoCarrera = cod, Nombre = carrera.Nombre});
+                //dataCarrera += cod + "," + carrera.Nombre;
+                //System.IO.StreamWriter file = new System.IO.StreamWriter(path + @"\Planificador\Data\NewData.txt", true);
+                //file.WriteLine(dataCarrera);
+                //System.IO.StreamWriter file = new System.IO.StreamWriter(this.path);
+                //file.Close();
 
-				bool registrada = false;
+                bool registrada = false;
 
-				foreach (Carrera c in ListaObj)
-				{
-					if (CarreraBLL.Mismas(c, carrera))
-						registrada = true;
-				}
+                foreach (Carrera c in ListaObj)
+                {
+                    if (CarreraBLL.Mismas(c, carrera))
+                        registrada = true;
+                }
 
-				if (!registrada)
-				{
-					carrera.CodigoCarrera = AsignarCodCarrera();
+                if (!registrada)
+                {
+                    carrera.CodigoCarrera = AsignarCodCarrera();
                     ListaObj.Add(carrera);
-					//System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
-					//file.WriteLine("");
-					//file.WriteLine(CarreraBLL.ToDataLine(carrera));
+                    //System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
+                    //file.WriteLine("");
+                    //file.WriteLine(CarreraBLL.ToDataLine(carrera));
 
-					//file.Close();
-				}
+                    //file.Close();
+                }
 
-			}
+            }
 
-			//else
+            //else
 
-			//{
+            //{
 
-			//carreras.Add(carrera);
+            //carreras.Add(carrera);
 
-			//}
+            //}
 
-		}
+        }
 
 
-		/* Nicolas Fernandez, 2/05/2017, Obtiene una carrera en particular. */
-		public Carrera ObtenerCarrera(Carrera carrera)
-		{
+        /* Nicolas Fernandez, 2/05/2017, Obtiene una carrera en particular. */
+        public Carrera ObtenerCarrera(Carrera carrera)
+        {
             foreach (Carrera c in ListaObj)
-			{
-				if (CarreraBLL.Mismas(carrera, c))
-					return c;
-			}
-			return null;
-		}
+            {
+                if (CarreraBLL.Mismas(carrera, c))
+                    return c;
+            }
+            return null;
+        }
 
-	}
+        public Carrera ObtenerCarrera(int idCarrera)
+        {
+            return _instancia.ListaObj.FirstOrDefault(c => c.CodigoCarrera == idCarrera);
+        }
+    }
 }

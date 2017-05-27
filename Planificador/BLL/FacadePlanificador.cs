@@ -185,7 +185,7 @@ namespace Planificador.BLL
 
         public Carrera ObtenerCarrera(Carrera carrera)
         {
-            throw new NotImplementedException();
+            return _carrera.ListaObj.FirstOrDefault(c => c.CodigoCarrera == carrera.CodigoCarrera);
         }
 
         public PlanDeEstudio ObtenerPlanesEstudio(PlanDeEstudio pe)

@@ -35,7 +35,11 @@ namespace Planificador.Controllers
         /// <param name="alumno"></param>
 		private CursadaViewModel Index(Alumno alumno)
         {
-            return new CursadaViewModel { Materias = alumno?.Libreta?.MateriasAprobadas?.ToList() };
+            CursadaViewModel cvm = new CursadaViewModel();
+
+            cvm.Materias = alumno != null ? alumno?.Libreta?.MateriasAprobadas?.ToList() : new List<Materia>();
+
+            return cvm;
         }
 
 
@@ -52,13 +56,18 @@ namespace Planificador.Controllers
 
         public JsonResult ObtenerPlanesDeEstudio(string nombreAlumno)
         {
-            List<PlanDeEstudio> listaPlanes = null; // AlumnoBLL.ObtenerAlumno(nombreAlumno)?.PlanesDeEstudios.ToList(); //TODO
-            object jsonResult = null; //from p in listaPlanes
-                             //join c in Data.Carreras.ListaCarreras
-                             //   on p.CarreraIdCarrera equals c.IdCarrera
-                             //select new { p.Id, c.Nombre }; //TODO
+            FacadePlanificador fc = new FacadePlanificador();
 
-            if (listaPlanes != null)
+            Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Nombre == nombreAlumno);
+
+            object jsonResult = from p in fc.ObtenerPlanesDeEstudio()
+                                join c in fc.ObtenerCarreras()
+                                    on p.Id equals c.CodigoCarrera
+                                join a in alumno?.PlanDeEstudio
+                                    on p.Id equals a.Id
+                                select new { p.Id, c.Nombre };
+
+            if (alumno?.PlanDeEstudio != null)
             {
                 return Json(jsonResult);
             }

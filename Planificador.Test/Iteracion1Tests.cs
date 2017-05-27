@@ -12,13 +12,13 @@ namespace Planificador.Test
 {
     class Iteracion1Tests
     {
-        private FacadePlanificador fc;
+        private FacadePlanificador _fc;
         private CursadaController Controller { get; set; }
 
         [SetUp]
         public void Setup()
         {
-            fc = new FacadePlanificador();
+            _fc = new FacadePlanificador();
             DataManager dm = new DataManager(Constantes.DataManagerPath + Constantes.NombreArchivo);
             dm.CargarDatos();
 
@@ -33,7 +33,7 @@ namespace Planificador.Test
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
             //Valido resultado de ViewModel
-            Assert.IsTrue(!model.Materias.Any());   
+            Assert.IsTrue(!model.Materias?.Any());   
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace Planificador.Test
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
-            List<PlanDeEstudio> todosLosPlanes = fc.ObtenerPlanesDeEstudio();
+            List<PlanDeEstudio> todosLosPlanes = _fc.ObtenerPlanesDeEstudio();
             PlanDeEstudio licenciaturaInformatica = todosLosPlanes.Where(p => p.Id == 0).FirstOrDefault(); //TODO: Ver Id
 
             //Valido resultado de ViewModel

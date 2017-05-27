@@ -30,15 +30,17 @@ namespace Planificador.BLL.Entidades
 
         public string ToDataLine(PlanDeEstudio plan)
 		{
-            return "[CarreraPlan]," + plan.Id;
+            return "[PlanDeEstudio]," + plan.Id;
 		}
 
         public PlanDeEstudio GenerateFromDataLine(string fromDataLine)
 		{
 			string[] planArray = fromDataLine.Split(',');
+		    CarreraBLL c = CarreraBLL.Instance();
             PlanDeEstudio plan = new PlanDeEstudio
 			{
                 Id = Convert.ToInt32(planArray[1]),
+                Carrera = c.ObtenerCarrera(Convert.ToInt32(planArray[2]))
 			};
             return plan;
 		}
