@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Planificador.Models;
+using Planificador.BLL.Entidades;
 
 namespace Planificador.BLL
 {
@@ -52,10 +53,12 @@ namespace Planificador.BLL
             //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
 
+            CarreraBLL cbl = new CarreraBLL();
+
             /* Verifica si la carrera exite, en caso de no exister la crea. */
-            if (!dm.ExisteCarrera(Carrera))
+            if (!cbl.ExisteCarrera(Carrera))
             {
-                dm.RegistrarCarrera(Carrera);
+                cbl.RegistrarCarrera(Carrera);
             }
 
             /* Compara si el plan ya se encuentra en el sistema. */

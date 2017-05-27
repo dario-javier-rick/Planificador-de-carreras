@@ -36,5 +36,36 @@ namespace Planificador.BLL.Entidades
             }
             return false;
         }
+
+
+
+        /* Nicolás Fernández, 17/05/2017, Retorna el resultado de la busqueda una materia. */
+        public bool ExisteMateria(string NombreMateria)
+        {
+            bool existe = false;
+
+            foreach (Materia mt in dm.ObtenerMateriasEnApp())
+            {
+                if (mt.Nombre.Equals(NombreMateria))
+                {
+                    existe = true;
+                }
+            }
+            return existe;
+        }
+
+
+
+        /* Nicolás Fernández, 17/05/2017, Devuelve una materia particular */
+        public Materia ObtenerMateria(string nombreMateria)
+        {
+            foreach (Materia mt in dm.ObtenerMateriasEnApp())
+            {
+                if (mt.Nombre.Equals(nombreMateria))
+                    return mt;
+            }
+            return new Materia(); //("", "");
+        }
+
     }
 }

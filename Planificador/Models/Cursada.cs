@@ -17,7 +17,7 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cursada()
         {
-            this.Alumno = new HashSet<BLL.Entidades.AlumnoBLL>();
+            this.Alumno = new HashSet<Alumno>();
             this.Materia = new HashSet<Materia>();
         }
     
@@ -27,7 +27,7 @@ namespace Planificador.Models
         public int ProfesorId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BLL.Entidades.AlumnoBLL> Alumno { get; set; }
+        public virtual ICollection<Alumno> Alumno { get; set; }
         public virtual Profesor Profesor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Materia> Materia { get; set; }

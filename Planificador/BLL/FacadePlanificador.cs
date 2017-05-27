@@ -12,9 +12,10 @@ namespace Planificador.BLL
     /// </summary>
     public class FacadeCursada
     {
-        private CarreraBLL _carrera = new CarreraBLL();
-        private MateriaBLL _materia = new MateriaBLL();
-        private AlumnoBLL _alumno = new AlumnoBLL();
+		public AlumnoBLL _alumno = new AlumnoBLL();
+        public CarreraBLL _carrera = new CarreraBLL();
+        public CorrelativaBLL _correlativas = new CorrelativaBLL();
+        public MateriaBLL _materia = new MateriaBLL();
         public CaminoCritico CaminoCritico { get; } = new CaminoCritico();
 
         public FacadeCursada()

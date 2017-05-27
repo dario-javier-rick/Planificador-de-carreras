@@ -8,14 +8,12 @@ namespace Planificador.BLL
     public class Finder
     {
         /*
-        protected static List<T> ObtenerObjetos<T>(ref T objeto) where T : class
+        protected static List<T> ObtenerObjetos<T>(ref T objeto) where T : ModelBase
         {
             List<T> dtoList = new List<T>();
-            OracleDataReader reader = null;
+
             try
             {
-                Id.Connection.Open();
-                reader = Id.ExecuteReader();
                 if (reader.HasRows)
                 {
                     // Get a parser for this DTO type and populate
@@ -31,53 +29,19 @@ namespace Planificador.BLL
                     }
                     reader.Close();
                 }
-                              else
-                                {
-                                    // Whenver there's no data, we return null. 
-                                    dtoList = null;
-                                } //COMMENT 11/12/2013
+                else
+                {
+                    dtoList = null;
+                }
             }
             catch (Exception e)
             {
-                UnitOfWork oUw = new UnitOfWork();
-                LogDTO _log = new LogDTO();
-
-                _log.sLog = " Error al ejecutar insert: " + Id.CommandText;
-                _log.sIdWebApp = "VOP13";
-                _log.sInsertusu = "VOP13";
-                _log.dInsertfec = DateTime.Now;
-                oUw.Add((IEntity)_log);
-
-                LogDTO _log2 = new LogDTO();
-                String parameters = "";
-                int count = Id.Parameters.Count;
-
-                for (int i = 0; i <= count - 1; i++)
-                {
-                    parameters += Id.Parameters[i].ParameterName + " " + Id.Parameters[i].Value;
-                }
-
-                _log2.sLog = "Parametros: " + parameters;
-                _log2.sIdWebApp = "VOP13";
-                _log2.sInsertusu = "VOP13";
-                _log2.dInsertfec = DateTime.Now;
-                oUw.Add((IEntity)_log2);
-
-
-                LogDTO _log3 = new LogDTO();
-                _log3.sLog = " error: " + e.Message;
-                _log3.sIdWebApp = "VOP13";
-                _log3.sInsertusu = "VOP13";
-                _log3.dInsertfec = DateTime.Now;
-                oUw.Add((IEntity)_log3);
-
-                oUw.Committ();
-                throw new Exception("Error en el Select", e);
+                throw new Exception("Error en el Finder", e);
             }
             finally
             {
-                Id.Connection.Close();
-                Id.Connection.Dispose();
+                //Id.Connection.Close();
+                //Id.Connection.Dispose();
             }
             return dtoList;
         }

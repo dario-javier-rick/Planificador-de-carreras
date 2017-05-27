@@ -123,5 +123,27 @@ namespace Planificador.BLL.Entidades
 
             return materiasQueNoRequierenCorrelativas;
         }
-    }
+
+
+		/* Nicolas Fernandez, 23/05/2017, Obtiene plan de esudio especifico. */
+		public PlanDeEstudio ObtenerPlanesEstudio(PlanDeEstudio plan)
+		{
+            foreach (PlanDeEstudio pe in dm.ObtenerPlanesdeEstudioEnApp())
+			{
+				if (PlanDeEstudioBLL.Mismos(plan, pe))
+				{
+					return pe;
+				}
+			}
+			return null;
+		}
+
+
+		public void CrearUnNuevoPlanDeEstudio(PlanDeEstudio Plan)
+		{
+            dm.ObtenerPlanesdeEstudioEnApp().Add(Plan);
+		}
+
+
+	}
 }

@@ -8,7 +8,7 @@ namespace Planificador.BLL.Entidades
 {
     public class AlumnoBLL : IDataReader<Alumno>, IDisposable
     {
-		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+		static DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
 
 		public string ToDataLine(Alumno alumno)
 		{
@@ -30,7 +30,7 @@ namespace Planificador.BLL.Entidades
 
 		public static Alumno ObtenerAlumno(string nombreAlumno)
 		{
-            return null;//dm.ObtenerAlumnosEnApp(); //.FirstOrDefault(a => a.Nombre == nombreAlumno);
+			return dm.ObtenerAlumnosEnApp().FirstOrDefault(a => a.Nombre == nombreAlumno);
 		}
 
         public static List<Materia> ListarMateriasAprobadas(Alumno alumno)

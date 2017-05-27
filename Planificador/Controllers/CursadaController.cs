@@ -98,7 +98,7 @@ namespace Planificador.Controllers
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
             if (alumno != null)
             {
-                FacadeCursada cursada = new FacadeCursada();
+                FacadePlanificador cursada = new FacadePlanificador();
                 List<Materia> materias = null; //cursada.ObtenerPosiblesMateriasACursar(alumno).ToList(); //TODO
                 cursada.CalcularPesoEnCaminoCritico(materias);
                 Dictionary<Materia, int> diccionario = cursada.CaminoCritico.DiccionarioCriticidad;
