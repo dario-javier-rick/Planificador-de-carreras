@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Planificador.BLL.Entidades;
 using Planificador.Models;
-using Planificador.BLL.Constantes;
+using Planificador.BLL.Factory;
 
 
 namespace Planificador.BLL
@@ -10,186 +10,117 @@ namespace Planificador.BLL
 {
 
     public class DataManager
-
     {
-        private static DataManager instancia;
-		private FacadePlanificador fc = new FacadePlanificador();
 
-		private string path;
-        private bool readed = false;
+        private readonly string _path;
+        private bool _readed;
 
-        private List<Alumno> alumnos = new List<Alumno>();
-        private List<Carrera> carreras = new List<Carrera>();
-        private List<Correlativa> correlativas = new List<Correlativa>();
-        private List<Cursada> cursadas = new List<Cursada>();
-        private List<Libreta> libretas = new List<Libreta>();
-        private List<Materia> materias = new List<Materia>();
-        private List<PlanDeEstudio> planes = new List<PlanDeEstudio>();
-        private List<Profesor> profesores = new List<Profesor>();
-
-
-        /// <summary>
-        /// Patrón Singleton
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static DataManager Instance(string path)
+        public DataManager(string path)
         {
-            if (instancia == null)
-            {
-                instancia = new DataManager(path);
-            }
-            return instancia;
+            _readed = false;
+            _path = path;
         }
 
 
-
         /// <summary>
-        /// Constructor privado. Patrón Singleton
-        /// </summary>
-        /// <param name="path"></param>
-        private DataManager(string path)
-        {
-            path = path + @"\" + Constantes.Constantes.NombreArchivo;
-            if (!readed)
-            {
-                CargarDatos();
-				readed = true;
-            }
-        }
-
-
-		/// <summary>
 		/// Nicolás Fernández, 18/05/2017, Carga datos desde el archivo.
 		/// </summary>
 		public void CargarDatos()
         {
-            System.IO.StreamReader file = new System.IO.StreamReader(path);
+            FacadePlanificador fc = new FacadePlanificador();
 
+            System.IO.StreamReader file = new System.IO.StreamReader(_path);
             string line = "";
 
             while ((line = file.ReadLine()) != null)
             {
                 string tipoRegistro = ValidarTipoRegistro(line);
 
-                switch(tipoRegistro)
+                switch (tipoRegistro)
                 {
                     case nameof(Correlativa):
+                        List<Correlativa> corBll = fc.ObtenerCorrelativas();
+                        corBll.Add(fc.GenerarObjeto<Correlativa>(line));
                         break;
                     case nameof(PlanDeEstudio):
+                        List<PlanDeEstudio> plaBll = fc.ObtenerPlanesDeEstudio();
+                        plaBll.Add(fc.GenerarObjeto<PlanDeEstudio>(line));
                         break;
                     case nameof(Alumno):
-                        alumnos.Add(fc._alumno.GenerateFromDataLine(line));
-						break;
+                        List<Alumno> aluBll = fc.ObtenerAlumnos();
+                        aluBll.Add(fc.GenerarObjeto<Alumno>(line));
+                        break;
                     case nameof(Carrera):
-                        carreras.Add(fc._carrera.GenerateFromDataLine(line));
-						break;
+                        List<Carrera> carBll = fc.ObtenerCarreras();
+                        carBll.Add(fc.GenerarObjeto<Carrera>(line));
+                        break;
                     case nameof(Cursada):
-						break;
-					case nameof(Materia):
-                        materias.Add(fc._materia.GenerateFromDataLine(line));
-						break;
-                    case nameof(Profesor):
-						break;
+                        List<Cursada> curBll = fc.ObtenerCursadas();
+                        curBll.Add(fc.GenerarObjeto<Cursada>(line));
+                        break;
+                    case nameof(Materia):
+                        List<Materia> matBll = fc.ObtenerMaterias();
+                        matBll.Add(fc.GenerarObjeto<Materia>(line));
+                        break;
+                    case nameof(Docente):
+                        List<Docente> docBll = fc.ObtenerDocentes();
+                        docBll.Add(fc.GenerarObjeto<Docente>(line));
+                        break;
                     case nameof(Libreta):
-						break;
+                        List<Libreta> libBll = fc.ObtenerLibretas();
+                        libBll.Add(fc.GenerarObjeto<Libreta>(line));
+                        break;
                 }
 
-
-
-
-                if (PlanDeEstudioBLL.DataLineToMe(line))
-                {
-                    //PlanDeEstudio plan = PlanDeEstudioBLL.GerateFromDataLine(line);
-
-                    //planes.Add(plan);
-
-                    //foreach (Carrera carreraPlan in carreras)
-                    //{
-                        //tengo que agregar las materias
-                        //agrego correlativas
-                        //agrego alumno
-                    //    if (plan.CodigoCarrera == carreraPlan.CodigoCarrera)
-                    //    {
-                    //        plan.Carrera = carreraPlan;
-                    //        carreraPlan.PlanDeEstudios.Add(plan);
-                    //    }
-                    //}
-
-                }
             }
 
-			file.Close();
+            _readed = true;
+
+            file.Close();
         }
 
-        private string ValidarTipoRegistro(string linea)
+        private static string ValidarTipoRegistro(string linea)
         {
             int posicion1 = linea.IndexOf('[');
             int posicion2 = linea.IndexOf(']');
 
-            return linea.Substring(posicion1, posicion2 - 1);
+            if (posicion1 != -1 && posicion2 != -1)
+            {
+                return linea.Substring(posicion1 + 1, posicion2 - 1);
+            }
+
+            return String.Empty;
+        }
+
+        public bool Leido()
+        {
+            return _readed;
         }
 
         public void GuardarDatos(string path)
         {
             System.IO.StreamWriter file = new System.IO.StreamWriter(path);
+            FacadePlanificador fc = new FacadePlanificador();
 
-            foreach (Alumno a in alumnos)
+            foreach (Alumno a in fc.ObtenerAlumnos())
             {
-                file.WriteLine(fc._alumno.ToDataLine(a));
+                file.WriteLine(fc.EscribirObjeto(a));
             }
 
-            foreach (Carrera c in carreras)
+            foreach (Carrera c in fc.ObtenerCarreras())
             {
-                //file.WriteLine(CarreraBLL.ToDataLine(c));
+                file.WriteLine(fc.EscribirObjeto(c));
             }
 
             file.Close();
         }
 
-
-
-        public void EliminarDatos(string path)
+        public void EliminarDatos()
         {
-            System.IO.StreamWriter file = new System.IO.StreamWriter(path);
+            System.IO.StreamWriter file = new System.IO.StreamWriter(_path);
             file.WriteLine("");
             file.Close();
         }
-
-
-
-
-		/** Obtencion de datos. **/
-
-		public static List<T> ObtenerObjetos<T>(ref T obj) where T : class //ModelBase
-		{
-			List<T> dtoList = new List<T>();
-			
-
-            T dto = null;
-			//dto = (T)parser.PopulateDTO(reader);
-			dtoList.Add(dto);
-
-            return dtoList;
-        }
-
-        public List<Carrera> ObtenerCarrerasEnApp()
-        {
-            return carreras;
-        }
-		public List<Alumno> ObtenerAlumnosEnApp()
-		{
-			return alumnos;
-		}
-		public List<PlanDeEstudio> ObtenerPlanesdeEstudioEnApp()
-		{
-			return planes;
-		}
-		public List<Materia> ObtenerMateriasEnApp()
-		{
-			return materias;
-		}
-
 
 
     }

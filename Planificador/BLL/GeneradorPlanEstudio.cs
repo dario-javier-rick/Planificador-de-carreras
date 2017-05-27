@@ -15,7 +15,7 @@ namespace Planificador.BLL
         {
             bool existe = false;
 
-            //DataManager dm = DataManager.Instance;
+/*            //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
             foreach (Carrera c in dm.ObtenerCarrerasEnApp())
             {
@@ -24,7 +24,7 @@ namespace Planificador.BLL
                     existe = true;
                 }
             }
-
+*/
             return existe;
         }
 
@@ -32,7 +32,7 @@ namespace Planificador.BLL
         public bool ExistePlanDeEstudio(PlanDeEstudio PlanEstudio)
         {
             bool existe = false;
-
+            /*
             //DataManager dm = DataManager.Instance;
             DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
             foreach (PlanDeEstudio pe in dm.ObtenerPlanesdeEstudioEnApp())
@@ -42,7 +42,7 @@ namespace Planificador.BLL
                     existe = true;
                 }
             }
-
+            */
             return existe;
         }
 
@@ -51,14 +51,14 @@ namespace Planificador.BLL
         {
             bool planCorrecto = false;
             //DataManager dm = DataManager.Instance;
-            DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+            //DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
 
-            CarreraBLL cbl = new CarreraBLL();
+            FacadePlanificador fc = new FacadePlanificador();
 
             /* Verifica si la carrera exite, en caso de no exister la crea. */
-            if (!cbl.ExisteCarrera(Carrera))
+            if (!fc.ExisteCarrera(Carrera))
             {
-                cbl.RegistrarCarrera(Carrera);
+                fc.RegistrarCarrera(Carrera);
             }
 
             /* Compara si el plan ya se encuentra en el sistema. */

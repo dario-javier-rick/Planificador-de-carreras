@@ -19,7 +19,7 @@ namespace Planificador.Models
         {
             this.Correlativas = new HashSet<Correlativa>();
             this.Materia = new HashSet<Materia>();
-            this.Alumno = new HashSet<BLL.Entidades.AlumnoBLL>();
+            this.Alumno = new HashSet<Alumno>();
         }
     
         public int Id { get; set; }
@@ -32,6 +32,6 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Materia> Materia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BLL.Entidades.AlumnoBLL> Alumno { get; set; }
+        public virtual ICollection<Alumno> Alumno { get; set; }
     }
 }

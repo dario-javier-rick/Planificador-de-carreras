@@ -4,34 +4,34 @@ using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
-    public class CursadaBLL:IDataReader<Cursada>
+    public class DocenteBLL: IDataReader<Docente>
     {
-        private static CursadaBLL _instancia;
-        public List<Cursada> ListaObj { get; }
+        private static DocenteBLL _instancia;
+        public List<Docente> ListaObj { get; }
 
         /// <summary>
         /// Patrón Singleton
         /// </summary>
         /// <returns></returns>
-        public static CursadaBLL Instance()
+        public static DocenteBLL Instance()
         {
-            return _instancia ?? (_instancia = new CursadaBLL());
+            return _instancia ?? (_instancia = new DocenteBLL());
         }
 
         /// <summary>
         /// Constructor privado. Patrón Singleton
         /// </summary>
-        private CursadaBLL()
+        private DocenteBLL()
         {
-            ListaObj = new List<Cursada>();
+            ListaObj = new List<Docente>();
         }
 
-        public string ToDataLine(Cursada obj)
+        public string ToDataLine(Docente obj)
         {
             throw new NotImplementedException();
         }
 
-        public Cursada GenerateFromDataLine(string linea)
+        public Docente GenerateFromDataLine(string linea)
         {
             throw new NotImplementedException();
         }

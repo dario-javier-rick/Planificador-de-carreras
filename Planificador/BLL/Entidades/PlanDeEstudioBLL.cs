@@ -8,9 +8,27 @@ namespace Planificador.BLL.Entidades
 {
     public class PlanDeEstudioBLL: IDataReader<PlanDeEstudio>
     {
-		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+        private static PlanDeEstudioBLL _instancia;
+        public List<PlanDeEstudio> ListaObj { get; }
 
-		public string ToDataLine(PlanDeEstudio plan)
+        /// <summary>
+        /// Patrón Singleton
+        /// </summary>
+        /// <returns></returns>
+        public static PlanDeEstudioBLL Instance()
+        {
+            return _instancia ?? (_instancia = new PlanDeEstudioBLL());
+        }
+
+        /// <summary>
+        /// Constructor privado. Patrón Singleton
+        /// </summary>
+        private PlanDeEstudioBLL()
+        {
+            ListaObj = new List<PlanDeEstudio>();
+        }
+
+        public string ToDataLine(PlanDeEstudio plan)
 		{
             return "[CarreraPlan]," + plan.Id;
 		}
@@ -61,8 +79,6 @@ namespace Planificador.BLL.Entidades
         /* Nicolas Fernande, 27/05/2017, Genera plan a partir de lectura de datos de un string. */
         public static PlanDeEstudio GerateFromDataLine(string line)
         {
-            DataManager dm = DataManager.Instance(BLL.Constantes.Constantes.DataManagerPath);
-
             string[] data = line.Split(',');
             PlanDeEstudio pe = null;
 
@@ -73,14 +89,14 @@ namespace Planificador.BLL.Entidades
                     CodigoCarrera = int.Parse(data[1]),
                     Id = int.Parse(data[2])
                 };
-                foreach (Carrera carre in dm.ObtenerCarrerasEnApp())
+      /*          foreach (Carrera carre in dm.ObtenerCarrerasEnApp())
                 {
                     if (CarreraBLL.MismodId(carre, pe.CodigoCarrera))
                     {
                         pe.Carrera = carre;
                     }
                 }
-            }
+        */    }
 
             return pe;
         }
@@ -128,7 +144,7 @@ namespace Planificador.BLL.Entidades
 		/* Nicolas Fernandez, 23/05/2017, Obtiene plan de esudio especifico. */
 		public PlanDeEstudio ObtenerPlanesEstudio(PlanDeEstudio plan)
 		{
-            foreach (PlanDeEstudio pe in dm.ObtenerPlanesdeEstudioEnApp())
+            foreach (PlanDeEstudio pe in ListaObj)
 			{
 				if (PlanDeEstudioBLL.Mismos(plan, pe))
 				{
@@ -141,9 +157,8 @@ namespace Planificador.BLL.Entidades
 
 		public void CrearUnNuevoPlanDeEstudio(PlanDeEstudio Plan)
 		{
-            dm.ObtenerPlanesdeEstudioEnApp().Add(Plan);
+            ListaObj.Add(Plan);
 		}
 
-
-	}
+    }
 }

@@ -12,15 +12,17 @@ namespace Planificador.Test
 {
     class Iteracion1Tests
     {
+        private FacadePlanificador fc;
         private CursadaController Controller { get; set; }
-        private DataManager dm { get; set; }
 
         [SetUp]
         public void Setup()
         {
+            fc = new FacadePlanificador();
+            DataManager dm = new DataManager(Constantes.DataManagerPath + Constantes.NombreArchivo);
+            dm.CargarDatos();
+
             Controller = new CursadaController();
-            string path = Constantes.DataManagerPath;
-            dm = DataManager.Instance(path);
         }
 
         [Test]
@@ -43,7 +45,7 @@ namespace Planificador.Test
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
 
-            List<PlanDeEstudio> todosLosPlanes = dm.ObtenerPlanesdeEstudioEnApp();
+            List<PlanDeEstudio> todosLosPlanes = fc.ObtenerPlanesDeEstudio();
             PlanDeEstudio licenciaturaInformatica = todosLosPlanes.Where(p => p.Id == 0).FirstOrDefault(); //TODO: Ver Id
 
             //Valido resultado de ViewModel

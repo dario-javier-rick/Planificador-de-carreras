@@ -16,7 +16,7 @@
           <EntitySet Name="AlumnoSet" EntityType="Model.Alumno" />
           <EntitySet Name="CarreraSet" EntityType="Model.Carrera" />
           <EntitySet Name="PlanDeEstudioSet" EntityType="Model.PlanDeEstudio" />
-          <EntitySet Name="ProfesorSet" EntityType="Model.Profesor" />
+          <EntitySet Name="DocenteSet" EntityType="Model.Docente" />
           <EntitySet Name="CursadaSet" EntityType="Model.Cursada" />
           <EntitySet Name="CorrelativaSet" EntityType="Model.Correlativa" />
           <EntitySet Name="MateriaSet" EntityType="Model.Materia" />
@@ -37,7 +37,7 @@
             <End EntitySet="CorrelativaSet" Role="Correlativas" />
           </AssociationSet>
           <AssociationSet Name="ProfesorCursada" Association="Model.ProfesorCursada">
-            <End EntitySet="ProfesorSet" Role="Profesor" />
+            <End EntitySet="DocenteSet" Role="Profesor" />
             <End EntitySet="CursadaSet" Role="Cursada" />
           </AssociationSet>
           <AssociationSet Name="MateriaCursada" Association="Model.MateriaCursada">
@@ -94,12 +94,13 @@
           <NavigationProperty Name="Materia" Relationship="Model.PlanDeEstudioMateria" FromRole="PlanDeEstudio" ToRole="Materia" />
           <NavigationProperty Name="Alumno" Relationship="Model.PlanDeEstudioAlumno" FromRole="PlanDeEstudio" ToRole="Alumno" />
         </EntityType>
-        <EntityType Name="Profesor">
+        <EntityType Name="Docente">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <NavigationProperty Name="Cursada" Relationship="Model.ProfesorCursada" FromRole="Profesor" ToRole="Cursada" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Cursada">
           <Key>
@@ -158,7 +159,7 @@
           <End Type="Model.Correlativa" Multiplicity="*" Role="Correlativas" />
         </Association>
         <Association Name="ProfesorCursada">
-          <End Type="Model.Profesor" Multiplicity="1" Role="Profesor" />
+          <End Type="Model.Docente" Multiplicity="1" Role="Profesor" />
           <End Type="Model.Cursada" Multiplicity="*" Role="Cursada" />
           <ReferentialConstraint>
             <Principal Role="Profesor">

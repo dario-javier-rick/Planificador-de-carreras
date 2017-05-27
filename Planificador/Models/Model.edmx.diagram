@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="Model.Alumno" PointX="7.375" PointY="2.75" Width="1.5" />
         <EntityTypeShape EntityType="Model.Carrera" PointX="1.25" PointY="0.625" Width="1.5" />
         <EntityTypeShape EntityType="Model.PlanDeEstudio" PointX="3.5" PointY="2.5" Width="1.5" />
-        <EntityTypeShape EntityType="Model.Profesor" PointX="11" PointY="1.25" Width="1.5" />
+        <EntityTypeShape EntityType="Model.Docente" PointX="11" PointY="1.25" Width="1.5" />
         <EntityTypeShape EntityType="Model.Cursada" PointX="11.125" PointY="4.375" Width="1.5" />
         <EntityTypeShape EntityType="Model.Correlativa" PointX="0.75" PointY="5.625" Width="1.5" />
         <EntityTypeShape EntityType="Model.Materia" PointX="3.375" PointY="6.5" Width="1.5" />

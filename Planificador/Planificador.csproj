@@ -146,12 +146,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\CaminoCritico.cs" />
     <Compile Include="BLL\Constantes\Constantes.cs" />
+    <Compile Include="BLL\Factory\BLLFactory.cs" />
+    <Compile Include="BLL\Factory\FactoryUniversidad.cs" />
     <Compile Include="BLL\Entidades\CarreraBLL.cs" />
     <Compile Include="BLL\DataManager.cs" />
     <Compile Include="BLL\Entidades\MateriaBLL.cs" />
     <Compile Include="BLL\Entidades\PlanDeEstudioBLL.cs" />
-    <Compile Include="BLL\Finder.cs" />
     <Compile Include="BLL\GeneradorPlanEstudio.cs" />
+    <Compile Include="BLL\Helpers\Helper.cs" />
     <Compile Include="Controllers\CursadaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -169,6 +171,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="BLL\Entidades\AlumnoBLL.cs" />
+    <Compile Include="Models\Docente.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Libreta.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -193,16 +198,13 @@
     <Compile Include="Models\PlanDeEstudio.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Profesor.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\CursadaViewModel.cs" />
     <Compile Include="BLL\Entidades\Interfaces\IDataReader.cs" />
     <Compile Include="BLL\FacadePlanificador.cs" />
     <Compile Include="BLL\Entidades\CorrelativaBLL.cs" />
     <Compile Include="BLL\Entidades\CursadaBLL.cs" />
-    <Compile Include="BLL\Entidades\ProfesorBLL.cs" />
+    <Compile Include="BLL\Entidades\DocenteBLL.cs" />
     <Compile Include="BLL\Entidades\LibretaBLL.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -278,7 +280,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BLL\Entidades\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -327,6 +328,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.4\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
   </Target>
   <PropertyGroup>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  "$(SolutionDir)Data" "$(ProjectDir)obj/Debug/Data" /Y /I
+xcopy  "$(SolutionDir)Data" "$(ProjectDir)obj/Release/Data" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

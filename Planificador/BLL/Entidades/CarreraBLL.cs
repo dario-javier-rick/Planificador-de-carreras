@@ -8,9 +8,27 @@ namespace Planificador.BLL.Entidades
 {
     public class CarreraBLL : IDataReader<Carrera>
     {
-		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+        private static CarreraBLL _instancia;
+        public List<Carrera> ListaObj { get; }
 
-		public string ToDataLine(Carrera carrera)
+        /// <summary>
+        /// Patrón Singleton
+        /// </summary>
+        /// <returns></returns>
+        public static CarreraBLL Instance()
+        {
+            return _instancia ?? (_instancia = new CarreraBLL());
+        }
+
+        /// <summary>
+        /// Constructor privado. Patrón Singleton
+        /// </summary>
+        private CarreraBLL()
+        {
+            ListaObj = new List<Carrera>();
+        }
+
+        public string ToDataLine(Carrera carrera)
         {
             return "[Carrera]," + carrera.CodigoCarrera + "," + carrera.Nombre;
         }
@@ -21,17 +39,26 @@ namespace Planificador.BLL.Entidades
             Carrera c = new Carrera {CodigoCarrera = int.Parse(datos[1]), Nombre = datos[2]};
 
             return c;
-        }
-
-        /* Nicolás Fernandez, 22/05/2017, Se crea una materia con codigo 0 ya que no esta registrada en la aplicacion
-         * se le asigna codigo una vez registrada. */
-        public static Carrera CrearCarrera(string nombre)
-        {
-            Carrera c = new Carrera { CodigoCarrera = 0,
+        }
+
+
+
+        /* Nicolás Fernandez, 22/05/2017, Se crea una materia con codigo 0 ya que no esta registrada en la aplicacion
+
+         * se le asigna codigo una vez registrada. */
+
+        public static Carrera CrearCarrera(string nombre)
+
+        {
+
+            Carrera c = new Carrera { CodigoCarrera = 0,
+
                                         Nombre = nombre};
             return c;
-        }
-
+        }
+
+
+
         /* Nicolas Fernandez, 22/05/2017, Compara dos materias por el nombre. */
         public static bool Mismas(Carrera carrera1, Carrera carrera2)
         {
@@ -40,8 +67,10 @@ namespace Planificador.BLL.Entidades
                 return true;
             }
             return false;
-        }
-
+        }
+
+
+
         public static bool MismodId(Carrera carre, int codigoCarrera)
         {
             if (carre.CodigoCarrera == codigoCarrera)
@@ -54,13 +83,13 @@ namespace Planificador.BLL.Entidades
 
 		internal bool ExisteCarrera(Carrera carrera)
 		{
-            return dm.ObtenerCarrerasEnApp().Exists(x => x.Nombre.Equals(carrera.Nombre));
+            return ListaObj.Exists(x => x.Nombre.Equals(carrera.Nombre));
 		}
 
 		/* Nicolás Fernández, 18/05/2017, Adignacion de código a carrera. */
 		public int AsignarCodCarrera()
 		{
-            return dm.ObtenerCarrerasEnApp().Count + 1;
+            return ListaObj.Count + 1;
 		}
 
 
@@ -68,9 +97,9 @@ namespace Planificador.BLL.Entidades
 		/* Nicolás Fernández, 18/05/2017, Metodo para saber si la carrera exite. */
 		public int CodigoDeCarrera(Carrera carrera)
 		{
-			if (dm.ObtenerCarrerasEnApp().Exists(x => x.Nombre.Equals(carrera.Nombre)))
+			if (ListaObj.Exists(x => x.Nombre.Equals(carrera.Nombre)))
 			{
-				return dm.ObtenerCarrerasEnApp().Find(x => x.Nombre.Equals(carrera.Nombre)).CodigoCarrera;
+				return ListaObj.Find(x => x.Nombre.Equals(carrera.Nombre)).CodigoCarrera;
 			}
 			return 0;
 		}
@@ -94,7 +123,7 @@ namespace Planificador.BLL.Entidades
 
 				bool registrada = false;
 
-				foreach (Carrera c in dm.ObtenerCarrerasEnApp())
+				foreach (Carrera c in ListaObj)
 				{
 					if (CarreraBLL.Mismas(c, carrera))
 						registrada = true;
@@ -103,7 +132,7 @@ namespace Planificador.BLL.Entidades
 				if (!registrada)
 				{
 					carrera.CodigoCarrera = AsignarCodCarrera();
-					dm.ObtenerCarrerasEnApp().Add(carrera);
+                    ListaObj.Add(carrera);
 					//System.IO.StreamWriter file = new System.IO.StreamWriter(this.path, true);
 					//file.WriteLine("");
 					//file.WriteLine(CarreraBLL.ToDataLine(carrera));
@@ -127,7 +156,7 @@ namespace Planificador.BLL.Entidades
 		/* Nicolas Fernandez, 2/05/2017, Obtiene una carrera en particular. */
 		public Carrera ObtenerCarrera(Carrera carrera)
 		{
-            foreach (Carrera c in dm.ObtenerCarrerasEnApp())
+            foreach (Carrera c in ListaObj)
 			{
 				if (CarreraBLL.Mismas(carrera, c))
 					return c;

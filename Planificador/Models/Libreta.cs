@@ -22,7 +22,7 @@ namespace Planificador.Models
     
         public int Id { get; set; }
     
-        public virtual BLL.Entidades.AlumnoBLL Alumno { get; set; }
+        public virtual Alumno Alumno { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Materia> MateriasAprobadas { get; set; }
     }

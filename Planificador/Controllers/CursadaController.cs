@@ -21,8 +21,9 @@ namespace Planificador.Controllers
         /// <returns></returns>
         public ActionResult Index(string nombreAlumno)
         {
-            Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
-            CursadaViewModel viewModel = new CursadaViewModel {Materias = alumno?.Libreta?.MateriasAprobadas?.ToList()};
+            FacadePlanificador fc = new FacadePlanificador();
+            Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Nombre == nombreAlumno);
+            CursadaViewModel viewModel = Index(alumno); 
             return View(viewModel);
         }
 
@@ -32,14 +33,9 @@ namespace Planificador.Controllers
 		/// Controlador HTTP debe consultar a este método para abstraer el comportamiento web 
         /// </summary>
         /// <param name="alumno"></param>
-		private CursadaViewModel Index(AlumnoBLL alumno)
+		private CursadaViewModel Index(Alumno alumno)
         {
-            Cursada cursada = new Cursada();
-            List<Materia> materias = null; //cursada.ObtenerPosiblesMateriasACursar(alumno).ToList(); //TODO
-
-            CursadaViewModel model = new CursadaViewModel { Materias = materias };
-
-            return model;
+            return new CursadaViewModel { Materias = alumno?.Libreta?.MateriasAprobadas?.ToList() };
         }
 
 
@@ -101,7 +97,7 @@ namespace Planificador.Controllers
                 FacadePlanificador cursada = new FacadePlanificador();
                 List<Materia> materias = null; //cursada.ObtenerPosiblesMateriasACursar(alumno).ToList(); //TODO
                 cursada.CalcularPesoEnCaminoCritico(materias);
-                Dictionary<Materia, int> diccionario = cursada.CaminoCritico.DiccionarioCriticidad;
+                Dictionary<Materia, int> diccionario = null;//cursada.CaminoCritico.DiccionarioCriticidad;
 
                 return Json(diccionario);
             }

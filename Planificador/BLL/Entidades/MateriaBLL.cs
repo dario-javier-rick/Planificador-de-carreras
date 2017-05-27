@@ -8,9 +8,27 @@ namespace Planificador.BLL.Entidades
 {
     public class MateriaBLL : IDataReader<Materia>
     {
-		DataManager dm = DataManager.Instance(Constantes.Constantes.DataManagerPath);
+        private static MateriaBLL _instancia;
+        public List<Materia> ListaObj { get; }
 
-		public string ToDataLine(Materia materia)
+        /// <summary>
+        /// Patrón Singleton
+        /// </summary>
+        /// <returns></returns>
+        public static MateriaBLL Instance()
+        {
+            return _instancia ?? (_instancia = new MateriaBLL());
+        }
+
+        /// <summary>
+        /// Constructor privado. Patrón Singleton
+        /// </summary>
+        private MateriaBLL()
+        {
+            ListaObj = new List<Materia>();
+        }
+
+        public string ToDataLine(Materia materia)
 		{
             return "[Materia]," + materia.Id;
 		}
@@ -23,6 +41,7 @@ namespace Planificador.BLL.Entidades
 			return m;
 		}
 
+        //Otros metodos
         public static Materia CrearMateria(string nombre)
         {
             return new Materia { Nombre=nombre};
@@ -44,7 +63,7 @@ namespace Planificador.BLL.Entidades
         {
             bool existe = false;
 
-            foreach (Materia mt in dm.ObtenerMateriasEnApp())
+            foreach (Materia mt in ListaObj)
             {
                 if (mt.Nombre.Equals(NombreMateria))
                 {
@@ -59,12 +78,12 @@ namespace Planificador.BLL.Entidades
         /* Nicolás Fernández, 17/05/2017, Devuelve una materia particular */
         public Materia ObtenerMateria(string nombreMateria)
         {
-            foreach (Materia mt in dm.ObtenerMateriasEnApp())
+            foreach (Materia mt in ListaObj)
             {
                 if (mt.Nombre.Equals(nombreMateria))
                     return mt;
             }
-            return new Materia(); //("", "");
+            return new Materia();
         }
 
     }

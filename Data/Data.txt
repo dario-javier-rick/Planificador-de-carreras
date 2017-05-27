@@ -1,6 +1,18 @@
-[Alumno],1,37170404,Dario Rick[Alumno],2,34179142,Nicolas Fernandez[Profesor],1,Javier MV[Materia],1,Programacion 1[Carrera],1,Tecnicatura Sistemas
+[Alumno],1,37170404,Dario Rick
+[Alumno],2,34179142,Nicolas Fernandez
+
+[Profesor],1,Javier MV
+
+[Materia],1,Programacion 1
+
+[Carrera],1,Tecnicatura Sistemas
 [Carrera],2,Licenciatura Sistemas
 [Carrera],3,Licenciatura Historia
-[Carrera],4,Ingenieria Industrial
-[CarreraPlan],2,1[PlanDeEstudio],1,1[Correlativa],1,1,2[Cursada][Libreta]
-
+[Carrera],4,Ingenieria Industrial
+
+[CarreraPlan],2,1
+
+[PlanDeEstudio],1,1
+
+
+

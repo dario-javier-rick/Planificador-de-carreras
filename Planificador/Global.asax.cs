@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Planificador.BLL;
+using Planificador.BLL.Constantes;
 
 namespace Planificador
 {
@@ -16,6 +18,9 @@ namespace Planificador
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            DataManager dm = new DataManager(Constantes.DataManagerPath + @"obj\Debug\Data\" + Constantes.NombreArchivo);
+            dm.CargarDatos();
         }
     }
 }
