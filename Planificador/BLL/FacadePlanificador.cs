@@ -10,7 +10,7 @@ namespace Planificador.BLL
     /// <summary>
     /// Patron Facade. Proveo una interfaz única para manejar la lógica de  subsistemas diferentes
     /// </summary>
-    public class FacadeCursada
+    public class FacadePlanificador
     {
 		public AlumnoBLL _alumno = new AlumnoBLL();
         public CarreraBLL _carrera = new CarreraBLL();
@@ -18,7 +18,7 @@ namespace Planificador.BLL
         public MateriaBLL _materia = new MateriaBLL();
         public CaminoCritico CaminoCritico { get; } = new CaminoCritico();
 
-        public FacadeCursada()
+        public FacadePlanificador()
         {
         }
 

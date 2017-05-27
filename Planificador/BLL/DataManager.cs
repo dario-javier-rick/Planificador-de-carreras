@@ -13,7 +13,7 @@ namespace Planificador.BLL
 
     {
         private static DataManager instancia;
-		private FacadeCursada fc = new FacadeCursada();
+		private FacadePlanificador fc = new FacadePlanificador();
 
 		private string path;
         private bool readed = false;
