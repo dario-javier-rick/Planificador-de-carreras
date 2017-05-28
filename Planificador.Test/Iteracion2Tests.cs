@@ -17,7 +17,7 @@ namespace Planificador.Test
         public void Setup()
         {
             fc = new FacadePlanificador();
-            DataManager dm = new DataManager(Constantes.DataManagerPath + @"Data\" + Constantes.NombreArchivo);
+            DataManager dm = new DataManager(Constantes.DataManagerPath + @"\Data\" + Constantes.NombreArchivo);
             dm.CargarDatos();
         }
 
