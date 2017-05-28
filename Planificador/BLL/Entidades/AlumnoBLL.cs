@@ -8,7 +8,8 @@ namespace Planificador.BLL.Entidades
 {
     public class AlumnoBLL : IDataReader<Alumno>
     {
-        private static AlumnoBLL _instancia;
+        //Lazy initialization. Instancio el objeto únicamente cuando lo necesito.
+        private static readonly Lazy<AlumnoBLL> Instancia = new Lazy<AlumnoBLL>(() => new AlumnoBLL());
         public List<Alumno> ListaObj { get; }
 
 
@@ -16,10 +17,8 @@ namespace Planificador.BLL.Entidades
         /// Patrón Singleton
         /// </summary>
         /// <returns></returns>
-        public static AlumnoBLL Instance()
-        {
-            return _instancia ?? (_instancia = new AlumnoBLL());
-        }
+        public static AlumnoBLL Instance => Instancia.Value;
+
 
         /// <summary>
         /// Constructor privado. Patrón Singleton
@@ -51,7 +50,7 @@ namespace Planificador.BLL.Entidades
         //Otros métodos.
         public static Alumno ObtenerAlumno(string nombreAlumno)
 		{
-			return _instancia.ListaObj.FirstOrDefault(a => a.Nombre == nombreAlumno);
+			return Instance.ListaObj.FirstOrDefault(a => a.Nombre == nombreAlumno);
 		}
 
         public static List<Materia> ListarMateriasAprobadas(Alumno alumno)

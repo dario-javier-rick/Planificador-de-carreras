@@ -190,7 +190,7 @@ namespace Planificador.BLL
 
         public PlanDeEstudio ObtenerPlanesEstudio(PlanDeEstudio pe)
         {
-            throw new NotImplementedException();
+            return _planDeEstudio.ListaObj.FirstOrDefault(p => p.Id == pe.Id);
         }
     }
 }

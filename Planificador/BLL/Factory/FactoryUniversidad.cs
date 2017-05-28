@@ -11,7 +11,7 @@ namespace Planificador.BLL.Factory
     {
         public override AlumnoBLL CrearAlumnoBLL()
         {
-            return AlumnoBLL.Instance();
+            return AlumnoBLL.Instance;
         }
 
         public override CarreraBLL CrearCarreraBLL()

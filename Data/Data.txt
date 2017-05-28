@@ -6,6 +6,9 @@
 [Carrera],1,Tecnicatura Sistemas
 [PlanDeEstudio],1,1
 
+[PlanDeEstudioAlumno],1,1
+[PlanDeEstudioAlumno],1,2
+
 [Materia],1,Introducción a la Programación
 [Materia],2,Introducción a la Matemática
 [Materia],3,Programación I
@@ -41,10 +44,6 @@
 [PlanDeEstudioMateria],1,15
 [PlanDeEstudioMateria],1,16
 [PlanDeEstudioMateria],1,17
-
-[PlanDeEstudioAlumno],1,1
-[PlanDeEstudioAlumno],1,2
-
 
 [Carrera],2,Licenciatura Sistemas
 [Carrera],3,Licenciatura Historia

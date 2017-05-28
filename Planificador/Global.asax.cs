@@ -19,7 +19,7 @@ namespace Planificador
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            DataManager dm = new DataManager(Constantes.DataManagerPath + @"obj\Debug\Data\" + Constantes.NombreArchivo);
+            DataManager dm = new DataManager(Constantes.DataManagerPath + @"bin\Debug\Data\" + Constantes.NombreArchivo);
             dm.CargarDatos();
         }
     }
