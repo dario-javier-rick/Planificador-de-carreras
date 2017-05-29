@@ -203,6 +203,7 @@
     <Compile Include="BLL\Entidades\LibretaBLL.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Start\Data\Data.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -318,8 +319,8 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Debug/Data" /Y /I
-xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Release/Data" /Y /I</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using Planificador.BLL;
 using Planificador.BLL.Constantes;
@@ -17,7 +18,7 @@ namespace Planificador.Test
         public void Setup()
         {
             fc = new FacadePlanificador();
-            DataManager dm = new DataManager(Constantes.DataManagerPath + @"\Data\" + Constantes.NombreArchivo);
+            DataManager dm = new DataManager(AppDomain.CurrentDomain.BaseDirectory + @"\Data\" + Constantes.NombreArchivo);
             dm.CargarDatos();
         }
 

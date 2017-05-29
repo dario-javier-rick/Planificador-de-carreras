@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using NUnit.Framework;
@@ -19,7 +20,7 @@ namespace Planificador.Test
         public void Setup()
         {
             _fc = new FacadePlanificador();
-            DataManager dm = new DataManager(Constantes.DataManagerPath + @"\Data\" + Constantes.NombreArchivo);
+            DataManager dm = new DataManager(AppDomain.CurrentDomain.BaseDirectory + @"\Data\" + Constantes.NombreArchivo);
             dm.CargarDatos();
 
             Controller = new CursadaController();
