@@ -5,7 +5,7 @@ install:
 - nuget install NUnit.ConsoleRunner -Version 3.6.1 -OutputDirectory testrunner
 script:
 - xbuild /p:Configuration=Release Planificador.sln
-- mono ./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe ./Planificador.Test/bin/Release/PlanificadorTest.dll
+- mono ./testrunner/NUnit.ConsoleRunner.3.6.1/tools/nunit3-console.exe ./Planificador.Test/bin/Release/Planificador.Test.dll
 notifications:
   email:
     recipients:

@@ -319,8 +319,8 @@
   <PropertyGroup>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Debug/Data" /Y /I
+xcopy  "$(SolutionDir)Data" "$(ProjectDir)bin/Release/Data" /Y /I</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
