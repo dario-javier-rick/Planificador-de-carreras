@@ -194,6 +194,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AlumnoViewModel.cs" />
     <Compile Include="ViewModels\CursadaViewModel.cs" />
     <Compile Include="BLL\Entidades\Interfaces\IDataReader.cs" />
     <Compile Include="BLL\FacadePlanificador.cs" />

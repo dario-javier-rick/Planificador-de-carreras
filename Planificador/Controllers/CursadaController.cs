@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Planificador.Models;
 using Planificador.ViewModels;
 using Planificador.BLL;
@@ -23,7 +24,7 @@ namespace Planificador.Controllers
         {
             FacadePlanificador fc = new FacadePlanificador();
             Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Nombre == nombreAlumno);
-            CursadaViewModel viewModel = Index(alumno); 
+            CursadaViewModel viewModel = Index(alumno);
             return View(viewModel);
         }
 
@@ -48,7 +49,13 @@ namespace Planificador.Controllers
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
             if (alumno != null)
             {
-                return Json(alumno);
+                AlumnoViewModel avm = new AlumnoViewModel
+                {
+                    Nombre = alumno.Nombre,
+                    Apellido = alumno.Apellido,
+                    Dni = alumno.Dni
+                };
+                return Json(avm);
             }
             return Json(new { });
         }
@@ -60,7 +67,7 @@ namespace Planificador.Controllers
 
             Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Nombre == nombreAlumno);
 
-            object jsonResult = from p in fc.ObtenerPlanesDeEstudio()
+            var jsonResult = from p in fc.ObtenerPlanesDeEstudio()
                                 join c in fc.ObtenerCarreras()
                                     on p.Id equals c.CodigoCarrera
                                 join a in alumno?.PlanDeEstudio
@@ -77,9 +84,12 @@ namespace Planificador.Controllers
         public JsonResult ObtenerHistorial(string nombreAlumno)
         {
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
-            if (alumno != null)
+            if (alumno.Libreta != null && alumno.Libreta.MateriasAprobadas.Any())
             {
-                return Json(alumno.Libreta);
+                var jsonResult = from m in alumno.Libreta.MateriasAprobadas
+                                 select new {m.Id, m.Nombre};
+
+                return Json(jsonResult);
             }
             return Json(new { });
         }
