@@ -81,7 +81,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\Data.txt" />
+    <Content Include="Data\Data.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
