@@ -48,5 +48,10 @@ namespace Planificador.BLL.Factory
         {
             return PlanDeEstudioBLL.Instance();
         }
+
+        public override ActaInscripcionBLL CrearActaInscipcionBLL()
+        {
+            return ActaInscripcionBLL.Instance();
+        }
     }
 }

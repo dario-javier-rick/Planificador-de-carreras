@@ -128,5 +128,10 @@ namespace Planificador.Test
             */
         }
 
+        [Test]
+        public void CaminoMinimo()
+        {
+
+        }
     }
 }

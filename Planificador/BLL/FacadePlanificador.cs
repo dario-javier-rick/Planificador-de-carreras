@@ -5,6 +5,7 @@ using System.Web;
 using Planificador.Models;
 using Planificador.BLL.Entidades;
 using Planificador.BLL.Factory;
+using Planificador.BLL.Helpers;
 
 namespace Planificador.BLL
 {
@@ -16,11 +17,13 @@ namespace Planificador.BLL
         private readonly AlumnoBLL _alumno;
         private readonly CarreraBLL _carrera;
         private readonly CorrelativaBLL _correlativas;
+
         private readonly CursadaBLL _cursada;
         private readonly DocenteBLL _docente;
         private readonly LibretaBLL _libreta;
         private readonly MateriaBLL _materia;
         private readonly PlanDeEstudioBLL _planDeEstudio;
+        private readonly ActaInscripcionBLL _actaIncipcion;
 
         private readonly CaminoCritico _caminoCritico = new CaminoCritico();
 
@@ -36,6 +39,22 @@ namespace Planificador.BLL
             _libreta = bllFactory.CrearLibretaBLL();
             _materia = bllFactory.CrearMateriaBLL();
             _planDeEstudio = bllFactory.CrearPlanDeEstudioBLL();
+            this._actaIncipcion = bllFactory.CrearActaInscipcionBLL();
+        }
+
+        internal Carrera ObtenerCarreradeAlumno(Alumno alumno)
+        {
+            return ObternerActasdeInscripcion().Find(x => x.AlumnoInscripto().Id == alumno.Id).InscriptoEnCarrera();
+        }
+
+        internal Carrera ObtenerCarreraPorId(int codigoCarrera)
+        {
+            return ObtenerCarreras().Find(x => x.CodigoCarrera == codigoCarrera);
+        }
+
+        internal Alumno ObtenerAlumnopoId(int id)
+        {
+            return ObtenerAlumnos().Find(x => x.Id == id);
         }
 
         public string EscribirObjeto<T>(T objeto) where T : class
@@ -83,6 +102,8 @@ namespace Planificador.BLL
                     return (T) Convert.ChangeType(_materia.GenerateFromDataLine(s), typeof(T));
                 case nameof(PlanDeEstudio):
                     return (T)Convert.ChangeType(_planDeEstudio.GenerateFromDataLine(s), typeof(T));
+                case nameof(ActaInscripcion):
+                    return (T)Convert.ChangeType(_actaIncipcion.GenerateFromDataLine(s), typeof(T));
                 default:
                     throw new Exception("Tipo no soportado");
             }
@@ -130,6 +151,10 @@ namespace Planificador.BLL
             return _planDeEstudio.ListaObj;
         }
 
+        public List<ActaInscripcion> ObternerActasdeInscripcion()
+        {
+            return _actaIncipcion.ListaObj;
+        }
 
         //Otros métodos
         internal void RegistrarCarrera(Carrera carrera)

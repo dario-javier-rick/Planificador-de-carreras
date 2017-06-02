@@ -4,6 +4,10 @@
 [Profesor],1,Javier MV
 
 [Carrera],1,Tecnicatura Sistemas
+
+[Actainscipcion],1,1
+[Actainscipcion],2,1
+
 [PlanDeEstudio],1,1
 
 [PlanDeEstudioAlumno],1,1

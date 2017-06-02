@@ -15,5 +15,6 @@ namespace Planificador.BLL.Entidades
         public abstract LibretaBLL CrearLibretaBLL();
         public abstract MateriaBLL CrearMateriaBLL();
         public abstract PlanDeEstudioBLL CrearPlanDeEstudioBLL();
+        public abstract ActaInscripcionBLL CrearActaInscipcionBLL();
     }
 }

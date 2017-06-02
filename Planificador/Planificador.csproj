@@ -141,6 +141,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\CaminoCritico.cs" />
     <Compile Include="BLL\Constantes\Constantes.cs" />
+    <Compile Include="BLL\Entidades\ActaInscripcionBLL.cs" />
     <Compile Include="BLL\Factory\BLLFactory.cs" />
     <Compile Include="BLL\Factory\FactoryUniversidad.cs" />
     <Compile Include="BLL\Entidades\CarreraBLL.cs" />
@@ -148,7 +149,11 @@
     <Compile Include="BLL\Entidades\MateriaBLL.cs" />
     <Compile Include="BLL\Entidades\PlanDeEstudioBLL.cs" />
     <Compile Include="BLL\GeneradorPlanEstudio.cs" />
+    <Compile Include="BLL\Helpers\ActaInscripcion.cs" />
     <Compile Include="BLL\Helpers\Helper.cs" />
+    <Compile Include="BLL\Helpers\PlanCursada.cs" />
+    <Compile Include="BLL\Strategies\Strategy.cs" />
+    <Compile Include="BLL\Strategies\StrategyBase.cs" />
     <Compile Include="Controllers\CursadaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -212,7 +217,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="BLL\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model.Context.tt">
@@ -237,10 +242,10 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="BLL\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="BLL\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="BLL\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="BLL\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
