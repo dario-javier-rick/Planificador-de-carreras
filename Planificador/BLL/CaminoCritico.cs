@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Planificador.BLL.Helpers;
 using Planificador.Models;
 using Planificador.BLL.Strategies;
 
@@ -9,7 +10,10 @@ namespace Planificador.BLL
 {
     class CaminoCritico
     {
+        private PlanDeEstudio _plan;
+        private List<Materia> _materiasAprobadas;
         private Strategy _strategy;
+        private PLanCursada _planCursada;
 
         //Constructor
         public CaminoCritico(Strategy strategy)
@@ -20,7 +24,19 @@ namespace Planificador.BLL
         public void ContextInterface(Alumno alumno)
         {
             FacadePlanificador fc = new FacadePlanificador();
-            fc.ObtenerCarreradeAlumno(alumno);
+            /* Obtengo la carrera para obtener su plan de estudio. */
+            Carrera carrera = fc.ObtenerCarreradeAlumno(alumno);
+
+            /* Obtengo el plan de la carrera para conocer las materias y sus correlativas. */
+            _plan = fc.ObtenerPlanEstudioParaCarrera(carrera);
+
+            /* Ahora obtengo un listado de materias aprobadas por el alumno. */
+            _materiasAprobadas = fc.ObtenerMateriasAprobadasPara(alumno);
+
+            PLanCursada planCursada = CrearPLanCursadaCrudo(_plan, _materiasAprobadas);
+
+            /* Hasta este momento voy a tener una lista PlanCursada cruda. */
+            /* Para esto se va pasar una estrategia y ordenara el plan en base a la estrategia. */
             _strategy.AlgorithmInterface();
         }
 

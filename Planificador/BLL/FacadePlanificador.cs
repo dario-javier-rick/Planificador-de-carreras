@@ -217,5 +217,15 @@ namespace Planificador.BLL
         {
             return _planDeEstudio.ListaObj.FirstOrDefault(p => p.Id == pe.Id);
         }
+
+        public PlanDeEstudio ObtenerPlanEstudioParaCarrera(Carrera carrera)
+        {
+            return this.ObtenerPlanesDeEstudio().Find(x => x.Carrera.CodigoCarrera == carrera.CodigoCarrera);
+        }
+
+        public List<Materia> ObtenerMateriasAprobadasPara(Alumno alumno)
+        {
+            return this.ObtenerLibretas().Find(x => x.Alumno.Equals(alumno)).MateriasAprobadas.ToList();
+        }
     }
 }

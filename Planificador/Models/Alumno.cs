@@ -31,5 +31,22 @@ namespace Planificador.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PlanDeEstudio> PlanDeEstudio { get; set; }
         public virtual Libreta Libreta { get; set; }
+        
+
+//        public override bool Equals(System.Object obj)
+//        {
+//            Alumno alumno = obj as Alumno;
+//
+//            if (obj == null)
+//            {
+//                return false;
+//            }
+
+//            if (this.Id == alumno.Id && this.Dni.Equals(alumno.Dni))
+//            {
+//                return true;
+//            }
+//            return false;
+//        }
     }
 }
