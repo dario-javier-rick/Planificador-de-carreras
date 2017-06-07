@@ -13,6 +13,7 @@ namespace Planificador.BLL
         private PlanDeEstudio _plan;
         private List<Materia> _materiasAprobadas;
         private Strategy _strategy;
+
         private PLanCursada _planCursada;
 
         //Constructor
@@ -33,11 +34,45 @@ namespace Planificador.BLL
             /* Ahora obtengo un listado de materias aprobadas por el alumno. */
             _materiasAprobadas = fc.ObtenerMateriasAprobadasPara(alumno);
 
-            PLanCursada planCursada = CrearPLanCursadaCrudo(_plan, _materiasAprobadas);
+            /* Obtengo las materias que faltan cursar para armar el plan de estudio que me queda por completar. */
+            List<Materia> materiasFaltantes = new List<Materia>();
+            foreach (Materia mat in _plan.Materia)
+            {
+                if (!_materiasAprobadas.Exists(x => x.Equals(mat)))
+                {
+                    materiasFaltantes.Add(mat);
+                }
+            }
+        }
 
-            /* Hasta este momento voy a tener una lista PlanCursada cruda. */
-            /* Para esto se va pasar una estrategia y ordenara el plan en base a la estrategia. */
-            _strategy.AlgorithmInterface();
+
+        /* Se crea un plan de cursada vacio para que se llene dentro de la funcion. */
+        //this._planCursada = new PLanCursada();
+
+        // CrearPlanCursadaCrudo(_planCursada, _materiasAprobadas, new PlanEstudioRestante(_plan, materiasFaltantes));
+
+        /* Hasta este momento voy a tener una lista PlanCursada cruda. */
+        /* Para esto se va pasar una estrategia y ordenara el plan en base a la estrategia. */
+        //_strategy.AlgorithmInterface();
+        //}
+
+        public void CrearPlanCursadaCrudo(PLanCursada planCursada, List<Materia> materiasAprobadas, PlanEstudioRestante planDeEstudio)
+        {
+            bool correlatividadCursadas;
+            Semestre semestre;
+
+            if (planDeEstudio.MateriasPendientes().Count != 0)
+            {
+                semestre = new Semestre();
+                foreach (Materia x in planDeEstudio.MateriasPendientes())
+                {
+                    correlatividadCursadas = true;
+                    /*nnn foreach (Materia y in planDeEstudio.Correlatividades())
+                    {
+                        
+                    }*/
+                }
+            }
         }
 
         public Dictionary<Materia, int> DiccionarioCriticidad { get; } = new Dictionary<Materia, int>();

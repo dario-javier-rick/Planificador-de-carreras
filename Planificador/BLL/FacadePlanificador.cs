@@ -197,7 +197,7 @@ namespace Planificador.BLL
             return AlumnoBLL.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarreras);
         }
 
-        public Dictionary<Materia, int> CalcularPesoEnCaminoCritico(List<Materia> materias)
+         public Dictionary<Materia, int> CalcularPesoEnCaminoCritico(List<Materia> materias)
         {
             _caminoCritico.CalcularPesoEnCaminoCritico(materias);
             return _caminoCritico.DiccionarioCriticidad;

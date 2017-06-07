@@ -152,12 +152,15 @@
     <Compile Include="BLL\Helpers\ActaInscripcion.cs" />
     <Compile Include="BLL\Helpers\Helper.cs" />
     <Compile Include="BLL\Helpers\PlanCursada.cs" />
+    <Compile Include="BLL\Helpers\PlanEstudioRestante.cs" />
+    <Compile Include="BLL\Helpers\Semestre.cs" />
     <Compile Include="BLL\Strategies\Strategy.cs" />
     <Compile Include="BLL\Strategies\StrategyBase.cs" />
     <Compile Include="Controllers\CursadaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="BLL\Entidades\AlumnoBLL.cs" />
     <Compile Include="Models\Alumno.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -170,7 +173,6 @@
     <Compile Include="Models\Cursada.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="BLL\Entidades\AlumnoBLL.cs" />
     <Compile Include="Models\Docente.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -199,6 +201,11 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AlumnoViewModel.cs" />
     <Compile Include="ViewModels\CursadaViewModel.cs" />
     <Compile Include="BLL\Entidades\Interfaces\IDataReader.cs" />
@@ -250,6 +257,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />

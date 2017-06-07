@@ -15,7 +15,6 @@
         <AssociationConnector Association="Model.CarreraPlanDeEstudios" />
         <AssociationConnector Association="Model.AlumnoCursada" />
         <AssociationConnector Association="Model.CorrelativasPlanDeEstudios" />
-        <AssociationConnector Association="Model.MateriaCorrelativas" />
         <AssociationConnector Association="Model.ProfesorCursada" />
         <AssociationConnector Association="Model.MateriaCursada" />
         <AssociationConnector Association="Model.PlanDeEstudioMateria" />
@@ -23,6 +22,8 @@
         <EntityTypeShape EntityType="Model.Libreta" Width="1.5" PointX="7.625" PointY="6.125" />
         <AssociationConnector Association="Model.AlumnoLibreta" />
         <AssociationConnector Association="Model.LibretaMateria" />
+        <AssociationConnector Association="Model.CorrelativaMateria" />
+        <AssociationConnector Association="Model.CorrelativaMateria1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
