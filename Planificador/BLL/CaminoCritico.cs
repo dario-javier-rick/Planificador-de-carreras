@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Planificador.BLL.Helpers;
 using Planificador.Models;
 using Planificador.BLL.Strategies;
@@ -14,7 +12,7 @@ namespace Planificador.BLL
         private List<Materia> _materiasAprobadas;
         private Strategy _strategy;
 
-        private PLanCursada _planCursada;
+        private PlanCursada _planCursada;
 
         //Constructor
         public CaminoCritico(Strategy strategy)
@@ -56,7 +54,7 @@ namespace Planificador.BLL
         //_strategy.AlgorithmInterface();
         //}
 
-        public void CrearPlanCursadaCrudo(PLanCursada planCursada, List<Materia> materiasAprobadas, PlanEstudioRestante planDeEstudio)
+        public void CrearPlanCursadaCrudo(PlanCursada planCursada, List<Materia> materiasAprobadas, PlanEstudioRestante planDeEstudio)
         {
             bool correlatividadCursadas;
             Semestre semestre;

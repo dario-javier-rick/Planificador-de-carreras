@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using Planificador.Models;
 
 namespace Planificador.BLL.Helpers
 {
-    public class PLanCursada
+    public class PlanCursada
     {
         private Dictionary<int, Semestre> _planCursada;
 
-        public PLanCursada()
+        public PlanCursada()
         {
             this._planCursada = new Dictionary<int, Semestre>();
         }

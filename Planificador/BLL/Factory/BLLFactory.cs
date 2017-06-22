@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Planificador.BLL.Entidades
+﻿namespace Planificador.BLL.Entidades
 {
     /// <summary>
     /// Abstract Factory.

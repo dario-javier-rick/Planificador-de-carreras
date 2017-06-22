@@ -1,5 +1,4 @@
-﻿using System;
-using Planificador.BLL.Entidades;
+﻿using Planificador.BLL.Entidades;
 
 namespace Planificador.BLL.Factory
 {

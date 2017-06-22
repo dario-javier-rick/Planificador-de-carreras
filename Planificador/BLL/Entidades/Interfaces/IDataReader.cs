@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
 {
