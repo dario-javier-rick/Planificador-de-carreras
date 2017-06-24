@@ -155,7 +155,7 @@
     <Compile Include="BLL\Helpers\PlanEstudioRestante.cs" />
     <Compile Include="BLL\Helpers\Semestre.cs" />
     <Compile Include="BLL\Strategies\Strategy.cs" />
-    <Compile Include="BLL\Strategies\StrategyBase.cs" />
+    <Compile Include="BLL\Strategies\EstrategiaGeneral.cs" />
     <Compile Include="Controllers\CursadaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

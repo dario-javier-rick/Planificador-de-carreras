@@ -15,32 +15,37 @@ namespace Planificador.BLL
         private PlanCursada _planCursada;
 
         //Constructor
-        public CaminoCritico(Strategy strategy)
+        public CaminoCritico(Alumno alumno)
         {
-            this._strategy = strategy;
+			FacadePlanificador fc = new FacadePlanificador();
+			/* Obtengo la carrera para obtener su plan de estudio. */
+			Carrera carrera = fc.ObtenerCarreradeAlumno(alumno);
+
+			/* Obtengo el plan de la carrera para conocer las materias y sus correlativas. */
+			_plan = fc.ObtenerPlanEstudioParaCarrera(carrera);
+
+			/* Ahora obtengo un listado de materias aprobadas por el alumno. */
+			_materiasAprobadas = fc.ObtenerMateriasAprobadasPara(alumno);
         }
 
-        public void ContextInterface(Alumno alumno)
+        public void ConfigurarEstrategia(Strategy estrategia)
         {
-            FacadePlanificador fc = new FacadePlanificador();
-            /* Obtengo la carrera para obtener su plan de estudio. */
-            Carrera carrera = fc.ObtenerCarreradeAlumno(alumno);
+            this._strategy = estrategia;
+        }
 
-            /* Obtengo el plan de la carrera para conocer las materias y sus correlativas. */
-            _plan = fc.ObtenerPlanEstudioParaCarrera(carrera);
+        public void Calcular()
+        {
+			/* Obtengo las materias que faltan cursar para armar el plan de estudio que me queda por completar. */
+			List<Materia> materiasFaltantes = new List<Materia>();
+			foreach (Materia mat in _plan.Materia)
+			{
+				if (!_materiasAprobadas.Exists(x => x.Equals(mat)))
+				{
+					materiasFaltantes.Add(mat);
+				}
+			}
 
-            /* Ahora obtengo un listado de materias aprobadas por el alumno. */
-            _materiasAprobadas = fc.ObtenerMateriasAprobadasPara(alumno);
-
-            /* Obtengo las materias que faltan cursar para armar el plan de estudio que me queda por completar. */
-            List<Materia> materiasFaltantes = new List<Materia>();
-            foreach (Materia mat in _plan.Materia)
-            {
-                if (!_materiasAprobadas.Exists(x => x.Equals(mat)))
-                {
-                    materiasFaltantes.Add(mat);
-                }
-            }
+            planCursada = _strategy.CalcularCaminoMinimo(_plan,materiasFaltantes);
         }
 
 
@@ -59,7 +64,7 @@ namespace Planificador.BLL
             bool correlatividadCursadas;
             Semestre semestre;
 
-            if (planDeEstudio.MateriasPendientes().Count != 0)
+            if (planDeEstudio.MateriasPendientes().Any())
             {
                 semestre = new Semestre();
                 foreach (Materia x in planDeEstudio.MateriasPendientes())
