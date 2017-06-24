@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Planificador.Models;
 using Planificador.ViewModels;
 using Planificador.BLL;
+using Planificador.BLL.Strategies;
 
 using AlumnoBLL = Planificador.BLL.Entidades.AlumnoBLL;
 
@@ -110,12 +111,11 @@ namespace Planificador.Controllers
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
             if (alumno != null)
             {
-                FacadePlanificador cursada = new FacadePlanificador();
-                List<Materia> materias = null; //cursada.ObtenerPosiblesMateriasACursar(alumno).ToList(); //TODO
-                cursada.CalcularPesoEnCaminoCritico(materias);
-                Dictionary<Materia, int> diccionario = null;//cursada.CaminoCritico.DiccionarioCriticidad;
+                CaminoCritico camino = new CaminoCritico(alumno);
+                camino.ConfigurarEstrategia(new EstrategiaGeneral());
+                camino.Calcular();
 
-                return Json(diccionario);
+                return Json(camino);
             }
 
             return Json(new { });

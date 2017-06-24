@@ -45,38 +45,16 @@ namespace Planificador.BLL
 				}
 			}
 
-            planCursada = _strategy.CalcularCaminoMinimo(_plan,materiasFaltantes);
+            _planCursada = _strategy.CalcularCaminoMinimo(_plan,materiasFaltantes);
         }
 
-
-        /* Se crea un plan de cursada vacio para que se llene dentro de la funcion. */
-        //this._planCursada = new PLanCursada();
-
-        // CrearPlanCursadaCrudo(_planCursada, _materiasAprobadas, new PlanEstudioRestante(_plan, materiasFaltantes));
-
-        /* Hasta este momento voy a tener una lista PlanCursada cruda. */
-        /* Para esto se va pasar una estrategia y ordenara el plan en base a la estrategia. */
-        //_strategy.AlgorithmInterface();
-        //}
-
-        public void CrearPlanCursadaCrudo(PlanCursada planCursada, List<Materia> materiasAprobadas, PlanEstudioRestante planDeEstudio)
+        public override string ToString()
         {
-            bool correlatividadCursadas;
-            Semestre semestre;
-
-            if (planDeEstudio.MateriasPendientes().Any())
-            {
-                semestre = new Semestre();
-                foreach (Materia x in planDeEstudio.MateriasPendientes())
-                {
-                    correlatividadCursadas = true;
-                    /*nnn foreach (Materia y in planDeEstudio.Correlatividades())
-                    {
-                        
-                    }*/
-                }
-            }
+            return _planCursada.ToString();
         }
+
+
+        //
 
         public Dictionary<Materia, int> DiccionarioCriticidad { get; } = new Dictionary<Materia, int>();
 
