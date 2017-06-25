@@ -15,12 +15,12 @@ namespace Planificador.BLL.Helpers
         public void AgregarSemestre()
         {
             int nuevoSemestre = 1 + this._planCursada.Count;
-            this._planCursada.Add(nuevoSemestre, new Semestre());
+            _planCursada.Add(nuevoSemestre, new Semestre());
         }
 
         public void AgregarMateriaSemestre(int semestre, Materia materia)
         {
-            //this._planCursada
+            _planCursada[semestre].AgregarMateria(materia);
         }
     }
 }
