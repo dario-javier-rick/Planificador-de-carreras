@@ -22,8 +22,6 @@ namespace Planificador.Test
             dm.CargarDatos();
         }
 
-
-
         /// <summary>
         /// User Story: 3.1
         /// Test Case: Se intenta probar un constructor vacío.
@@ -123,7 +121,6 @@ namespace Planificador.Test
         {
 
         }
-
 
 
         /*[Test]

@@ -19,7 +19,7 @@ namespace Planificador.BLL
         {
 			FacadePlanificador fc = new FacadePlanificador();
 			/* Obtengo la carrera para obtener su plan de estudio. */
-			Carrera carrera = fc.ObtenerCarreradeAlumno(alumno);
+            Carrera carrera = fc.ObtenerCarrerasDeAlumno(alumno).FirstOrDefault();
 
 			/* Obtengo el plan de la carrera para conocer las materias y sus correlativas. */
 			_plan = fc.ObtenerPlanEstudioParaCarrera(carrera);

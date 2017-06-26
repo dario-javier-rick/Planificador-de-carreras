@@ -7,7 +7,7 @@ namespace Planificador.BLL.Strategies
 {
     class EstrategiaGeneral : Strategy
     {
-        public override PlanCursada CalcularCaminoMinimo(PlanDeEstudio planEstudio, IEnumerable<Materia> materiasPendientes)
+        public override PlanCursada CalcularCaminoMinimo(PlanDeEstudio planEstudio, IEnumerable<Materia> materiasPendientes, params string[] args)
         {
             if (!materiasPendientes.Any())
             {
@@ -35,7 +35,15 @@ namespace Planificador.BLL.Strategies
         {
             foreach (Materia x in materiasPendientes)
             {
-                if (!x.Correlativas.Any()) //Verifico correlativas segun plan de estudios
+                //Verifico correlativas segun plan de estudios
+                var listaCorrelativas = (from cor in x.RequiereCursar
+                                        where x.PlanDeEstudio == planDeEstudio
+                                        select cor.MateriaCorrelativa).ToList();
+                    
+                    /*x.Correlativa.Where
+                    (corr => corr.IdPlanEstudio == planDeEstudio.Id).ToList();*/
+
+                if (!listaCorrelativas.Any())
                 {
                     if (semestre == null)
                     {

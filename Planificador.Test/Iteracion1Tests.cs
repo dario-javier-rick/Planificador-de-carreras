@@ -131,7 +131,8 @@ namespace Planificador.Test
         [Test]
         public void CaminoMinimo()
         {
-
+            //Consulto al controlador
+            Controller.ObtenerCaminoCritico("Dario Rick");
         }
     }
 }

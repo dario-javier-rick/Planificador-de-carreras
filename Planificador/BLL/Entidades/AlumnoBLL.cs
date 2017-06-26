@@ -45,8 +45,12 @@ namespace Planificador.BLL.Entidades
             return alumno;
         }
 
-
         //Otros métodos.
+        public static Alumno ObtenerAlumno(int idAlumno)
+        {
+            return Instance.ListaObj.FirstOrDefault(a => a.Id == idAlumno);
+        }
+
         public static Alumno ObtenerAlumno(string nombreAlumno)
 		{
 			return Instance.ListaObj.FirstOrDefault(a => a.Nombre == nombreAlumno);
@@ -54,7 +58,8 @@ namespace Planificador.BLL.Entidades
 
         public static List<Materia> ListarMateriasAprobadas(Alumno alumno)
         {
-            return alumno.Libreta.MateriasAprobadas.ToList();
+            throw new NotImplementedException();
+            //return alumno.Libreta.MateriasAprobadas.ToList();
         }
 
         public static IEnumerable<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)

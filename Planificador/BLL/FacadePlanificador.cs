@@ -41,9 +41,21 @@ namespace Planificador.BLL
             this._actaIncipcion = bllFactory.CrearActaInscipcionBLL();
         }
 
-        internal Carrera ObtenerCarreradeAlumno(Alumno alumno)
+        internal List<Carrera> ObtenerCarrerasDeAlumno(Alumno alumno)
         {
-            return ObternerActasdeInscripcion().Find(x => x.AlumnoInscripto().Id == alumno.Id).InscriptoEnCarrera();
+            //return ObternerActasdeInscripcion().Find(x => x.AlumnoInscripto().Id == alumno.Id).InscriptoEnCarrera();
+
+            List<Carrera> carreras = new List<Carrera>();
+
+            List<PlanDeEstudio> planes = alumno.PlanDeEstudio.ToList();
+
+            foreach (PlanDeEstudio plan in planes)
+            {
+                carreras.Add(plan.Carrera);
+            }
+
+            return carreras;
+
         }
 
         internal Carrera ObtenerCarreraPorId(int codigoCarrera)
@@ -51,7 +63,7 @@ namespace Planificador.BLL
             return ObtenerCarreras().Find(x => x.CodigoCarrera == codigoCarrera);
         }
 
-        internal Alumno ObtenerAlumnopoId(int id)
+        internal Alumno ObtenerAlumnoPorId(int id)
         {
             return ObtenerAlumnos().Find(x => x.Id == id);
         }
@@ -224,7 +236,12 @@ namespace Planificador.BLL
 
         public List<Materia> ObtenerMateriasAprobadasPara(Alumno alumno)
         {
-            return this.ObtenerLibretas().Find(x => x.Alumno.Equals(alumno)).MateriasAprobadas.ToList();
+            var libreta = ObtenerLibretas().FirstOrDefault(x => x.Alumno.Id == alumno.Id);
+
+            var mat = (from mata in libreta.MateriaAprobada
+                       select mata.Materia);
+
+            return mat.ToList();
         }
     }
 }

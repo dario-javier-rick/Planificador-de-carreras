@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Planificador.Models;
 
 namespace Planificador.BLL.Entidades
@@ -83,5 +84,9 @@ namespace Planificador.BLL.Entidades
             return new Materia();
         }
 
+        public static Materia ObtenerMateria(int idMateria)
+        {
+            return _instancia.ListaObj.FirstOrDefault(a => a.Id == idMateria);
+        }
     }
 }

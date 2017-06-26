@@ -55,6 +55,19 @@
 
 [CarreraPlan],2,1
 
+[PlanDeEstudioCorrelativa],1,3,1
+[PlanDeEstudioCorrelativa],1,6,3
+[PlanDeEstudioCorrelativa],1,9,6
+[PlanDeEstudioCorrelativa],1,8,2
+[PlanDeEstudioCorrelativa],1,13,8
+[PlanDeEstudioCorrelativa],1,11,5
+[PlanDeEstudioCorrelativa],1,14,11
+
+
+//Alumno, Materia, Nota, Fecha Aprobacion
+[Libreta],1,1,9.00,20-01-2010
+[Libreta],1,2,8.50,20-01-2010
+
 
 
 

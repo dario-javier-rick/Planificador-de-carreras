@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Planificador.Models;
@@ -36,7 +37,9 @@ namespace Planificador.Controllers
         {
             CursadaViewModel cvm = new CursadaViewModel();
 
-            cvm.Materias = alumno != null ? alumno?.Libreta?.MateriasAprobadas?.ToList() : new List<Materia>();
+            throw new NotImplementedException();
+
+            //cvm.Materias = alumno != null ? alumno?.Libreta?.MateriaAprobada?.ToList() : new List<Materia>();
 
             return cvm;
         }
@@ -82,10 +85,10 @@ namespace Planificador.Controllers
         public JsonResult ObtenerHistorial(string nombreAlumno)
         {
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
-            if (alumno.Libreta != null && alumno.Libreta.MateriasAprobadas.Any())
+            if (alumno.Libreta != null && alumno.Libreta.MateriaAprobada.Any())
             {
-                var jsonResult = from m in alumno.Libreta.MateriasAprobadas
-                                 select new {m.Id, m.Nombre};
+                var jsonResult = from m in alumno.Libreta.MateriaAprobada
+                                 select new {m.Id, m.Materia.Nombre};
 
                 return Json(jsonResult);
             }

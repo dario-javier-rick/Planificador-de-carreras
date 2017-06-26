@@ -48,15 +48,6 @@
             <End Role="PlanDeEstudio" EntitySet="PlanDeEstudioSet" />
             <End Role="Alumno" EntitySet="AlumnoSet" />
           </AssociationSet>
-          <EntitySet Name="LibretaSet" EntityType="Model.Libreta" />
-          <AssociationSet Name="AlumnoLibreta" Association="Model.AlumnoLibreta">
-            <End Role="Alumno" EntitySet="AlumnoSet" />
-            <End Role="Libreta" EntitySet="LibretaSet" />
-          </AssociationSet>
-          <AssociationSet Name="LibretaMateria" Association="Model.LibretaMateria">
-            <End Role="Libreta" EntitySet="LibretaSet" />
-            <End Role="Materia" EntitySet="MateriaSet" />
-          </AssociationSet>
           <AssociationSet Name="CorrelativaMateria" Association="Model.CorrelativaMateria">
             <End Role="Correlativa" EntitySet="CorrelativaSet" />
             <End Role="Materia" EntitySet="MateriaSet" />
@@ -64,6 +55,20 @@
           <AssociationSet Name="CorrelativaMateria1" Association="Model.CorrelativaMateria1">
             <End Role="Correlativa" EntitySet="CorrelativaSet" />
             <End Role="Materia" EntitySet="MateriaSet" />
+          </AssociationSet>
+          <EntitySet Name="MateriaAprobadaSet" EntityType="Model.MateriaAprobada" />
+          <AssociationSet Name="MateriaAprobadaMateria" Association="Model.MateriaAprobadaMateria">
+            <End Role="MateriaAprobada" EntitySet="MateriaAprobadaSet" />
+            <End Role="Materia" EntitySet="MateriaSet" />
+          </AssociationSet>
+          <EntitySet Name="Libreta" EntityType="Model.Libreta" />
+          <AssociationSet Name="AlumnoLibreta" Association="Model.AlumnoLibreta">
+            <End Role="Alumno" EntitySet="AlumnoSet" />
+            <End Role="Libreta" EntitySet="Libreta" />
+          </AssociationSet>
+          <AssociationSet Name="LibretaMateriaAprobada" Association="Model.LibretaMateriaAprobada">
+            <End Role="Libreta" EntitySet="Libreta" />
+            <End Role="MateriaAprobada" EntitySet="MateriaAprobadaSet" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Alumno">
@@ -124,8 +129,8 @@
             <PropertyRef Name="IdPlanEstudio" />
           </Key>
           <NavigationProperty Name="PlanDeEstudios" Relationship="Model.CorrelativasPlanDeEstudios" FromRole="Correlativas" ToRole="PlanDeEstudios" />
-          <Property Name="IdPlanEstudio" Type="String" Nullable="false" />
-          <Property Name="IdMateria" Type="String" Nullable="false" />
+          <Property Name="IdPlanEstudio" Type="Int32" Nullable="false" />
+          <Property Name="IdMateria" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Materia" Relationship="Model.CorrelativaMateria" FromRole="Correlativa" ToRole="Materia" />
           <NavigationProperty Name="MateriaCorrelativa" Relationship="Model.CorrelativaMateria1" FromRole="Correlativa" ToRole="Materia" />
         </EntityType>
@@ -137,9 +142,9 @@
           <NavigationProperty Name="Cursada" Relationship="Model.MateriaCursada" FromRole="Materia" ToRole="Cursada" />
           <NavigationProperty Name="PlanDeEstudio" Relationship="Model.PlanDeEstudioMateria" FromRole="Materia" ToRole="PlanDeEstudio" />
           <Property Name="Nombre" Type="String" Nullable="false" />
-          <NavigationProperty Name="Libreta" Relationship="Model.LibretaMateria" FromRole="Materia" ToRole="Libreta" />
-          <NavigationProperty Name="Correlativa" Relationship="Model.CorrelativaMateria" FromRole="Materia" ToRole="Correlativa" />
+          <NavigationProperty Name="RequiereCursar" Relationship="Model.CorrelativaMateria" FromRole="Materia" ToRole="Correlativa" />
           <NavigationProperty Name="Correlativas" Relationship="Model.CorrelativaMateria1" FromRole="Materia" ToRole="Correlativa" />
+          <NavigationProperty Name="MateriaAprobada" Relationship="Model.MateriaAprobadaMateria" FromRole="Materia" ToRole="MateriaAprobada" />
         </EntityType>
         <Association Name="CarreraPlanDeEstudios">
           <End Type="Model.Carrera" Multiplicity="1" Role="Carrera" />
@@ -185,22 +190,6 @@
           <End Type="Model.PlanDeEstudio" Role="PlanDeEstudio" Multiplicity="*" />
           <End Type="Model.Alumno" Role="Alumno" Multiplicity="*" />
         </Association>
-        <EntityType Name="Libreta">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoLibreta" FromRole="Libreta" ToRole="Alumno" />
-          <NavigationProperty Name="MateriasAprobadas" Relationship="Model.LibretaMateria" FromRole="Libreta" ToRole="Materia" />
-        </EntityType>
-        <Association Name="AlumnoLibreta">
-          <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
-          <End Type="Model.Libreta" Role="Libreta" Multiplicity="1" />
-        </Association>
-        <Association Name="LibretaMateria">
-          <End Type="Model.Libreta" Role="Libreta" Multiplicity="*" />
-          <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
-        </Association>
         <Association Name="CorrelativaMateria">
           <End Type="Model.Correlativa" Role="Correlativa" Multiplicity="*" />
           <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
@@ -208,6 +197,37 @@
         <Association Name="CorrelativaMateria1">
           <End Type="Model.Correlativa" Role="Correlativa" Multiplicity="*" />
           <End Type="Model.Materia" Role="Materia" Multiplicity="*" />
+        </Association>
+        <EntityType Name="MateriaAprobada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nota" Type="Double" Nullable="false" />
+          <Property Name="FechaAprobacion" Type="DateTime" Nullable="false" />
+          <Property Name="LibretaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materia" Relationship="Model.MateriaAprobadaMateria" FromRole="MateriaAprobada" ToRole="Materia" />
+          <NavigationProperty Name="Libreta" Relationship="Model.LibretaMateriaAprobada" FromRole="MateriaAprobada" ToRole="Libreta" />
+        </EntityType>
+        <Association Name="MateriaAprobadaMateria">
+          <End Type="Model.MateriaAprobada" Role="MateriaAprobada" Multiplicity="*" />
+          <End Type="Model.Materia" Role="Materia" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Libreta" >
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <NavigationProperty Name="Alumno" Relationship="Model.AlumnoLibreta" FromRole="Libreta" ToRole="Alumno" cg:SetterAccess="Public" />
+          <NavigationProperty Name="MateriaAprobada" Relationship="Model.LibretaMateriaAprobada" FromRole="Libreta" ToRole="MateriaAprobada" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="AlumnoLibreta">
+          <End Type="Model.Alumno" Role="Alumno" Multiplicity="1" />
+          <End Type="Model.Libreta" Role="Libreta" Multiplicity="1" />
+        </Association>
+        <Association Name="LibretaMateriaAprobada">
+          <End Type="Model.Libreta" Role="Libreta" Multiplicity="1" />
+          <End Type="Model.MateriaAprobada" Role="MateriaAprobada" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -233,6 +253,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->

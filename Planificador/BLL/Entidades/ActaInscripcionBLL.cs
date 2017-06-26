@@ -30,7 +30,7 @@ namespace Planificador.BLL.Entidades
 
             FacadePlanificador fc = new FacadePlanificador();
 
-            Alumno alumno = fc.ObtenerAlumnopoId(int.Parse(actaArray[2]));
+            Alumno alumno = fc.ObtenerAlumnoPorId(int.Parse(actaArray[2]));
             Carrera carrera = fc.ObtenerCarreraPorId(int.Parse(actaArray[3]));
 
             ActaInscripcion acta = new ActaInscripcion(alumno,carrera);

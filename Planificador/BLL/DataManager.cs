@@ -83,6 +83,21 @@ namespace Planificador.BLL
                         plan2.Alumno.Add(alumno);
                         alumno.PlanDeEstudio.Add(plan2);
                         break;
+                    case "PlanDeEstudioCorrelativa":
+                        string[] array3 = line.Split(',');
+                        PlanDeEstudio plan3 = fc.ObtenerPlanesDeEstudio().First(p => p.Id == Convert.ToInt32(array3[1]));
+                        Materia materia1 = fc.ObtenerMaterias().First(m => m.Id == Convert.ToInt32(array3[2]));
+                        Materia materia2 = fc.ObtenerMaterias().First(m => m.Id == Convert.ToInt32(array3[3]));
+
+                        Correlativa c = new Correlativa
+                        {
+                            IdMateria = materia2.Id,
+                            IdPlanEstudio = plan3.Id,
+                            MateriaCorrelativa = new List<Materia>()
+                        };
+
+                        materia1.RequiereCursar.Add(c);
+                        break;
                 }
 
             }
