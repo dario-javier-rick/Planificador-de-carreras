@@ -9,17 +9,15 @@ namespace Planificador.BLL.Strategies
     {
         public override PlanCursada CalcularCaminoMinimo(PlanDeEstudio planEstudio, IEnumerable<Materia> materiasPendientes, params string[] args)
         {
+            PlanCursada planCursada = new PlanCursada();
+
             if (!materiasPendientes.Any())
             {
-                return new PlanCursada();
+                return planCursada;
             }
 
             IEnumerable<Materia> materiasAprobadas = planEstudio.Materia.Where(p => !materiasPendientes.Contains(p)).ToList();
-
-            PlanCursada planCursada = new PlanCursada();
-
-            AgregarMateriasPorSemestre(planCursada, null, 0, planEstudio, materiasPendientes);
-
+            AgregarMateriasPorSemestre(planCursada, planEstudio, materiasAprobadas);
 
             return planCursada;
         }
@@ -27,37 +25,38 @@ namespace Planificador.BLL.Strategies
         private static void AgregarMateriasPorSemestre
         (
         PlanCursada planCursada,
-        Semestre semestre,
-        int nivel,
-        PlanDeEstudio planDeEstudio, //Del plan de estudio dependen las correlatividades 
-        IEnumerable<Materia> materiasPendientes
+        PlanDeEstudio planDeEstudio,
+        IEnumerable<Materia> materiasAprobadas,
+        int nivel = 1
         )
         {
-            foreach (Materia x in materiasPendientes)
-            {
-                //Verifico correlativas segun plan de estudios
-                var listaCorrelativas = (from cor in x.RequiereCursar
-                                        where x.PlanDeEstudio == planDeEstudio
-                                        select cor.MateriaCorrelativa).ToList();
-                    
-                    /*x.Correlativa.Where
-                    (corr => corr.IdPlanEstudio == planDeEstudio.Id).ToList();*/
+            List<Materia> materiasPlanDeEstudios = planDeEstudio.Materia.ToList();
+            List<Materia> materiasSinCorrelativas = (from mat in materiasPlanDeEstudios
+                                                     where 
+                                                     //Que no este aprobada
+                                                     !materiasAprobadas.Contains(mat)
+                                                     //Que segun su plan de estudios, no tenga tenga correlativas
+                                                     && 
+                                                     ( !mat.RequiereCursar.Select(corr => corr.IdPlanEstudio == planDeEstudio.Id).Any()
+                                                     //O que de sus correlativas, todas esten aprobadas
+                                                     || mat.RequiereCursar.Any(corr => corr.IdPlanEstudio == planDeEstudio.Id && materiasAprobadas.Any(c => c.Id == corr.IdMateria))
+                                                     )
+                                                     select mat).ToList();
 
-                if (!listaCorrelativas.Any())
-                {
-                    if (semestre == null)
-                    {
-                        semestre = new Semestre();
-                    }
-                    semestre.AgregarMateria(x);
-                }
-                else
-                {
-                    var materiasRequeridas = materiasPendientes; // TODO: Hacer where y filtrar por correlativas segun plan de estudios 
-                    Semestre proximoSemestre = new Semestre();
-                    AgregarMateriasPorSemestre(planCursada,proximoSemestre,nivel++,planDeEstudio, materiasRequeridas);
-                }
+            if (!materiasSinCorrelativas.Any())
+            {
+                return;
             }
+
+            planCursada.AgregarSemestre();
+
+            foreach (Materia m in materiasSinCorrelativas)
+            {
+                planCursada.AgregarMateriaSemestre(nivel, m);
+            }
+
+            AgregarMateriasPorSemestre(planCursada, planDeEstudio, materiasSinCorrelativas.Union(materiasAprobadas), ++nivel);
+
         }
 
 

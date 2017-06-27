@@ -238,8 +238,8 @@ namespace Planificador.BLL
         {
             var libreta = ObtenerLibretas().FirstOrDefault(x => x.Alumno.Id == alumno.Id);
 
-            var mat = (from mata in libreta.MateriaAprobada
-                       select mata.Materia);
+            var mat = from mata in libreta.MateriaAprobada
+                       select mata.Materia;
 
             return mat.ToList();
         }

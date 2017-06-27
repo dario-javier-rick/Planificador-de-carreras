@@ -34,7 +34,7 @@ namespace Planificador.BLL.Entidades
 		public Materia GenerateFromDataLine(string dataLine)
 		{
 			string[] datos = dataLine.Split(',');
-            Materia m = new Materia { Id = int.Parse(datos[1]) };
+            Materia m = new Materia { Id = int.Parse(datos[1]), Nombre = datos[2]};
 
 			return m;
 		}
