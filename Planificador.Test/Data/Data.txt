@@ -1,7 +1,7 @@
 [Alumno],1,37170404,Dario Rick
 [Alumno],2,34179142,Nicolas Fernandez
 
-[Profesor],1,Javier MV
+[Profesor],1,Javier Martinez Viademonte
 
 [Carrera],1,Tecnicatura Sistemas
 [Carrera],2,Licenciatura en Sistemas

@@ -37,9 +37,9 @@ namespace Planificador.Controllers
         {
             CursadaViewModel cvm = new CursadaViewModel();
 
-            throw new NotImplementedException();
+            FacadePlanificador fc = new FacadePlanificador();
 
-            //cvm.Materias = alumno != null ? alumno?.Libreta?.MateriaAprobada?.ToList() : new List<Materia>();
+            cvm.Materias = fc.ObtenerMateriasAprobadasPara(alumno);
 
             return cvm;
         }

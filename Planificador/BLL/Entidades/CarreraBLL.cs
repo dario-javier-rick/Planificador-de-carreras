@@ -165,5 +165,10 @@ namespace Planificador.BLL.Entidades
         {
             return _instancia.ListaObj.FirstOrDefault(c => c.CodigoCarrera == idCarrera);
         }
+
+        public static Carrera ObtenerCarrera(string nombre)
+        {
+            return _instancia.ListaObj.FirstOrDefault(c => c.Nombre == nombre);
+        }
     }
 }
