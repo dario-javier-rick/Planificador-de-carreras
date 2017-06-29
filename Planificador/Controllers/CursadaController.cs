@@ -27,7 +27,6 @@ namespace Planificador.Controllers
             return View(viewModel);
         }
 
-
         /// <summary>
         /// Controlador generico.
 		/// Controlador HTTP debe consultar a este método para abstraer el comportamiento web 
@@ -35,15 +34,9 @@ namespace Planificador.Controllers
         /// <param name="alumno"></param>
 		private CursadaViewModel Index(Alumno alumno)
         {
-            CursadaViewModel cvm = new CursadaViewModel();
-
-            FacadePlanificador fc = new FacadePlanificador();
-
-            cvm.Materias = fc.ObtenerMateriasAprobadasPara(alumno);
-
+            CursadaViewModel cvm = new CursadaViewModel();;
             return cvm;
         }
-
 
         public JsonResult ObtenerDatosAlumno(string nombreAlumno)
         {
@@ -67,7 +60,7 @@ namespace Planificador.Controllers
             FacadePlanificador fc = new FacadePlanificador();
 
             Alumno alumno = fc.ObtenerAlumnos().FirstOrDefault(a => a.Nombre == nombreAlumno);
-
+        
             var jsonResult = from p in fc.ObtenerPlanesDeEstudio()
                                 join c in fc.ObtenerCarreras()
                                     on p.Id equals c.CodigoCarrera
@@ -100,8 +93,7 @@ namespace Planificador.Controllers
             Alumno alumno = AlumnoBLL.ObtenerAlumno(nombreAlumno);
             if (alumno != null)
             {
-                Cursada cursada = new Cursada();
-                List<Materia> materias = null;//CursadaBLL.ObtenerPosiblesMateriasACursar(alumno).ToList();
+                List<Materia> materias = AlumnoBLL.ListarMateriasSinAprobar(alumno);
 
                 return Json(materias);
             }

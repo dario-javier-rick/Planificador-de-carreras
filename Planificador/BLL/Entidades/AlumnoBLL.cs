@@ -58,8 +58,28 @@ namespace Planificador.BLL.Entidades
 
         public static List<Materia> ListarMateriasAprobadas(Alumno alumno)
         {
-            throw new NotImplementedException();
-            //return alumno.Libreta.MateriasAprobadas.ToList();
+            return alumno.Libreta.MateriaAprobada.Select(m => m.Materia).ToList();
+
+        }
+
+        public static List<Materia> ListarMateriasSinAprobar(Alumno alumno)
+        {
+            List<Materia> materiasCarreras = new List<Materia>();
+
+            foreach (PlanDeEstudio p in alumno.PlanDeEstudio.ToList())
+            {
+                foreach (Materia m in p.Materia)
+                {
+                    materiasCarreras.Add(m);
+                }
+            }
+
+            foreach (Materia m in ListarMateriasAprobadas(alumno))
+            {
+                materiasCarreras.Remove(m);
+            }
+
+            return materiasCarreras;
         }
 
         public static IEnumerable<Materia> ObtenerMateriasQuePuedoCursar(IEnumerable<Materia> materiasAprobadas, IEnumerable<Materia> materiasDeCarrera)
@@ -78,36 +98,6 @@ namespace Planificador.BLL.Entidades
 
             return materiasQuePudenSerCursadas;
         }
-
-        public static implicit operator Lazy<object>(AlumnoBLL v)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        /*
-        private static List<Materia> ObtenerMateriasSinAprobar(List<Materia> materiasAprobadas, List<Materia> materiasDeCarrera)
-        {
-            List<Materia> listaDeMateriasSinAprobar = new List<Materia>();
-            foreach (Materia materiaDelAlumnoAprobada in materiasAprobadas)
-            {
-                Materia materiaAprobada = materiasDeCarrera.FirstOrDefault(x => x.Equals(materiaDelAlumnoAprobada));
-                if (materiaAprobada != null)
-                {
-                    foreach (var materiaDeCarrera in materiasDeCarrera)
-                    {
-                        if (materiaDeCarrera.Correlativas.Contains(materiaAprobada))
-                        {
-                            materiaDeCarrera.Correlativas.Remove(materiaDeCarrera);
-                            listaDeMateriasSinAprobar.Add(materiaDeCarrera);
-                        }
-                    }
-                }
-            }
-            return listaDeMateriasSinAprobar;
-        }
-        */
 
     }
 }

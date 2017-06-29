@@ -16,16 +16,13 @@ namespace Planificador.BLL
         private readonly AlumnoBLL _alumno;
         private readonly CarreraBLL _carrera;
         private readonly CorrelativaBLL _correlativas;
-
         private readonly CursadaBLL _cursada;
         private readonly DocenteBLL _docente;
         private readonly LibretaBLL _libreta;
         private readonly MateriaBLL _materia;
         private readonly PlanDeEstudioBLL _planDeEstudio;
         private readonly ActaInscripcionBLL _actaIncipcion;
-
-        private readonly CaminoCritico _caminoCritico = new CaminoCritico();
-
+       
         public FacadePlanificador()
         {
             BLLFactory bllFactory = new FactoryEntidades();
@@ -43,8 +40,6 @@ namespace Planificador.BLL
 
         internal List<Carrera> ObtenerCarrerasDeAlumno(Alumno alumno)
         {
-            //return ObternerActasdeInscripcion().Find(x => x.AlumnoInscripto().Id == alumno.Id).InscriptoEnCarrera();
-
             List<Carrera> carreras = new List<Carrera>();
 
             List<PlanDeEstudio> planes = alumno.PlanDeEstudio.ToList();
@@ -55,7 +50,6 @@ namespace Planificador.BLL
             }
 
             return carreras;
-
         }
 
         internal Carrera ObtenerCarreraPorId(int codigoCarrera)
@@ -120,7 +114,6 @@ namespace Planificador.BLL
             }
         }
 
-
         //Getters de listas
         public List<Alumno> ObtenerAlumnos()
         {
@@ -168,55 +161,10 @@ namespace Planificador.BLL
         }
 
         //Otros métodos
-        internal void RegistrarCarrera(Carrera carrera)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-        /// <summary>
-        /// Dado un alumno, devuelve las materias que puede cursar teniendo en cuenta las de los planes de estudios, las ya cursadas, las que le faltan y las correlativas.
-        /// </summary>
-        /// <param name="alumno"></param>
-        /// <returns></returns>
-        public static IEnumerable<Materia> ObtenerPosiblesMateriasACursar(Alumno alumno)
-        {
-            if (alumno == null)
-            {
-                return Enumerable.Empty<Materia>();
-            }
-
-            //TODO: Patron observer? Nico V: noup, observer es para el front
-
-            //Recorro todos los planes de estudios del alumno, y obtengo las materias correspondientes
-            List<PlanDeEstudio> planesDeEstudios = alumno.PlanDeEstudio.ToList();
-            HashSet<Materia> materiasDeCarreras = new HashSet<Materia>();
-
-            foreach (PlanDeEstudio plan in planesDeEstudios)
-            {
-                foreach (Materia materia in plan.Materia)
-                {
-                    materiasDeCarreras.Add(materia);
-                }
-            }
-
-            //Me fijo que materias aprobadas tiene el alumno
-            IEnumerable<Materia> materiasAprobadas = AlumnoBLL.ListarMateriasAprobadas(alumno);
-
-            //Devuelvo las que realmente pueden ser cursadas.
-            return AlumnoBLL.ObtenerMateriasQuePuedoCursar(materiasAprobadas, materiasDeCarreras);
-        }
-
-         public Dictionary<Materia, int> CalcularPesoEnCaminoCritico(List<Materia> materias)
-        {
-            _caminoCritico.CalcularPesoEnCaminoCritico(materias);
-            return _caminoCritico.DiccionarioCriticidad;
-        }
 
         public bool ExisteCarrera(Carrera carrera)
         {
-            throw new NotImplementedException();
+            return _carrera.ExisteCarrera(carrera);
         }
 
         public Carrera ObtenerCarrera(Carrera carrera)
@@ -236,12 +184,13 @@ namespace Planificador.BLL
 
         public List<Materia> ObtenerMateriasAprobadasPara(Alumno alumno)
         {
+            //return AlumnoBLL.ListarMateriasAprobadas(alumno);
             var libreta = ObtenerLibretas().FirstOrDefault(x => x.Alumno.Id == alumno.Id);
-
             var mat = from mata in libreta.MateriaAprobada
-                       select mata.Materia;
+                select mata.Materia;
 
             return mat.ToList();
+
         }
     }
 }

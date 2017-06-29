@@ -25,6 +25,13 @@ namespace Planificador
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            //Bundles propios
+
+            bundles.Add(new ScriptBundle("~/Bundles/Cursada.js").Include(
+                "~/Scripts/Views/Cursada.js"));
+
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

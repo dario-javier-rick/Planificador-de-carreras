@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Planificador.Models;
 using Planificador.BLL.Helpers;
@@ -18,6 +19,8 @@ namespace Planificador.BLL.Strategies
 
             IEnumerable<Materia> materiasAprobadas = planEstudio.Materia.Where(p => !materiasPendientes.Contains(p)).ToList();
             AgregarMateriasPorSemestre(planCursada, planEstudio, materiasAprobadas);
+
+            Console.WriteLine(planCursada);
 
             return planCursada;
         }

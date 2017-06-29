@@ -149,7 +149,6 @@
     <Compile Include="BLL\DataManager.cs" />
     <Compile Include="BLL\Entidades\MateriaBLL.cs" />
     <Compile Include="BLL\Entidades\PlanDeEstudioBLL.cs" />
-    <Compile Include="BLL\GeneradorPlanEstudio.cs" />
     <Compile Include="BLL\Helpers\ActaInscripcion.cs" />
     <Compile Include="BLL\Helpers\Helper.cs" />
     <Compile Include="BLL\Helpers\PlanCursada.cs" />
@@ -228,7 +227,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="BLL\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\Model.Context.tt">
@@ -253,20 +252,25 @@
     <Content Include="Models\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="BLL\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="BLL\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="BLL\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="BLL\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\Views\Cursada.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />

@@ -35,7 +35,7 @@ namespace Planificador.Test
             //Controlador retorna ViewModel
             CursadaViewModel model = (CursadaViewModel)result.ViewData.Model;
             //Valido resultado de ViewModel
-            Assert.IsTrue(!model.Materias?.Any());   
+            Assert.IsTrue(model != null);   
         }
 
         [Test]
@@ -52,8 +52,8 @@ namespace Planificador.Test
             PlanDeEstudio tecnicaturaInformatica = CarreraBLL.ObtenerCarrera("Tecnicatura Sistemas").PlanDeEstudios.FirstOrDefault();
 
             //Valido resultado de ViewModel
-            IEnumerable<Materia> listaMateriasTecnicaturaInformatica = CarreraBLL.ObtenerCarrera("Tecnicatura Sistemas").PlanDeEstudios.FirstOrDefault().Materia;
-            CollectionAssert.AreEqual(listaMateriasTecnicaturaInformatica.ToList(), model.Materias.ToList());
+            IEnumerable<Materia> listaMateriasTecnicaturaInformatica = CarreraBLL.ObtenerCarrera("Tecnicatura Sistemas")?.PlanDeEstudios?.FirstOrDefault()?.Materia;
+            CollectionAssert.AreEqual(listaMateriasTecnicaturaInformatica?.ToList(), model.Materias?.ToList());
         }
 
         [Test]
